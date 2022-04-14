@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #A8919C;
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: #330A29;
+}
+
+.navbar a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a:hover {
+    background-color: #AFE9DC;
+    color: #330A29;
+}
+
+.navbar a.active {
+    background-color: #85697A;
+    color: #330A29;
+}
+
+.navbar a.top_right {
+    float: right;
+}
+.navbar a.top_left {
+    float: left;
+}
+
+.search_add_container{
+    padding: 10px;
+    margin-top: 8px;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search_add_container input{
+    height: 30px;
+    width: 200px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #85697A;
+    background-color: #CAB9BE;
+}
+
+#new_autograph{
+    padding: 10px;
+    margin-right: 30px;
+    height: 35px;
+    width: 200px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #85697A;
+    background-color: #CAB9BE;
+}
+
+#new_autograph:hover{
+    background-color: #AFE9DC;
+    color: #330A29;
+}
+
+#search_bar{
+    margin-left: 30px;
+}
+
+.inline-flex-parent {
+    display: flex;
+}
+
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: right;
+    overflow: hidden;
+
+    display: inline-block;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #AFE9DC;
+   color: #330A29;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #CAB9BE;
+    right: 0;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: #330A29;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+
