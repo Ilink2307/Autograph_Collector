@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="style/registerStyling.css">
+    <script src="scripts/registerFunctionalities.js"></script>
+</head>
+<body>
+
+    <div class="register_div vertical_center">
+        <div>
+            <header id="register_text">
+                Register
+            </header>
+        </div>
+        <div class="parent">
+            <form action="mainScreen.html" onsubmit="return validateFormOnSubmit(this);">
+                <div class="center_register_text">
+                    <label for="userName">Username</label>
+                </div>
+                <div class="center_register_input">
+                    <input type="text" id="userName" name="userName" placeholder="johnsmith31">
+                </div>
+
+                <div class="center_register_text">
+                    <label for="password">Password</label>
+                </div>
+                <div class="center_register_input">
+                    <input type="text" id="password" name="password" placeholder="strong password">
+                </div>
+
+                <div class="center_register_text">
+                    <label for="confirmPassword">Confirm password</label>
+                </div>
+                <div class="center_register_input">
+                    <input type="text" id="confirmPassword" name="confirmPassword" placeholder="strong password again">
+                </div>
+
+                <div class="center_register_text">
+                    <label for="firstName">First name</label>
+                </div>
+                <div class="center_register_input">
+                    <input type="text" id="firstName" name="firstName" placeholder="John">
+                </div>
+
+                <div class="center_register_text">
+                    <label for="lastName">Last name</label>
+                </div>
+                <div class="center_register_input">
+                    <input type="text" id="lastName" name="lastName" placeholder="Smith">
+                </div>
+
+                <div class="center_register_text">
+                    <label for="age">Age</label>
+                </div>
+                <div class="center_register_input">
+                    <input type="number" id="age" name="age" min="1" max="150" placeholder="25">
+                </div>
+
+                <div class="center_register_text">
+                    <label for="bio">Bio</label>
+                </div>
+                <div class="center_register_input">
+                    <input type="text" id="bio" name="bio" placeholder="I like collecting autographs! :)">
+                </div>
+
+                <div class="center_register_button">
+                    <button id="register_button">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

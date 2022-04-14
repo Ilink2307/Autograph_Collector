@@ -1,0 +1,93 @@
+body {
+    background-color: #A8919C;
+    font-family: Arial, Helvetica, sans-serif;
+    /*overflow: hidden; /* Hide scrollbars */
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+body::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+#register_text {
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    color: #A8919C;
+}
+
+.center_register_text {
+    float: left;
+    font-size: large;
+    color: #B9A5AD;
+    padding-top: 12px;
+    align-items: center;
+    border: none;
+}
+
+.center_register_input {
+    border: none;
+}
+
+.register_div {
+    width: 60%;
+    height: 85%;
+    padding: 10px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-right: 20%;
+    margin-left: 20%;
+    background-color: #330A29;
+    border-radius: 20px;
+}
+
+.parent {
+    display: grid;
+    place-items: center;
+}
+
+#register_button {
+    background-color: #85697A;
+    border: none;
+    color: #CAB9BE;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: large;
+    cursor: pointer;
+    border-radius: 15px;
+    height: 30px;
+    margin-top: 10px;
+
+}
+
+#register_button:hover {background-color: #5C3A52}
+
+.parent input {
+    height: 20px;
+    width: 200px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #85697A;
+    background-color: #CAB9BE;
+}
+
+.center_register_button {
+    text-align: center;
+}
+
+.vertical_center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+
+}
