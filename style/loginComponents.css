@@ -7,22 +7,23 @@ body {
 #login_title{
     text-align: center;
     top: 80%;
-    margin-bottom: 10%;
+    margin-bottom: 2%;
     color: #CAB9BE;
     font-size: xx-large;
 }
 
 .text_field{
+    flex: 1;
     float: left;
     font-size: large;
     color: #CAB9BE;
-    margin-top: 5%;
+    margin-top: 2%;
     margin-bottom: 1%;
 }
 
 .group input{
     height: 30px;
-    width: 200px;
+    width: 100%;
     border-radius: 15px;
     border-style: solid;
     border-color: #85697A;
@@ -32,7 +33,10 @@ body {
 .group{
     display: grid;
     place-items: center;
-
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 50%;
 }
 
 .flex-parent {
@@ -45,12 +49,13 @@ body {
 
 .login_button{
     align-items: center;
-    margin-top: 100px;
+    margin-top: 1%;
+    margin-bottom: 1%;
     justify-content: space-between;
-    font-size: x-large;
+    font-size: large;
     display: inline-block;
-    height: 50px;
-    width: 100px;
+    height: 100%;
+    width: 100%;
     border-radius: 15px;
     border-style: solid;
     border-color: #85697A;
@@ -59,13 +64,15 @@ body {
 
 .register_button{
     align-items: center;
-    margin-top: 20px;
+    margin-top: 1%;
+    margin-bottom: 1%;
     justify-content: space-between;
-    font-size: medium;
+    font-size: large;
     display: inline-block;
-    height: 30px;
-    width: 100px;
+    height: 100%;
+    width: 100%;
     border-radius: 15px;
+    border-style: solid;
     color: #CAB9BE ;
     background-color: #48223E;
 }
@@ -90,4 +97,42 @@ body {
     margin-right: 30%;
     border-radius: 15px;
     border-style: solid;
+    width: 60%;
+    height: 70%;
+}
+
+.vertical_horizontal_center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.buttons {
+    height: 30%;
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
+    align-items: center;
+}
+
+.form_buttons {
+    width: 100px;
+    height: 50%;
+    align-items: center;
+    margin-top: 2%;
+    justify-content: space-between;
+    font-size: x-large;
+    display: inline-block;
+}
+
+.form_div {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 40%;
+    margin-bottom: 2.5%;
+    margin-top: 2.5%;
 }

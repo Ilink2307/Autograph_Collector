@@ -82,12 +82,11 @@ body::-webkit-scrollbar { /* WebKit */
     text-align: center;
 }
 
-.vertical_center {
+.vertical_horizontal_center {
     margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     -ms-transform: translateY(-50%) translateX(-50%);
     transform: translateY(-50%) translateX(-50%);
-
 }
