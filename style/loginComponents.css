@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #A8919C;
+    overflow: hidden; /* Hide scrollbars */
+}
+#login_title{
+    text-align: center;
+    top: 80%;
+    margin-bottom: 10%;
+    color: #CAB9BE;
+    font-size: xx-large;
+}
+
+.text_field{
+    float: left;
+    font-size: large;
+    color: #CAB9BE;
+    margin-top: 5%;
+    margin-bottom: 1%;
+}
+
+.group input{
+    height: 30px;
+    width: 200px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #85697A;
+    background-color: #CAB9BE;
+}
+
+.group{
+    display: grid;
+    place-items: center;
+
+}
+
+.flex-parent {
+    display: flex;
+}
+
+.jc-center {
+    justify-content: center;
+}
+
+.login_button{
+    align-items: center;
+    margin-top: 100px;
+    justify-content: space-between;
+    font-size: x-large;
+    display: inline-block;
+    height: 50px;
+    width: 100px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #85697A;
+    background-color: #CAB9BE;
+}
+
+.register_button{
+    align-items: center;
+    margin-top: 20px;
+    justify-content: space-between;
+    font-size: medium;
+    display: inline-block;
+    height: 30px;
+    width: 100px;
+    border-radius: 15px;
+    color: #CAB9BE ;
+    background-color: #48223E;
+}
+
+.login_button:hover{
+    background-color: #AFE9DC;
+    color: #330A29;
+}
+
+.register_button:hover{
+    background-color: #AFE9DC;
+    color: #330A29;
+}
+
+.container{
+    background-color:#330A29;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-top: 12%;
+    margin-bottom: 12%;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-radius: 15px;
+    border-style: solid;
+}
