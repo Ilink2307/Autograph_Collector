@@ -39,44 +39,6 @@ body {
     float: left;
 }
 
-.search_add_container{
-    padding: 10px;
-    margin-top: 8px;
-    font-size: 20px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.search_add_container input{
-    height: 30px;
-    width: 200px;
-    border-radius: 15px;
-    border-style: solid;
-    border-color: #85697A;
-    background-color: #CAB9BE;
-}
-
-#new_autograph{
-    padding: 10px;
-    margin-right: 30px;
-    height: 35px;
-    width: 200px;
-    border-radius: 15px;
-    border-style: solid;
-    color: #330A29;
-    border-color: #85697A;
-    background-color: #CAB9BE;
-}
-
-#new_autograph:hover{
-    background-color: #AFE9DC;
-    color: #330A29;
-}
-
-#search_bar{
-    margin-left: 30px;
-}
-
 .inline-flex-parent {
     display: flex;
 }
@@ -126,7 +88,8 @@ body {
     position: relative;
     background-color: #CAB9BE;
     right: 0;
-    width: 800px;
+    width: 60%;
+    height: auto;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -140,7 +103,7 @@ body {
     display: block;
 }
 
-.autograph_btn {
+.statistics_btn {
     background-color: #5C3A52;
     color: white;
     padding: 16px;
@@ -150,17 +113,18 @@ body {
     cursor: pointer;
 }
 
-.autograph_btn:hover, .autograph_btn:focus {
+.statistics_btn:hover, .statistics_btn:focus {
     background-color: #AFE9DC;
     color: #330A29;
 }
 
-.autograph_dropdown {
+.statistics_dropdown {
     position: relative;
     display: inline-block;
+    margin-bottom: 1%;
 }
 
-.autograph_dropdown_content {
+.statistics_dropdown_content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -170,24 +134,24 @@ body {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
-.autograph_dropdown_content a {
+.statistics_dropdown_content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.autograph_dropdown_content a:hover {background-color: #f1f1f1}
+.statistics_dropdown_content a:hover {background-color: #f1f1f1}
 
 .show {display:block;}
 
-.autograph_element{
+.statistics_element{
     align-items: center;
     align-content: center;
     position: inherit;
 }
 
-#main_title{
+.statistics_title{
     text-align: center;
     color: #330A29;
 }
