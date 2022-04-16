@@ -144,9 +144,11 @@ body {
     color: white;
     padding: 16px;
     font-size: 16px;
-    border-radius: 15px;
+    border-radius: 5px;
     border: none;
     cursor: pointer;
+    margin-top: 2%;
+    width: 80%;
 }
 
 .autograph_btn:hover, .autograph_btn:focus {
@@ -175,7 +177,8 @@ body {
     height: 90%;
     margin-left: 10%;
     margin-right: 10%;
-
+    padding-top: 1%;
+    border-radius: 5px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 

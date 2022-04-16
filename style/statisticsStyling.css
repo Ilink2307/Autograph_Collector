@@ -85,10 +85,9 @@ body {
 
 .dropdown-content {
     display: none;
-    position: relative;
+    position: absolute;
     background-color: #CAB9BE;
     right: 0;
-    width: 60%;
     height: auto;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -108,7 +107,7 @@ body {
     color: white;
     padding: 16px;
     font-size: 16px;
-    border-radius: 2px;
+    border-radius: 5px;
     border: none;
     cursor: pointer;
     width: 100%;
@@ -128,8 +127,10 @@ body {
 
 .statistics_dropdown_content {
     overflow: auto;
+    position: relative;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     width: 100%;
+    border-radius: 5px;
 }
 
 .statistics_dropdown_content p {
