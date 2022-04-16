@@ -108,9 +108,10 @@ body {
     color: white;
     padding: 16px;
     font-size: 16px;
-    border-radius: 15px;
+    border-radius: 2px;
     border: none;
     cursor: pointer;
+    width: 100%;
 }
 
 .statistics_btn:hover, .statistics_btn:focus {
@@ -122,20 +123,17 @@ body {
     position: relative;
     display: inline-block;
     margin-bottom: 1%;
+    width: 50%;
 }
 
 .statistics_dropdown_content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    width: 100%;
 }
 
-.statistics_dropdown_content a {
-    color: black;
+.statistics_dropdown_content p {
+    color: #330A29;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
