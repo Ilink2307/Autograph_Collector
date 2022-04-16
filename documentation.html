@@ -5,7 +5,7 @@
     <title>Documentation</title>
 </head>
 <body style="font-family: 'Times New Roman', serif; text-align: justify;">
-    <h1>AuCo</h1>
+    <h1>AuCo (Autograph Collector)</h1>
     <section typeof="sa:AuthorsList">
         <h2>Authors</h2>
         <ul>
@@ -49,16 +49,16 @@
         </ul>
 
         <section>
-            <h2>1.Introduction</h2>
+            <h2>1 Introduction</h2>
             <section>
                 <h3 role="doc-subtitle">1.1 Purpose</h3>
-                <p>The product described in this documentation represents the frontend part of a bigger project named AuCo(Autograph Collector).<br>
+                <p>The product described in this documentation represents the frontend part of a bigger project named AuCo(Autograph Collector).
                 This SRS encapsulates version 1.0 of this product, which is composed of HTML, CSS and JavaScript files.</p>
             </section>
             <section>
                 <h3 role="doc-subtitle">1.2 Document Conventions</h3>
                 <p>This document is written using Times New Roman. Priorities are indicated by the &#60;h1> - &#60;h6> tags, with the highest one
-                represented by the &#60;h1> tag.<br>
+                being represented by the &#60;h1> tag.
                 The content is structured in different sections using the <a href="https://w3c.github.io/scholarly-html/">"Scholarly HTML"</a> format. Each section has its own number in accordance with the
                 priorities mentioned above.</p>
             </section>
@@ -94,9 +94,6 @@
                     <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://www.w3schools.com/" property="schema:citation" id="ref-3">
                         <cite property="schema:name"><a href="https://www.w3schools.com/">W3Schools</a></cite>
                     </li>
-                    <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://github.com/rick4470/IEEE-SRS-Tempate" property="schema:citation" id="ref-4">
-                        <cite property="schema:name"><a href="https://github.com/rick4470/IEEE-SRS-Tempate">IEEE SRS Template</a></cite>
-                    </li>
                 </ol>
             </section>
         </section>
@@ -105,7 +102,7 @@
             <section>
                 <h3 role="doc-subtitle">2.1 Product Perspective</h3>
                 <p>
-                    This product is part of the Collection-Organizing-Apps-family, and gives the user an overview of their own collection of
+                    This product is part of the collection-organizing-apps family, and gives the user an overview of their own collection of
                     autographs in the "Statistics" section.
                 </p>
             </section>
@@ -181,17 +178,20 @@
             <h2>3 External Interface Requirements</h2>
             <section>
                 <h3 role="doc-subtitle">3.1 User Interfaces</h3>
-                <p>When the user access the website there is displayed a welcome page that lets the user either log in into an existing account or create a new one by accessing the register page.<br>
-                    In the main page the user has the option to search a specific autograph, or they can add a new one. The autographs are displayed as buttons that show an image of the autograph and a short description
-                    when clicked on.<br>
-                    The user also has the option to access a page of statistics where he can gain useful information about either theirs or others autographs.
-                    If wanted, the user can log out of the account or edit their account information and account settings.
+                <p>When the user access the website there is displayed a welcome page that lets the user either log in
+                    into an existing account or create a new one by accessing the register page.
+                    In the main page the user has the option to search for a specific autograph, or they can add a new one.
+                    The autographs are displayed as buttons that show an image of the autograph and a short description
+                    when clicked on.
+                    The user also has the option to access a page of statistics where he can gain useful information
+                    about either their or others' autographs.
+                    If wanted, the user can log out of the account or edit their information and account settings.
                 </p>
             </section>
             <section>
                 <h3 role="doc-subtitle">3.2 Hardware Interfaces</h3>
-                <p>This website is supported by all devices on which the user can access a browser. <br>
-                    The chosen protocol used for communication is HTTPS and th data will be transferred via either JSON or CSV format.</p>
+                <p>This website is supported by all devices on which the user can access a browser.
+                    The chosen protocol used for communication is HTTPS and the data will be transferred via either JSON or CSV format.</p>
             </section>
             <section>
                 <h3 role="doc-subtitle">3.3 Software Interfaces</h3>
@@ -289,7 +289,7 @@
                         <h5 role="doc-subtitle">4.2.2.1 Adding a New Autograph</h5>
                         <p>
                             This feature is triggered by the user after clicking the "New Autograph"
-                            button, which triggers the interface's response. Next, the user has to
+                            button, which triggers the interfaces' response. Next, the user has to
                             provide the required specifications and upload a photo, which are added
                             to the database.
                         </p>
@@ -307,7 +307,7 @@
                         <p>
                             This feature is triggered by the user after clicking the "Delete"
                             button within an autograph element. The website will ask for
-                            confirmation and by accepting, the database will be updates, and feedback
+                            confirmation and by accepting, the database will be updated, and feedback
                             will be shown.
                         </p>
                     </section>
