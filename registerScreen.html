@@ -15,7 +15,14 @@
             </header>
         </div>
         <div class="parent">
-            <form action="mainScreen.html" onsubmit="return validateFormOnSubmit(this);">
+            <form onsubmit="return validateFormOnSubmit(this);">
+                <div class="center_register_text">
+                    <label for="email">Email</label>
+                </div>
+                <div class="center_register_input">
+                    <input type="text" id="email" name="email" placeholder="johnsmith31@gmail.com">
+                </div>
+
                 <div class="center_register_text">
                     <label for="userName">Username</label>
                 </div>
@@ -30,7 +37,7 @@
                     <input type="text" id="password" name="password" placeholder="strong password">
                 </div>
 
-                <div class="center_register_text">
+                <!--<div class="center_register_text">
                     <label for="confirmPassword">Confirm password</label>
                 </div>
                 <div class="center_register_input">
@@ -63,10 +70,10 @@
                 </div>
                 <div class="center_register_input">
                     <input type="text" id="bio" name="bio" placeholder="I like collecting autographs! :)">
-                </div>
+                </div>-->
 
                 <div class="center_register_button">
-                    <button id="register_button">Register</button>
+                    <button id="register_button" onclick="return registerUser()">Register</button>
                 </div>
             </form>
         </div>
