@@ -2,27 +2,62 @@ function validateFormOnSubmit(RegisterForm){
     return RegisterForm != null;
 }
 
-function registerUser() {
+async function registerUser() {
     let email = document.getElementById("email").value;
     let username = document.getElementById("userName").value;
     let password = document.getElementById("password").value;
 
-    let params = email+'/'+username+'/'+password;
-
-    let url = 'http://localhost:8081/api/register/' + params;
+    let url = 'http://localhost:8081/register';
     alert(url);
 
-    let httpRequest = new XMLHttpRequest();
-    if (!httpRequest) {
-        alert(' Cannot create an XMLHTTP instance');
-        return false;
+    await registerApiCall(email, username, password, url)
+
+}
+
+async function registerApiCall(email, username, password, url) {
+    try {
+        const user = {
+            email: email,
+            username: username,
+            password: password
+        }
+
+        let userJSON = JSON.stringify(user);
+        sendRequestTest(url, userJSON)
+
+    } catch (error) {
+        console.error(error)
     }
 
-    httpRequest.open('POST', url);
+}
 
-    httpRequest.onload = () => console.log(httpRequest.responseText);
+function sendRegisterRequest(userJSON, url) {
+    const request = new XMLHttpRequest();
+    request.onload = function() {
+        //de facut update la pagina daca merge
+        console.log("se face request de register")
+    }
 
-    httpRequest.send();
+    request.open("POST", url, true);
+    request.setRequestHeader("Content-type", "application/json");
+    request.send(userJSON);
+}
 
-
+function sendRequestTest(url, bodyText) {
+    fetch(url, {
+        method: 'POST',
+        body: bodyText,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'text/plain'
+        }
+    }).then((response) => {
+        return response.json()
+    }).then((res) => {
+        if (res.status === 201) {
+            console.log("Post successfully created!")
+        }
+    }).catch((error) => {
+        console.log(error)
+    })
 }
