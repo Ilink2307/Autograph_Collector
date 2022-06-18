@@ -22,9 +22,7 @@ async function registerApiCall(email, username, password, url) {
             password: password
         }
 
-        //let userJSON = JSON.stringify(user)
-        let userJSON = "ok"
-        //sendRegisterRequest(userJSON, url)
+        let userJSON = JSON.stringify(user);
         sendRequestTest(url, userJSON)
 
     } catch (error) {
