@@ -8,10 +8,8 @@ async function registerUser() {
     let password = document.getElementById("password").value;
 
     let url = 'http://localhost:8081/register';
-    alert(url);
 
     await registerApiCall(email, username, password, url)
-
 }
 
 async function registerApiCall(email, username, password, url) {
@@ -23,27 +21,14 @@ async function registerApiCall(email, username, password, url) {
         }
 
         let userJSON = JSON.stringify(user);
-        sendRequestTest(url, userJSON)
+        sendRegisterRequest(url, userJSON)
 
     } catch (error) {
         console.error(error)
     }
-
 }
 
-function sendRegisterRequest(userJSON, url) {
-    const request = new XMLHttpRequest();
-    request.onload = function() {
-        //de facut update la pagina daca merge
-        console.log("se face request de register")
-    }
-
-    request.open("POST", url, true);
-    request.setRequestHeader("Content-type", "application/json");
-    request.send(userJSON);
-}
-
-function sendRequestTest(url, bodyText) {
+function sendRegisterRequest(url, bodyText) {
     fetch(url, {
         method: 'POST',
         body: bodyText,

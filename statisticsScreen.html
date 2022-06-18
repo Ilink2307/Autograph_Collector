@@ -33,11 +33,11 @@
                 </li>
                 <li class="statistics_element">
                     <div class="statistics_dropdown">
-                        <button class="statistics_btn" onclick="myFunction('statistics_details_1')">
+                        <button class="statistics_btn" onclick="showPersonalStatistics('statistics_details_1')">
                             See your stats
                         </button>
                         <div id="statistics_details_1" class="dropdown-content statistics_dropdown_content">
-                            <p>Total number of autographs: 4</p>
+                            <p>Total number of autographs: <div id="numberOfAutographs"></div></p>
                             <p>Most valuable autograph: The puppy autograph (20 auco points)</p>
                             <p>Total value of your autographs: 80 auco points</p>
                         </div>
@@ -50,7 +50,7 @@
                 </li>
                 <li class="statistics_element">
                     <div class="statistics_dropdown">
-                        <button class="statistics_btn" onclick="myFunction('statistics_details_2')">
+                        <button class="statistics_btn" onclick="showGlobalStatistics('statistics_details_2')">
                             Highest total value - Top 3 users
                         </button>
                         <div id="statistics_details_2" class="dropdown-content statistics_dropdown_content" >
@@ -63,7 +63,7 @@
 
                 <li class="statistics_element">
                     <div class="statistics_dropdown">
-                        <button class="statistics_btn" onclick="myFunction('statistics_details_3')">
+                        <button class="statistics_btn" onclick="showGlobalStatistics('statistics_details_3')">
                             Most Autographs - Top 3 users
                         </button>
                         <div id="statistics_details_3" class="dropdown-content statistics_dropdown_content">
@@ -76,7 +76,7 @@
 
                 <li class="statistics_element">
                     <div class="statistics_dropdown">
-                        <button class="statistics_btn" onclick="myFunction('statistics_details_4')">
+                        <button class="statistics_btn" onclick="showGlobalStatistics('statistics_details_4')">
                             Users Having The Most Valuable Autograph
                         </button>
                         <div id="statistics_details_4" class="dropdown-content statistics_dropdown_content">

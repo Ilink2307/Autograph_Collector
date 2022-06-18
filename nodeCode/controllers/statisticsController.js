@@ -11,7 +11,6 @@ async function getUserStatistics(req, res) {
         req.on('end', async () => {
             const  userStatistics = await Statistics.getLoggedUserStatistics();
             res.writeHead(201, {'Content-Type': 'application/json'});
-            console.log(userStatistics)
             return res.end(JSON.stringify(userStatistics))
         })
     } catch (error){
