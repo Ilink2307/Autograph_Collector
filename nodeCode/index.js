@@ -1,15 +1,17 @@
 const http = require('http');
-const oracledb = require('oracledb');
-const {registerUser, loginUser} = require('./controllers/userController')
+const { registerUser, loginUser } = require('./controllers/userController')
+const { getUserStatistics } = require('./controllers/statisticsController')
 
 const PORT = 8081;
 
 const server = http.createServer((req, res) => {
 
-    if(req.url === '/register' && req.method === 'POST'){
+    if(req.url === '/register' && req.method === 'POST') {
         registerUser(req, res);
-    }else if(req.url === '/login' && req.method === 'GET'){
+    } else if(req.url === '/login' && req.method === 'GET') {
         loginUser(req, res);
+    } else if(req.url === '/user-statistics' && req.method === 'GET') {
+        getUserStatistics(req, res);
     }
     else{
         res.writeHead(404,{'Content-Type': 'application/json'});
