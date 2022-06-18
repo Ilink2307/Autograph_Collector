@@ -8,7 +8,6 @@ async function registerUser(req, res){
         })
 
         req.on('end', async () => {
-            console.log(body);
             const {email, username, password} = JSON.parse(body);
 
             const person = {
@@ -23,7 +22,7 @@ async function registerUser(req, res){
 
         })
 
-    }catch (error){
+    } catch (error){
         console.log(error);
     }
 }
