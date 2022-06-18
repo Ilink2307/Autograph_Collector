@@ -8,7 +8,8 @@ const server = http.createServer((req, res) => {
 
     if(req.url === '/register' && req.method === 'POST'){
         registerUser(req, res);
-    }else if(req.url === '/login' && req.method === 'GET'){
+    }else if(req.url === '/login'  && req.method === 'GET'){
+
         loginUser(req, res);
     }
     else{

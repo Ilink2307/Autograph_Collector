@@ -1,13 +1,49 @@
 async function login (){
 
-    let email = document.getElementById("userName").value;
+    let username = document.getElementById("userName").value;
     let password = document.getElementById("password").value;
-    let urlPath = 'http://localhost:8081/api/login' + '/' + email + '/' + password;
-    console.log(urlPath);
 
-    const response = await fetch(urlPath, {method: 'post'});
+    let urlPath = 'http://localhost:8081/login';
 
+    alert(urlPath);
 
+    //const response = await fetch(urlPath, {method: 'post'});
+    await loginApiCall(username, password, urlPath);
+
+}
+async function loginApiCall(username, password, url) {
+    try {
+        const user = {
+            username: username,
+            password: password
+        }
+
+        let userJSON = JSON.stringify(user);
+        sendLoginRequest(url, userJSON)
+
+    } catch (error) {
+        console.error(error)
+    }
+
+}
+function sendLoginRequest(url, bodyText) {
+    fetch(url, {
+        method: 'GET',
+        body: bodyText,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'text/plain'
+        }
+    }).then((response) => {
+        return response.json()
+    }).then((res) => {
+        if (res.status === 200) {
+            console.log("Successfully logged in!")
+        }
+    }).catch((error) => {
+        console.log(error)
+    })
+}
 
 
 
@@ -30,5 +66,5 @@ async function login (){
     else {
         alert("fail");
     }*/
-}
+
 
