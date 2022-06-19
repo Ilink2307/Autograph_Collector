@@ -106,8 +106,18 @@ body {
     font-family: inherit;
     margin: 0;
 }
+.dropdown .select_dropbtn{
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: orangered;
+    padding: 14px 16px;
+    font-family: inherit;
+    margin: 0;
+    background-color: #CAB9BE;
+}
 
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover, .dropdown:hover .dropbtn{
     background-color: #AFE9DC;
     color: #330A29;
 }
@@ -206,6 +216,143 @@ body {
     text-align: center;
     color: #330A29;
 }
+
+#add_new_autograph{
+    text-align: center;
+    text-effect: none;
+    color: #330A29;
+}
+#big_new_autograph_box{
+    text-align: justify;
+    background-color:#85697A;
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 8px solid purple;
+}
+.option_text_and_item{
+    //background-color: purple;
+    align-items: flex-start;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(160px, 1fr));
+}
+.option_text{
+    color: #330A29;
+    padding-top: 6%;
+    padding-bottom: 3%;
+    text-align: center;
+}
+
+.option_item{
+    background-color: #CAB9BE;
+    color: mediumblue;
+    height: 40px;
+    width: 100px;
+    border-radius: 20%;
+
+}
+#item{
+    background-color: orangered;
+}
+#item2{
+    background-color: #AFE9DC;
+}
+#item3{
+    background-color: yellowgreen;
+}
+#item4{
+    background-color: purple;
+}
+.option_item:hover{
+    background-color: #AFE9DC;
+}
+
+.add_custom_container{
+    margin-top: 8px;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add_custom_bar input{
+    height: 30px;
+    width: 150px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #85697A;
+    background-color: #CAB9BE;
+}
+.add_custom_bar{
+    padding: 10px;
+    margin-top: 8px;
+    font-size: 20px;
+    display: flex;
+}
+.add_mentions_container{
+    margin-top: 8px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.add_mentions_container input{
+    height: 30px;
+    width: 100%;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #85697A;
+    background-color: #CAB9BE;
+}
+.add_mentions_bar{
+    padding: 10px;
+    font-size: 20px;
+    display: flex;
+}
+
+.select_dropdown{
+    float: right;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.select_dropdown .select_dropbtn{
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.select_dropdown_content a {
+    float: none;
+    color: #330A29;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.select_dropdown_content{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.select_dropdown_content a:hover {
+
+    background-color: #AFE9DC;
+}
+
+.dropdown:hover .select_dropdown_content {
+    display: block;
+    background-color: #ddd;
+    margin-top: 45px;
+}
+
 
 .center_item{
     text-align: center;

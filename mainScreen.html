@@ -37,6 +37,99 @@
     </div>
 
     <div class="center_item">
+
+        <h2 id="add_new_autograph">Add a new autograph to your collection</h2>
+        <nav>
+            <div id="big_new_autograph_box">
+                <div class="option_text_and_item">
+                    <div id="item">
+                        <div class="option_text">Upload a photo</div>
+                        <button class="option_item">Choose a photo</button>
+                        <form action="/action_page.php">
+                            <input type="file" id="myFile" name="filename">
+                        </form>
+                    </div>
+                    <div id="item2">
+                        <div class="option_text">Date</div>
+                        <div class="select_dropdown">
+                            <button class="select_dropbtn">Select date
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="select_dropdown_content">
+                                <a href="#">aaaaa</a>
+                                <a href="#">aaaaaas</a>
+                                <a href="#">aaaaaas</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="item3">
+                        <li>
+                            <div class="option_text">Personality</div>
+                            <div class="dropdown">
+                                <button class="select_dropdown">Select personality
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="select_dropdown_content">
+                                    <a href="#">aaaaa</a>
+                                    <a href="#">aaaaaas</a>
+                                    <a href="#">aaaaaas</a>
+                                </div>
+                            </div>
+                            <div class="option_text">Add custom</div>
+                            <div class="add_custom_container">
+                                <form class="add_custom_bar" onclick="searchBarFunction()">
+                                    <input class="center_item" id="input_custom_personality" type="text" placeholder="add custom" name="search">
+                                </form>
+                            </div>
+                        </li>
+
+                    </div>
+                    <div id="item4" class="center_item">
+                        <li>
+                            <div class="option_text">Placed on</div>
+                            <div class="dropdown">
+                                <button class="select_dropdown">Select item
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="select_dropdown_content">
+                                    <a href="#">aaaaa</a>
+                                    <a href="#">aaaaaas</a>
+                                    <a href="#">aaaaaas</a>
+                                </div>
+                            </div>
+                            <div class="option_text">Add custom</div>
+                            <div class="add_custom_container">
+                                <form class="add_custom_bar" onclick="searchBarFunction()">
+                                    <input class="center_item" id="input_custom_item" type="text" placeholder="add custom" name="search">
+                                </form>
+                            </div>
+                        </li>
+
+                    </div>
+                    <div>
+                        <div class="option_text">Add some tags</div>
+                        <button class="option_item">Select tags</button>
+                        <div class="option_text">Add custom</div>
+                        <div class="add_custom_container">
+                            <form class="add_custom_bar" onclick="searchBarFunction()">
+                                <input class="center_item" id="input_custom_tags" type="text" placeholder="add custom" name="search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="center_item">
+                    <div class="option_text">Add special mentions</div>
+                    <div class="add_mentions_container center_item" style="background-color: #AFE9DC">
+                        <form class="add_mentions_bar" onclick="searchBarFunction()">
+                            <input class="center_item" id="input_mentions" type="text" placeholder="add custom" name="search">
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </nav>
         <h1 id="main_title">Your Autographs</h1>
         <nav>
             <ul id="ul_center" style="list-style-type:none;" >
