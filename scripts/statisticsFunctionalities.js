@@ -1,10 +1,10 @@
 let personalStatisticsButtonIsPressed = false;
+let firstGlobalStatisticButtonIsPressed = false;
 
 async function showPersonalStatistics(elementId) {
     if(personalStatisticsButtonIsPressed === true) {
         personalStatisticsButtonIsPressed = false;
     } else {
-        console.log("se face get la statistici")
         let url = 'http://localhost:8081/user-statistics';
         await getUserStatisticsCall(url);
         personalStatisticsButtonIsPressed = true;
@@ -13,11 +13,56 @@ async function showPersonalStatistics(elementId) {
     document.getElementById(elementId).classList.toggle("show");
 }
 
+async function showTopThreeUsersByValue(elementId) {
+    if(firstGlobalStatisticButtonIsPressed === true) {
+        firstGlobalStatisticButtonIsPressed = false;
+    } else {
+        let url = 'http://localhost:8081/global-statistics-1';
+        await getFirstGlobalStatisticCall(url);
+        firstGlobalStatisticButtonIsPressed = true;
+    }
+
+    document.getElementById(elementId).classList.toggle("show");
+}
+
+async function getFirstGlobalStatisticCall(url) {
+    try {
+        let responseBody = await sendFirstGeneralStatisticRequest(url);
+        document.getElementById("firstGSUsername1").innerHTML = responseBody.firstUser.username;
+        document.getElementById("firstGSUsername2").innerHTML = responseBody.secondUser.username;
+        document.getElementById("firstGSUsername3").innerHTML = responseBody.thirdUser.username;
+
+        document.getElementById("firstGSPoints1").innerHTML = responseBody.firstUser.pts;
+        document.getElementById("firstGSPoints2").innerHTML = responseBody.secondUser.pts;
+        document.getElementById("firstGSPoints3").innerHTML = responseBody.thirdUser.pts;
+        console.log(responseBody)
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+async function sendFirstGeneralStatisticRequest(url) {
+    let responseBody;
+    await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'text/plain'
+        }
+    }).then(response=>response.json())
+        .then(data=>{responseBody = data;})
+        .catch(err => console.error(err));
+    return responseBody;
+}
+
 async function getUserStatisticsCall(url) {
     try {
-        //probabil trimitem in body emailul userului sau ceva identificator
+        //vom lua id user din authentication header sau file dupa ce il facem
         //momentan se face la user 1
-        let responseBody = await sendPersonalStatisticsRequest(url)
+
+        let responseBody = await sendPersonalStatisticsRequest(url);
+        console.log(responseBody)
         document.getElementById("usersNumberOfAutographs").innerHTML = responseBody.numberOfAutographs;
         document.getElementById("usersMostValuableAutographsAuthor").innerHTML = responseBody.mostValuableAutographsAuthorsName;
         document.getElementById("usersMostValuableAutographsValue").innerHTML = responseBody.mostValuableAutographsPoints;
@@ -31,7 +76,6 @@ async function getUserStatisticsCall(url) {
     } catch (error) {
         console.error(error)
     }
-
 }
 
 async function sendPersonalStatisticsRequest(url) {

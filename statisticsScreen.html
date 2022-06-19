@@ -60,13 +60,32 @@
                 </li>
                 <li class="statistics_element">
                     <div class="statistics_dropdown">
-                        <button class="statistics_btn" onclick="showGlobalStatistics('statistics_details_2')">
+                        <button class="statistics_btn" onclick="showTopThreeUsersByValue('statistics_details_2')">
                             Highest total value - Top 3 users
                         </button>
                         <div id="statistics_details_2" class="dropdown-content statistics_dropdown_content" >
-                            <p>James Mary: 300 auco points</p>
-                            <p>Robert Patricia: 270 auco points</p>
-                            <p>John	Jennifer: 256 auco points</p>
+                            <ol>
+                                <li>
+                                    <p id="firstGSUsername1"></p>
+                                    <p> with </p>
+                                    <p id="firstGSPoints1"></p>
+                                    <p>AuCo points</p>
+                                </li>
+
+                                <li>
+                                    <p id="firstGSUsername2"></p>
+                                    <p> with </p>
+                                    <p id="firstGSPoints2"></p>
+                                    <p>AuCo points</p>
+                                </li>
+
+                                <li>
+                                    <p id="firstGSUsername3"></p>
+                                    <p> with </p>
+                                    <p id="firstGSPoints3"></p>
+                                    <p>AuCo points</p>
+                                </li>
+                            </ol>
                         </div>
                     </div>
                 </li>

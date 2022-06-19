@@ -8,6 +8,122 @@ function getLoggedUserStatistics() {
     })
 }
 
+async function getFirstGlobalStatistic() {
+    return new Promise ((resolve, reject) => {
+        const info = getFirstGlobalStatisticFromBD();
+        resolve(info);
+    })
+}
+
+async function getFirstGlobalStatisticFromBD() {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({user:"project", password:"PROJECT", connectionString:"localhost/XE"});
+
+        //FUNCTIA ASTA INCA NU ESTE GATA, PROBLEME CU VERSIUNE ORACLE, TREBUIE SIMPLIFICAT CEVA
+
+        //let firstUsername = await getTheNthUsernameByValue(connection, 1);
+        /*let secondUsername = await getTheNthUsernameByValue(connection, 2);
+        let thirdUsername = await getTheNthUsernameByValue(connection, 3);
+
+        let firstUserPoints = await getUserPoints(connection, firstUsername);
+        let secondUserPoints = await getUserPoints(connection, firstUsername);
+        let thirdUserPoints = await getUserPoints(connection, firstUsername);
+
+        let firstUser = { username: firstUsername, pts: firstUserPoints }
+        let secondUser = { username: secondUsername, pts: secondUserPoints }
+        let thirdUser = { username: thirdUsername, pts: thirdUserPoints }
+
+        await connection.close;
+
+        return {
+            firstUser: firstUser,
+            secondUser: secondUser,
+            thirdUser: thirdUser
+        }*/
+
+    } catch (error){
+        console.error(error);
+    }
+}
+
+async function getUserPoints(connection, username) {
+    try {
+        let userID = getUserIDByUsername(connection, username);
+        return await getUserPointsByID(connection, userID);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function getUserIDByUsername(connection, username) {
+    try {
+        let idQuery = `SELECT ID_USER FROM ACCOUNTS WHERE USERNAME = :username`;
+        let idQueryResult = await connection.execute(
+            idQuery, [username],
+            { autoCommit: true });
+        return idQueryResult.rows[0][0]
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function getUserPointsByID(connection, userID) {
+    try {
+        let sumQuery = `SELECT SUM(POINTS) FROM ALL_AUTOGRAPHS WHERE ID_USER = :userID`
+        let sumQueryResult = await connection.execute(
+            sumQuery, [userID],
+            { autoCommit: true });
+
+        return sumQueryResult.rows[0][0];
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function getTheNthUsernameByValue(connection, index) {
+    try {
+
+        let sumQuery = `SELECT SUM(POINTS) FROM ALL_AUTOGRAPHS GROUP BY ID_USER`
+        let sumQueryResult = await connection.execute(
+            sumQuery, { autoCommit: true }
+        )
+        console.log(sumQueryResult.rows[0][0])
+
+
+        let userIDQuery = `SELECT ID_USER FROM (SELECT ID_USER
+                        FROM (SELECT * FROM (SELECT SUM(POINTS) AS SUMA, ID_USER FROM ALL_AUTOGRAPHS GROUP BY ID_USER) ORDER BY SUMA)
+                        WHERE ROWNUM <= 1) WHERE ROWNUM >= 1`;
+
+        console.log("query: " + userIDQuery)
+        console.log("index: " + index)
+
+        let userIDQueryResult = await connection.execute(
+            userIDQuery,
+            { autoCommit: true });
+
+        console.log("result: " + userIDQueryResult.rows)
+
+        let userID = userIDQueryResult.rows[0][0];
+
+        let usernameQuery = `SELECT ID_AUTHOR FROM ALL_AUTOGRAPHS WHERE POINTS = :maxValue AND ID_USER = :loggedUserID`;
+        let usernameQueryResult = await connection.execute(
+            usernameQuery, [userID],
+            { autoCommit: true });
+
+        let username = usernameQueryResult.rows[0][0];
+
+        return {
+            username: username
+        };
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 async function getLoggedUserStatisticsFromBD(loggedUserID) {
     let connection;
     try {
@@ -206,5 +322,6 @@ async function getNumberOfAutographs(connection, loggedUserID) {
 }
 
 module.exports = {
-    getLoggedUserStatistics
+    getLoggedUserStatistics,
+    getFirstGlobalStatistic
 }
