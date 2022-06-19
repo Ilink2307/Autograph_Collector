@@ -10,8 +10,10 @@ async function registerUser(req, res){
         })
 
         req.on('end', async () => {
+
             console.log("Register Body")
             console.log(body);
+
             const {email, username, password} = JSON.parse(body);
 
             const person = {
@@ -25,7 +27,6 @@ async function registerUser(req, res){
             return res.end(JSON.stringify(newUser))
 
         })
-
 
     }catch (error){
         console.log(error);

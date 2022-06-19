@@ -8,10 +8,9 @@ async function registerUser() {
     let password = document.getElementById("password").value;
 
     let url = 'http://localhost:8081/register';
-    alert(url);
+    console.log("ACESTA ESTE URLUL" + url)
 
     await registerApiCall(email, username, password, url)
-
 }
 
 async function registerApiCall(email, username, password, url) {
@@ -23,11 +22,14 @@ async function registerApiCall(email, username, password, url) {
         }
 
         let userJSON = JSON.stringify(user);
+
         sendRegisterRequest (url, userJSON)
+
 
     } catch (error) {
         console.error(error)
     }
+
 
 }
 function sendRequestTest(userJSON, url) {
@@ -43,6 +45,7 @@ function sendRequestTest(userJSON, url) {
 }
 
 function sendRegisterRequest (url, bodyText) {
+
     fetch(url, {
         method: 'POST',
         body: bodyText,

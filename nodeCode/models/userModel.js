@@ -1,4 +1,3 @@
-const { v4: uuidv4} = require('uuid');
 const oracledb = require("oracledb");
 
 function registerUserBD(person){
@@ -9,16 +8,12 @@ function registerUserBD(person){
     })
 }
 
+
 function findIfUserExistsByUsername(username, password){
     return new Promise((resolve, reject) =>{
         const userExists = findIfUserExistsInBD(username, password);
         resolve(userExists);
     })
-}
-
-module.exports = {
-    registerUserBD,
-    findIfUserExistsByUsername
 }
 
 async function findIfUserExistsInBD(username, password){
@@ -52,7 +47,6 @@ async function addUserInOracleBD(newUser) {
     let connection;
     try {
         connection = await oracledb.getConnection({user:"project", password:"PROJECT", connectionString:"localhost/XE"});
-        console.log("se adauga user");
 
         let maxIdQuery = `SELECT COUNT(*) FROM ACCOUNTS`;
         const results = await connection.execute(maxIdQuery);
@@ -62,7 +56,6 @@ async function addUserInOracleBD(newUser) {
         let username = newUser.username;
         let password = newUser.password;
         let query = `INSERT INTO ACCOUNTS VALUES (:id, :email, :username, :password)`;
-
 
         let result = await connection.execute(
             query, [id, email, username, password],
@@ -86,6 +79,13 @@ getNumberOfAccounts = function(connection, query){
                     resolve(rows);
                 }
             }
-        )
-    })
+            )
+    }
+    )
 }
+
+module.exports = {
+    registerUserBD,
+    findIfUserExistsByUsername
+}
+
