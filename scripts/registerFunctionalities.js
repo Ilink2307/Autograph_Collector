@@ -8,6 +8,7 @@ async function registerUser() {
     let password = document.getElementById("password").value;
 
     let url = 'http://localhost:8081/register';
+    console.log("ACESTA ESTE URLUL" + url)
 
     await registerApiCall(email, username, password, url)
 }

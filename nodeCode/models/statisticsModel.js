@@ -16,15 +16,20 @@ async function getLoggedUserStatisticsFromBD(loggedUserID) {
         let numberOfAutographs = await getNumberOfAutographs(connection, loggedUserID);
 
         if(numberOfAutographs) {
+            let topThreeMostValuableAutographsData = await getTopThreeMostValuableAutographsData(connection, loggedUserID)
             let mostValuableAutographsData = await getMostValuableAutographsData(connection, loggedUserID);
             let totalValueOfAutographs = await getTotalValueOfAutographs(connection, loggedUserID);
+            let mostFrequentAuthor = await getMostFrequentAuthor(connection, loggedUserID);
+
             await connection.close;
 
             return {
                 numberOfAutographs: numberOfAutographs,
                 mostValuableAutographsAuthorsName: mostValuableAutographsData.authorsName,
                 mostValuableAutographsPoints: mostValuableAutographsData.maxPoints,
-                totalValueOfAutographs: totalValueOfAutographs
+                totalValueOfAutographs: totalValueOfAutographs,
+                topThreeMostValuableAutographsData: topThreeMostValuableAutographsData,
+                mostFrequentAuthor: mostFrequentAuthor
             }
         }
 
@@ -37,6 +42,108 @@ async function getLoggedUserStatisticsFromBD(loggedUserID) {
         }
 
     } catch (error){
+        console.error(error);
+    }
+}
+
+async function getMostFrequentAuthor(connection, loggedUserID) {
+    try {
+        let authorIDQuery = `select counter1.ID_AUTHOR
+            from (select COUNT(*) as total, ID_AUTHOR
+                from ALL_AUTOGRAPHS
+                group by ID_AUTHOR) counter1,
+            (select MAX(total) as maxtotal from 
+                    (select COUNT(*) as total, ID_AUTHOR from ALL_AUTOGRAPHS where ID_USER = :loggedUserID group by ID_AUTHOR)) counter2
+                        where counter1.total = counter2.maxtotal`
+
+        let authorIDResult = await connection.execute(
+            authorIDQuery, [loggedUserID],
+            { autoCommit: true });
+        let authorID = authorIDResult.rows[0][0];
+
+        let authorNameQuery =  `SELECT AUTHOR FROM AUTOGRAPH_AUTHORS WHERE ID_AUTHOR = :authorID`
+        let authorNameResult = await connection.execute(
+            authorNameQuery, [authorID],
+            { autoCommit: true });
+        let authorName = authorNameResult.rows[0][0];
+
+        let numberQuery = `SELECT COUNT(*) FROM ALL_AUTOGRAPHS WHERE ID_USER = :loggedUserID AND ID_AUTHOR = :authorID`
+        let numberQueryResult = await connection.execute(
+            numberQuery, [loggedUserID, authorID],
+            { autoCommit: true });
+        let number = numberQueryResult.rows[0][0];
+
+        return { authorName, number}
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function getTopThreeMostValuableAutographsData(connection, loggedUserID) {
+    try {
+        let firstAuthorName = null;
+        let secondAuthorName = null;
+        let thirdAuthorName = null;
+
+
+        let firstAutoQuery = `SELECT ID_AUTHOR FROM (SELECT * FROM ALL_AUTOGRAPHS WHERE ID_USER = :loggedUserID ORDER BY POINTS) WHERE ROWNUM <= 1`
+        let firstAutoQueryResult = await connection.execute(
+            firstAutoQuery, [loggedUserID],
+            { autoCommit: true });
+        let firstAutoData = firstAutoQueryResult.rows[0][0];
+
+        let firstAuthorNameQuery =  `SELECT AUTHOR FROM AUTOGRAPH_AUTHORS WHERE ID_AUTHOR = :authorID`
+        let firstAuthorNameResult = await connection.execute(
+            firstAuthorNameQuery, [firstAutoData],
+            { autoCommit: true });
+        firstAuthorName = firstAuthorNameResult.rows[0][0];
+
+        let secondAutoQuery = `SELECT ID_AUTHOR FROM (SELECT * FROM 
+                            (SELECT * FROM ALL_AUTOGRAPHS WHERE ID_USER = :loggedUserID ORDER BY POINTS)
+                        WHERE ROWNUM <= 2) WHERE ROWNUM >= 2`
+
+        let secondAutoQueryResult = await connection.execute(
+            secondAutoQuery, [loggedUserID],
+            { autoCommit: true });
+
+        let secondAutoData = null;
+
+        if(secondAutoQueryResult.rows[0]) {
+            secondAutoData = secondAutoQueryResult.rows[0][0];
+
+            let secondAuthorNameQuery =  `SELECT AUTHOR FROM AUTOGRAPH_AUTHORS WHERE ID_AUTHOR = :authorID`
+            let secondAuthorNameResult = await connection.execute(
+                secondAuthorNameQuery, [secondAutoData],
+                { autoCommit: true });
+            secondAuthorName = secondAuthorNameResult.rows[0][0];
+
+            let thirdAutoQuery = `SELECT ID_AUTHOR FROM (SELECT * FROM
+                (SELECT * FROM ALL_AUTOGRAPHS WHERE ID_USER = :loggedUserID ORDER BY POINTS)
+                                             WHERE ROWNUM <= 3) WHERE ROWNUM >= 3`
+
+            let thirdAutoQueryResult = await connection.execute(
+                thirdAutoQuery, [loggedUserID],
+                { autoCommit: true });
+
+            let thirdAutoData;
+            if(thirdAutoQueryResult.rows[0]) {
+                thirdAutoData = thirdAutoQueryResult.rows[0][0];
+
+                let thirdAuthorNameQuery =  `SELECT AUTHOR FROM AUTOGRAPH_AUTHORS WHERE ID_AUTHOR = :authorID`
+                let thirdAuthorNameResult = await connection.execute(
+                    thirdAuthorNameQuery, [thirdAutoData],
+                    { autoCommit: true });
+                thirdAuthorName = thirdAuthorNameResult.rows[0][0];
+            }
+        }
+
+        return {
+            firstAuthor: firstAuthorName,
+            secondAuthor: secondAuthorName,
+            thirdAuthor: thirdAuthorName }
+
+    } catch (error) {
         console.error(error);
     }
 }
@@ -64,7 +171,6 @@ async function getMostValuableAutographsData(connection, loggedUserID) {
             authorsName: authorNameResult.rows[0][0],
             maxPoints: maxValue
         };
-
     } catch (error) {
         console.error(error);
     }

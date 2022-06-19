@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="IU-221.5591.52">
-    <data-source name="@localhost" uuid="0539913e-ef11-412e-8be4-3591e16176c5">
+    <data-source name="BAZA_PROJECT_WEB" uuid="12cac51a-6bb8-4d8e-9ffe-a1b05a24331c">
       <database-info product="Oracle" version="Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production" jdbc-version="4.2" driver-name="Oracle JDBC driver" driver-version="21.1.0.0.0" dbms="ORACLE" exact-version="11.2.0.2.0" exact-driver-version="21.1">
         <extra-name-characters>$#</extra-name-characters>
         <identifier-quote-string>&quot;</identifier-quote-string>

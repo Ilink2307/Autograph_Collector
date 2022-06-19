@@ -2,7 +2,6 @@ const Statistics = require('../models/statisticsModel')
 
 async function getUserStatistics(req, res) {
     try {
-
         let body ='';
         req.on('data', (chunk) => {
             body += chunk.toString();

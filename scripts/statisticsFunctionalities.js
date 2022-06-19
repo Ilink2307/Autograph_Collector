@@ -1,7 +1,14 @@
+let personalStatisticsButtonIsPressed = false;
+
 async function showPersonalStatistics(elementId) {
-    console.log("se face get la statistici")
-    let url = 'http://localhost:8081/user-statistics';
-    await getUserStatisticsCall(url);
+    if(personalStatisticsButtonIsPressed === true) {
+        personalStatisticsButtonIsPressed = false;
+    } else {
+        console.log("se face get la statistici")
+        let url = 'http://localhost:8081/user-statistics';
+        await getUserStatisticsCall(url);
+        personalStatisticsButtonIsPressed = true;
+    }
 
     document.getElementById(elementId).classList.toggle("show");
 }
@@ -11,9 +18,15 @@ async function getUserStatisticsCall(url) {
         //probabil trimitem in body emailul userului sau ceva identificator
         //momentan se face la user 1
         let responseBody = await sendPersonalStatisticsRequest(url)
-        console.log("Responseul de la statistici este: " + responseBody);
-
-        document.getElementById("numberOfAutographs").innerHTML = responseBody.numberOfAutographs;
+        document.getElementById("usersNumberOfAutographs").innerHTML = responseBody.numberOfAutographs;
+        document.getElementById("usersMostValuableAutographsAuthor").innerHTML = responseBody.mostValuableAutographsAuthorsName;
+        document.getElementById("usersMostValuableAutographsValue").innerHTML = responseBody.mostValuableAutographsPoints;
+        document.getElementById("usersMostTotalValue").innerHTML = responseBody.totalValueOfAutographs;
+        document.getElementById("usersMostFrequentAuthor").innerHTML = responseBody.mostFrequentAuthor.authorName;
+        document.getElementById("usersMostFrequentAuthorCount").innerHTML = responseBody.mostFrequentAuthor.number;
+        document.getElementById("firstAuthor").innerHTML = responseBody.topThreeMostValuableAutographsData.firstAuthor;
+        document.getElementById("secondAuthor").innerHTML = responseBody.topThreeMostValuableAutographsData.secondAuthor;
+        document.getElementById("thirdAuthor").innerHTML = responseBody.topThreeMostValuableAutographsData.thirdAuthor;
 
     } catch (error) {
         console.error(error)
@@ -22,24 +35,17 @@ async function getUserStatisticsCall(url) {
 }
 
 async function sendPersonalStatisticsRequest(url) {
-    const response = await fetch(url, {
+    let responseBody;
+    await fetch(url, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'text/plain'
         }
-    }).then((response) => {
-        return response.json()
-    }).then((res) => {
-        if (res.status === 200) {
-            console.log("gasite")
-        }
-    }).catch((error) => {
-        console.log(error)
-        return null;
-    })
-
-    return response;
+    }).then(response=>response.json())
+        .then(data=>{responseBody = data;})
+        .catch(err => console.error(err));
+    return responseBody;
 }
 
 function showGlobalStatistics(elementId) {
