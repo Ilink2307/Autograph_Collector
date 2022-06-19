@@ -1,34 +1,58 @@
 async function login (){
 
-    let email = document.getElementById("userName").value;
+    let username = document.getElementById("userName").value;
     let password = document.getElementById("password").value;
-    let urlPath = 'http://localhost:8081/api/login' + '/' + email + '/' + password;
-    console.log(urlPath);
 
-    const response = await fetch(urlPath, {method: 'post'});
+    let urlPath = 'http://localhost:8081/login';
 
+    alert(urlPath);
 
+    await loginApiCall(username, password, urlPath);
 
-
-
-    /*//const myJson = response.toString(); //extract JSON from the http response
-    // do something with myJson
-    //alert(myJson);
-    let data = await response.json();
-
-
-    const xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", urlPath, false ); // false for synchronous request
-    xmlHttp.send( null );
-    console.log(4);
-    alert(xmlHttp.responseText);
-
-    if(xmlHttp.responseText === 'success') {
-        //send user to main if response is ok
-        alert("ok");
-    }
-    else {
-        alert("fail");
-    }*/
 }
+async function loginApiCall(username, password, url) {
+    try {
+        const user = {
+            username: username,
+            password: password
+        }
+
+        let userJSON = JSON.stringify(user);
+        let textResponse = await sendLoginRequest(url, userJSON);
+
+        alert(textResponse.message);
+
+        if(textResponse.message == 'User Not Registered'){
+            alert("Incorrect username or password")
+        }
+        else
+            location.replace( 'http://localhost:63343/Autograph_Collector/mainScreen.html')
+
+    } catch (error) {
+        console.error(error);
+    }
+
+
+}
+async function sendLoginRequest(url, bodyText) {
+    let responseBody
+
+    await fetch(url, {
+        method: 'POST',
+        body: bodyText,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'text/plain'
+        }
+    }).then(response=>response.json())
+        .then(data=>{
+            responseBody = data;
+        })
+        .catch(err => console.error(err));
+    return responseBody;
+}
+
+
+
+
 

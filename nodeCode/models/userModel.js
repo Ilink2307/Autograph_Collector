@@ -8,6 +8,41 @@ function registerUserBD(person){
     })
 }
 
+
+function findIfUserExistsByUsername(username, password){
+    return new Promise((resolve, reject) =>{
+        const userExists = findIfUserExistsInBD(username, password);
+        resolve(userExists);
+    })
+}
+
+async function findIfUserExistsInBD(username, password){
+    let connection;
+    try{
+        connection = await oracledb.getConnection({user:"project", password:"PROJECT", connectionString:"localhost/XE"});
+        console.log("se cauta user");
+
+        let query = `SELECT USERNAME FROM ACCOUNTS WHERE USERNAME = :username AND  PASS = :password`;
+
+        let result = await connection.execute(
+            query, [username, password],
+            { autoCommit: true });
+
+        if(result.rows[0]){
+            await connection.close;
+            return true;
+        }
+        else {
+            await connection.close;
+            return false;
+        }
+    }
+    catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+
 async function addUserInOracleBD(newUser) {
     let connection;
     try {
@@ -50,5 +85,7 @@ getNumberOfAccounts = function(connection, query){
 }
 
 module.exports = {
-    registerUserBD
+    registerUserBD,
+    findIfUserExistsByUsername
 }
+

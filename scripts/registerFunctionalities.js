@@ -22,14 +22,30 @@ async function registerApiCall(email, username, password, url) {
         }
 
         let userJSON = JSON.stringify(user);
-        sendRegisterRequest(url, userJSON)
+
+        sendRegisterRequest (url, userJSON)
+
 
     } catch (error) {
         console.error(error)
     }
+
+
+}
+function sendRequestTest(userJSON, url) {
+    const request = new XMLHttpRequest();
+    request.onload = function() {
+        //de facut update la pagina daca merge
+        console.log("se face request de register")
+    }
+
+    request.open("POST", url, true);
+    request.setRequestHeader("Content-type", "application/json");
+    request.send(userJSON);
 }
 
-function sendRegisterRequest(url, bodyText) {
+function sendRegisterRequest (url, bodyText) {
+
     fetch(url, {
         method: 'POST',
         body: bodyText,
