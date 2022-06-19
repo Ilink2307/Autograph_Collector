@@ -34,7 +34,7 @@ async function registerUser(req, res){
 }
 
 // @desc Login User
-// @route GET /login
+// @route POST /login
 async function loginUser(req, res, header_custom){
     try {
 

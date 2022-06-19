@@ -1,6 +1,7 @@
 const http = require('http');
 const { registerUser, loginUser } = require('./controllers/userController')
 const { getUserStatistics, getFirstGlobalStatistic } = require('./controllers/statisticsController')
+const { addNewAutograph } = require('./controllers/autographController')
 
 const PORT = 8081;
 
@@ -30,11 +31,16 @@ const server = http.createServer((req, res) => {
     } else if(req.url === '/user-statistics' && req.method === 'GET') {
         getUserStatistics(req, res);
     } else if(req.url === '/global-statistic-1' && req.method === 'GET') {
-        getFirstGlobalStatistic(req, res);
+        getFirstGlobalStatistic(req, res); //nu merge
     } else if(req.url === '/global-statistic-2' && req.method === 'GET') {
-        getSecondGlobalStatistic(req, res);
+        getSecondGlobalStatistic(req, res); //de implementat
     } else if(req.url === '/global-statistic-3' && req.method === 'GET') {
-        getThirdGlobalStatistic(req, res);
+        getThirdGlobalStatistic(req, res); //de implementat
+    } else if(req.url === '/new-autograph' && req.method === 'POST') {
+        addNewAutograph(req, res).then(
+            function(value) { console.log("add success") },
+            function(error) { console.log("add fail") }
+        );
     }
     else{
         res.writeHead(404,{'Content-Type': 'application/json'});
