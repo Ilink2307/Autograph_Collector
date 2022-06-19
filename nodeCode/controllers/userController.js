@@ -10,6 +10,7 @@ async function registerUser(req, res){
         })
 
         req.on('end', async () => {
+            console.log("Register Body")
             console.log(body);
             const {email, username, password} = JSON.parse(body);
 
@@ -32,13 +33,13 @@ async function registerUser(req, res){
 }
 
 // @desc Login User
-// @route GET /login/:id
-async function loginUser(req, res){
+// @route GET /login
+async function loginUser(req, res, header_custom){
     try {
 
-        console.log("PLLPLPLPLPL: ")
         let person;
         let body = '';
+
         req.on('data', (chunk) => {
             body += chunk.toString();
         })
@@ -50,21 +51,23 @@ async function loginUser(req, res){
 
             person = {
                 username,
-                password
+                password,
+            }
+
+            const personExists = await Person.findIfUserExistsByUsername(person.username, person.password);
+
+            if(!personExists){
+                res.writeHead(404, {'Content-Type': 'application/json'});
+                res.end(JSON.stringify({message: 'User Not Registered'}))
+                console.log ("User Not Registered")
+            }
+            else{
+                res.writeHead(200, {'Content-Type': 'application/json'});
+                res.end(JSON.stringify({message: 'User Logged in'}))
+                console.log ("User Logged in")
             }
         })
-        console.log(person);
-        const personExists = await Person.findIfUserExistsByUsername(person.username);
 
-        if(!personExists){
-            res.writeHead(404, {'Content-Type': 'application/json'});
-            res.end(JSON.stringify({message: 'User Not Registered'}))
-            console.log ("User Not Registered")
-        }
-        else{
-            res.writeHead(200, {'Content-Type': 'application/json'});
-            console.log ("User Logged in")
-        }
 
     }catch (error){
         console.log(error);

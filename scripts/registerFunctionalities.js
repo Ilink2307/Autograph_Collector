@@ -23,15 +23,14 @@ async function registerApiCall(email, username, password, url) {
         }
 
         let userJSON = JSON.stringify(user);
-        sendRequestTest(url, userJSON)
+        sendRegisterRequest (url, userJSON)
 
     } catch (error) {
         console.error(error)
     }
 
 }
-
-function sendRegisterRequest(userJSON, url) {
+function sendRequestTest(userJSON, url) {
     const request = new XMLHttpRequest();
     request.onload = function() {
         //de facut update la pagina daca merge
@@ -43,7 +42,7 @@ function sendRegisterRequest(userJSON, url) {
     request.send(userJSON);
 }
 
-function sendRequestTest(url, bodyText) {
+function sendRegisterRequest (url, bodyText) {
     fetch(url, {
         method: 'POST',
         body: bodyText,

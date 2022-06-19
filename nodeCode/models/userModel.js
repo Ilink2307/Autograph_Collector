@@ -9,11 +9,10 @@ function registerUserBD(person){
     })
 }
 
-function findIfUserExistsByUsername(username){
+function findIfUserExistsByUsername(username, password){
     return new Promise((resolve, reject) =>{
-        const userExists = findIfUserExistsInBD(username);
+        const userExists = findIfUserExistsInBD(username, password);
         resolve(userExists);
-
     })
 }
 
@@ -22,16 +21,16 @@ module.exports = {
     findIfUserExistsByUsername
 }
 
-async function findIfUserExistsInBD(username){
+async function findIfUserExistsInBD(username, password){
     let connection;
     try{
         connection = await oracledb.getConnection({user:"project", password:"PROJECT", connectionString:"localhost/XE"});
         console.log("se cauta user");
 
-        let query = `SELECT USERNAME FROM ACCOUNTS WHERE USERNAME = :username`;
+        let query = `SELECT USERNAME FROM ACCOUNTS WHERE USERNAME = :username AND  PASS = :password`;
 
         let result = await connection.execute(
-            query, [username],
+            query, [username, password],
             { autoCommit: true });
 
         if(result.rows[0]){
