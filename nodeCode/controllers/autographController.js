@@ -1,5 +1,26 @@
 const AutographModel = require('../models/autographModel');
 
+async function getAutographs(req, res) {
+    try {
+        let body ='';
+        req.on('data', (chunk) => {
+            body += chunk.toString();
+        })
+
+        req.on('end', async () => {
+
+            let userID = 4; // va fi luat din header de la get dupa ce face autentificarea
+
+            const getResponse = await AutographModel.getAutographs(userID);
+            console.log(getResponse)
+            res.writeHead(201, {'Content-Type': 'application/json'});
+            return res.end(JSON.stringify(getResponse))
+        })
+    } catch (error){
+        console.log(error);
+    }
+}
+
 async function addNewAutograph(req, res) {
     try {
         let body ='';
@@ -41,5 +62,6 @@ async function addNewAutograph(req, res) {
 }
 
 module.exports = {
-    addNewAutograph
+    addNewAutograph,
+    getAutographs
 }
