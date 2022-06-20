@@ -3,12 +3,12 @@ const mediumImportance = 5;
 
 async function getAutographs(userID) {
     return new Promise(async (resolve, reject) => {
-        const getResponse = await getAutographFromBD(userID);
+        const getResponse = await getAutographsFromBD(userID);
         resolve(getResponse);
     });
 }
 
-async function getAutographFromBD(userID) {
+async function getAutographsFromBD(userID) {
     let connection;
     try {
         connection = await oracledb.getConnection({user:"project", password:"PROJECT", connectionString:"localhost/XE"});

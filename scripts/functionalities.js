@@ -1,10 +1,143 @@
+const customOptionID = 2;
+
 function openDropdown(elementId) {
-    alert("sa apasat pe buton");
     document.getElementById(elementId).classList.toggle("show");
 }
 
 window.onload = async function() {
     await refreshAutographs();
+}
+
+async function submitForm() {
+    let url = 'http://localhost:8081/new-autograph';
+    let data = getDataFromForms();
+    if(dataIsGoodToInsert(data)) {
+        await newAutographApiCall(data, url);
+        await refreshAutographs();
+        alert("Your new autograph was successfully added!")
+    }
+}
+
+function getDataFromForms() {
+    let daySelect = document.getElementById("autographDateDay");
+    let day = daySelect.options[daySelect.selectedIndex].value;
+    let monthSelect = document.getElementById("autographDateMonth");
+    let month = monthSelect.options[monthSelect.selectedIndex].value;
+    let yearSelect = document.getElementById("autographDateYear");
+    let year = yearSelect.options[yearSelect.selectedIndex].value;
+
+    let idUser = 4;
+    let photo = "demo.jpg";
+    let autographDate = day + "-" + month + "-" + year;
+
+    let author;
+    let authorSelect = document.getElementById("autographAuthorSelect");
+    if(authorSelect.options[authorSelect.selectedIndex].value ===
+        authorSelect.options[customOptionID].value) {
+        author = document.getElementById("autographAuthorCustom").value;
+    } else {
+        author = authorSelect.options[authorSelect.selectedIndex].value;
+    }
+
+    let autographItem;
+    let itemSelect = document.getElementById("autographItemSelect");
+    if(itemSelect.options[itemSelect.selectedIndex].value ===
+        itemSelect.options[customOptionID].value) {
+        autographItem = document.getElementById("autographItemCustom").value;
+    } else {
+        autographItem = itemSelect.options[itemSelect.selectedIndex].value;
+    }
+
+    let tags = getAllTags().toString();
+
+    if(!tags) {
+        tags = "none";
+    }
+
+    let mentions = document.getElementById("autographMentions").value;
+    if(!mentions) {
+        mentions = "none";
+    }
+
+    let moment = "acum 5 zile"; //de luat din id supa ce apare campul
+    if(!moment) {
+        moment = "none";
+    }
+
+    return {
+        idUser: idUser,
+        photo: photo,
+        autographDate: autographDate,
+        author: author,
+        autographItem: autographItem,
+        tags: tags,
+        mentions: mentions,
+        moment: moment
+    };
+}
+
+function getAllTags() {
+    let allTags = ""
+    let customTags = document.getElementById("autographTagsCustom").value;
+
+    if(customTags.length !== 0) {
+        allTags = allTags + customTags.toString();
+    }
+
+    let checkBoxElementID = 'checkBoxID1';
+    for(let i = 1; document.getElementById(checkBoxElementID); ++i) {
+        if(document.getElementById(checkBoxElementID).checked === true) {
+            if(allTags.length !== 0) {
+                allTags = allTags + ", ";
+            }
+            allTags = allTags + document.getElementById(checkBoxElementID).name;
+        }
+        let nextIndex = i+1
+        checkBoxElementID = 'checkBoxID' + nextIndex;
+    }
+    return allTags;
+}
+
+function customElementWasSpecified(id) {
+    let element = document.getElementById(id);
+    element.value = customOptionID;
+    element.dispatchEvent(new Event('change'));
+}
+
+function dataIsGoodToInsert(data) {
+    let daySelect = document.getElementById("autographDateDay");
+    let day = daySelect.options[daySelect.selectedIndex].value;
+    let monthSelect = document.getElementById("autographDateMonth");
+    let month = monthSelect.options[monthSelect.selectedIndex].value;
+    let yearSelect = document.getElementById("autographDateYear");
+    let year = yearSelect.options[yearSelect.selectedIndex].value;
+
+    if(!data.photo) {
+        alert("Please select a valid photo!");
+        return false;
+    }
+    if(day === "Select Day") {
+        alert("Please select a valid day!");
+        return false;
+    }
+    if(month === "Select Month") {
+        alert("Please select a valid month!");
+        return false;
+    }
+    if(year === "Select Year") {
+        alert("Please select a valid year!");
+        return false;
+    }
+    if(data.author === "Select Personality") {
+        alert("Please select a valid personality!");
+        return false;
+    }
+    if(data.autographItem === "Select Item") {
+        alert("Please select a valid item!");
+        return false;
+    }
+
+    return true;
 }
 
 async function refreshAutographs() {
@@ -108,12 +241,6 @@ function displayAutographs(autographArray) {
 
         document.getElementById("ul_center").appendChild(newLi);
     }
-}
-
-async function addNewAutographFromMain() {
-    let object = getObjectFromInputForms();
-    let url = 'http://localhost:8081/new-autograph';
-    await newAutographApiCall(object, url);
 }
 
 async function newAutographApiCall(object, url) {
