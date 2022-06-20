@@ -7,7 +7,7 @@ const PORT = 8081;
 
 const server = http.createServer((req, res) => {
 
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63343')
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342')
     res.setHeader('Access-Control-Request-Method', '')
 
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST')
@@ -48,6 +48,7 @@ const server = http.createServer((req, res) => {
             function(error) { console.log("add fail") }
         );
     } else if(req.url === '/main-get' && req.method === 'GET') {
+        console.log("se va efectua get autographs");
         getAutographs(req, res).then(
             function(value) { console.log("main get success") },
             function(error) { console.log("main get fail") }

@@ -4,6 +4,7 @@ const mediumImportance = 5;
 async function getAutographs(userID) {
     return new Promise(async (resolve, reject) => {
         const getResponse = await getAutographFromBD(userID);
+        console.log("Primul autograf are acest autor: " + getResponse[0].author)
         resolve(getResponse);
     });
 }
@@ -23,8 +24,6 @@ async function getAutographFromBD(userID) {
             autographArray.push(currentAutograph);
         }
 
-        console.log(autographArray); //tetsing
-
         await connection.close;
         return autographArray;
     }
@@ -35,11 +34,10 @@ async function getAutographFromBD(userID) {
 }
 
 async function getProcessedAutograph(connection, currentAutographRaw) {
-    console.log("se va procesa autograful");
     let processedAutograph;
 
-    let author = await getAuthorNameByID(connection, currentAutographRaw[0]);
-    let item = await getItemNameByID(connection, currentAutographRaw[1]);
+    let author = await getAuthorNameByID(connection, currentAutographRaw[2]);
+    let item = await getItemNameByID(connection, currentAutographRaw[3]);
     let moment = currentAutographRaw[4];
     let mentions = currentAutographRaw[5];
     let pts = currentAutographRaw[6];
@@ -95,9 +93,6 @@ async function getIthAutographFromBD(connection, userID, i) {
             autographQuery, [userID, i],
             { autoCommit: true });
 
-        console.log("AUTOGRAFUL " + i + " este: ");
-        console.log(autographResult.rows[0]);
-
         return autographResult.rows[0];
     } catch (error) {
         console.error(error);
@@ -131,8 +126,6 @@ async function addAutographInBD(autograph) {
         connection = await oracledb.getConnection({user:"project", password:"PROJECT", connectionString:"localhost/XE"});
 
         let uploadObject = await computeUploadObject(connection, autograph);
-
-        console.log(uploadObject); //tetsing
 
         let insertQuery = `INSERT INTO ALL_AUTOGRAPHS_V2 VALUES (:a, :b, :c, :d, :e, :f, :g, :h, :i)`
         await connection.execute(
