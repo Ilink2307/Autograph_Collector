@@ -1,11 +1,128 @@
 const oracledb = require("oracledb")
 const mediumImportance = 5;
 
+async function getAutographs(userID) {
+    return new Promise(async (resolve, reject) => {
+        const getResponse = await getAutographFromBD(userID);
+        resolve(getResponse);
+    });
+}
+
+async function getAutographFromBD(userID) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({user:"project", password:"PROJECT", connectionString:"localhost/XE"});
+
+        let autographArray = [];
+
+        let numberOfAutographs = await getNumberOfAutographs(connection, userID);
+
+        for(let i = 0; i < numberOfAutographs; ++i) {
+            let currentAutographRaw = await getIthAutographFromBD(connection, userID, i+1);
+            let currentAutograph = await getProcessedAutograph(connection, currentAutographRaw);
+            autographArray.push(currentAutograph);
+        }
+
+        console.log(autographArray); //tetsing
+
+        await connection.close;
+        return autographArray;
+    }
+    catch (error){
+        console.error(error);
+        return "add failed in db";
+    }
+}
+
+async function getProcessedAutograph(connection, currentAutographRaw) {
+    console.log("se va procesa autograful");
+    let processedAutograph;
+
+    let author = await getAuthorNameByID(connection, currentAutographRaw[0]);
+    let item = await getItemNameByID(connection, currentAutographRaw[1]);
+    let moment = currentAutographRaw[4];
+    let mentions = currentAutographRaw[5];
+    let pts = currentAutographRaw[6];
+    let date = currentAutographRaw[7];
+    let photo = currentAutographRaw[8];
+
+    processedAutograph = {
+        author,
+        item,
+        moment,
+        mentions,
+        pts,
+        date,
+        photo
+    }
+
+    return processedAutograph;
+}
+
+async function getItemNameByID(connection, id) {
+    try {
+        let itemNameQuery =  `SELECT ITEM_NAME FROM ITEMS WHERE ID_ITEM = :a`
+        let itemNameResult = await connection.execute(
+            itemNameQuery, [id],
+            { autoCommit: true });
+
+        return itemNameResult.rows[0][0];
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function getAuthorNameByID(connection, id) {
+    try {
+        let authorNameQuery =  `SELECT AUTHOR FROM AUTOGRAPH_AUTHORS WHERE ID_AUTHOR = :a`
+        let authorNameResult = await connection.execute(
+            authorNameQuery, [id],
+            { autoCommit: true });
+
+        return authorNameResult.rows[0][0];
+    } catch (error) {
+            console.error(error);
+    }
+}
+
+async function getIthAutographFromBD(connection, userID, i) {
+    try {
+        let autographQuery = `SELECT * FROM (SELECT * FROM (SELECT * FROM 
+                            (SELECT * FROM ALL_AUTOGRAPHS_V2 WHERE ID_USER = :a ORDER BY ID_AUTOGRAPH) WHERE ROWNUM <= :b)
+                            ORDER BY ID_AUTOGRAPH DESC) WHERE ROWNUM <=1`
+
+        let autographResult = await connection.execute(
+            autographQuery, [userID, i],
+            { autoCommit: true });
+
+        console.log("AUTOGRAFUL " + i + " este: ");
+        console.log(autographResult.rows[0]);
+
+        return autographResult.rows[0];
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function getNumberOfAutographs(connection, loggedUserID) {
+    try {
+        let numberOfAutographsQuery = `SELECT COUNT(*) FROM ALL_AUTOGRAPHS_V2 WHERE ID_USER = :loggedUserID`;
+
+        let numberOfAutographsResult = await connection.execute(
+            numberOfAutographsQuery, [loggedUserID],
+            { autoCommit: true });
+
+        return numberOfAutographsResult.rows[0][0];
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 async function addAutograph(autograph){
     return new Promise(async (resolve, reject) => {
         const addResponse = await addAutographInBD(autograph);
         resolve(addResponse);
-    })
+    });
 }
 
 async function addAutographInBD(autograph) {
@@ -162,5 +279,6 @@ async function computePointsForAutograph(connection, authorID, itemID, mentions)
 }
 
 module.exports = {
-    addAutograph
+    addAutograph,
+    getAutographs
 }

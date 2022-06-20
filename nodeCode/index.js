@@ -1,7 +1,7 @@
 const http = require('http');
 const { registerUser, loginUser } = require('./controllers/userController')
 const { getUserStatistics, getFirstGlobalStatistic } = require('./controllers/statisticsController')
-const { addNewAutograph } = require('./controllers/autographController')
+const { addNewAutograph, getAutographs } = require('./controllers/autographController')
 
 const PORT = 8081;
 
@@ -29,9 +29,15 @@ const server = http.createServer((req, res) => {
             function(error) { console.log("login fail") }
         );
     } else if(req.url === '/user-statistics' && req.method === 'GET') {
-        getUserStatistics(req, res);
+        getUserStatistics(req, res).then(
+            function(value) { console.log("personal statistics success") },
+            function(error) { console.log("personal statistics fail") }
+        );
     } else if(req.url === '/global-statistic-1' && req.method === 'GET') {
-        getFirstGlobalStatistic(req, res); //nu merge
+        getFirstGlobalStatistic(req, res).then(
+            function(value) { console.log("first global statistic success") },
+            function(error) { console.log("first global statistic fail") }
+        ); //nu merge
     } else if(req.url === '/global-statistic-2' && req.method === 'GET') {
         getSecondGlobalStatistic(req, res); //de implementat
     } else if(req.url === '/global-statistic-3' && req.method === 'GET') {
@@ -40,6 +46,11 @@ const server = http.createServer((req, res) => {
         addNewAutograph(req, res).then(
             function(value) { console.log("add success") },
             function(error) { console.log("add fail") }
+        );
+    } else if(req.url === '/main-get' && req.method === 'GET') {
+        getAutographs(req, res).then(
+            function(value) { console.log("main get success") },
+            function(error) { console.log("main get fail") }
         );
     }
     else{
