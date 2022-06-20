@@ -1,4 +1,5 @@
 function openDropdown(elementId) {
+    alert("sa apasat pe buton");
     document.getElementById(elementId).classList.toggle("show");
 }
 
@@ -49,7 +50,19 @@ function displayAutographs(autographArray) {
         let customDetailsID = "autographDetails" + index;
         let customFunctionCall = "openDropdown('" + customDetailsID + "')";
         autoButton.setAttribute("onClick", customFunctionCall);
-        autoButton.innerHTML = "Your " + index + "-th autograph";
+
+        let innerText;
+        if(index === 1){
+            innerText = "Your first autograph";
+        } else if(index === 2) {
+            innerText = "Your second autograph";
+        } else if(index === 3) {
+            innerText = "Your second autograph";
+        } else {
+            innerText = "Your " + index + "th autograph"
+        }
+
+        autoButton.innerHTML = innerText;
 
         let secondDiv = document.createElement("div");
         secondDiv.setAttribute("id", customDetailsID);

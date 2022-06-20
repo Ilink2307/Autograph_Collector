@@ -13,7 +13,6 @@ async function getAutographs(req, res) {
 
             const getResponse = await AutographModel.getAutographs(userID);
             res.writeHead(201, {'Content-Type': 'application/json'});
-            console.log(JSON.stringify(getResponse));
             return res.end(JSON.stringify(getResponse))
         })
     } catch (error){
