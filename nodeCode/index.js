@@ -33,15 +33,6 @@ const server = http.createServer((req, res) => {
             function(value) { console.log("personal statistics success") },
             function(error) { console.log("personal statistics fail") }
         );
-    } else if(req.url === '/global-statistic-1' && req.method === 'GET') {
-        getFirstGlobalStatistic(req, res).then(
-            function(value) { console.log("first global statistic success") },
-            function(error) { console.log("first global statistic fail") }
-        ); //nu merge
-    } else if(req.url === '/global-statistic-2' && req.method === 'GET') {
-        getSecondGlobalStatistic(req, res); //de implementat
-    } else if(req.url === '/global-statistic-3' && req.method === 'GET') {
-        getThirdGlobalStatistic(req, res); //de implementat
     } else if(req.url === '/new-autograph' && req.method === 'POST') {
         addNewAutograph(req, res).then(
             function(value) { console.log("add success") },
