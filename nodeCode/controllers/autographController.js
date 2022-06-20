@@ -12,8 +12,8 @@ async function getAutographs(req, res) {
             let userID = 4; // va fi luat din header de la get dupa ce face autentificarea
 
             const getResponse = await AutographModel.getAutographs(userID);
-            console.log(getResponse)
             res.writeHead(201, {'Content-Type': 'application/json'});
+            console.log(JSON.stringify(getResponse));
             return res.end(JSON.stringify(getResponse))
         })
     } catch (error){
