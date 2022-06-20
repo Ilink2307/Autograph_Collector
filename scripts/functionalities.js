@@ -6,6 +6,10 @@ function searchBarFunction(){
 
 }
 
+function addCustomBar(){
+
+}
+
 var modal = document.getElementById('myModal');
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
@@ -25,3 +29,20 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function() {
     modal.style.display = "none";
 }
+
+
+
+////////////////////////////////Start tag Checkbox
+var expanded = false;
+
+function showCheckboxes() {
+    var checkboxes = document.getElementById("checkboxes");
+    if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+    } else {
+        checkboxes.style.display = "none";
+        expanded = false;
+    }
+}
+////////////////////////////////End tag Checkbox
