@@ -90,53 +90,9 @@ body {
     text-decoration: none;
 }
 
-.dropdown {
-    float: right;
-    overflow: hidden;
-    display: inline-block;
-}
-
-.dropdown .dropbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
-}
-
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover, .dropdown:hover .dropbtn{
     background-color: #AFE9DC;
     color: #330A29;
-}
-
-.dropdown-content a {
-    float: none;
-    color: #330A29;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-.dropdown-content{
-    display: none;
-    position: absolute;
-    background-color: #CAB9BE;
-    right: 0;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
 }
 
 .autograph_btn {
@@ -156,39 +112,6 @@ body {
     color: #330A29;
 }
 
-.autograph_dropdown {
-    position: relative;
-    display: inline-block;
-    text-align: center;
-    width: 90%;
-
-}
-
-.autograph_dropdown_content {
-    display: none;
-   /* position: relative;
-    text-align: center;
-    align-items: center;
-    */
-
-    background-color: #CAB9BE;
-    min-width: 160px;
-    width: 80%;
-    height: 90%;
-    margin-left: 10%;
-    margin-right: 10%;
-    padding-top: 1%;
-    border-radius: 5px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.autograph_dropdown_content a {
-    color: #330A29;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
 #autographDetails{
 
 }
@@ -204,6 +127,12 @@ body {
 }
 #main_title{
     text-align: center;
+    color: #330A29;
+}
+
+#add_new_autograph{
+    text-align: center;
+    text-effect: none;
     color: #330A29;
 }
 
@@ -314,7 +243,298 @@ div.a{
     padding: 0;
 }
 
+/*////////////////////////////////////////////////Dropdowns*/
+
+.dropdown {
+    overflow: visible;
+    display: inline-block;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: #5C3A52;
+    font-family: inherit;
+    margin: 0;
+}
+
+.dropdown:hover .select_dropdown_content {
+    display: block;
+    background-color: #ddd;
+    margin-top: 45px;
+}
+
+.dropdown-content a {
+    float: none;
+    color: #330A29;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: #CAB9BE;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/*/////////////////////////////////////////try//////////////////////////////////////////*/
+
+:root {
+    --radius: 2px;
+    --baseFg: dimgray;
+    --baseBg: white;
+    --accentFg: #AFE9DC;
+    --accentBg: #48223E;
+}
+
+select {
+    margin-top: 10px;
+    font: 400 12px/1.3 sans-serif;
+    -webkit-appearance: none;
+    appearance: none;
+    color: #330A29;
+    border: 1px solid var(--baseFg);
+    line-height: 1;
+    outline: 0;
+    padding: 0.65em 2.5em 0.55em 0.75em;
+    border-radius: var(--radius);
+    background-color: #CAB9BE;
+    background-image: linear-gradient(var(--baseFg), var(--baseFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;
+    background-position: right 20px center, right bottom, right bottom, right bottom;
+}
+
+select:hover {
+    background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+}
+
+select:active {
+    background-image: linear-gradient(var(--accentFg), var(--accentFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentFg) 50%),
+    linear-gradient(var(--accentFg) 42%, var(--accentBg) 42%);
+    color: var(--accentBg);
+    border-color: var(--accentFg);
+    background-color: var(--accentFg);
+}
+/*/////////////////////////////////////////try//////////////////////////////////////////*/
 
 
 
+/*/////////////////////////////////////Autograph_Dropdown*/
+.autograph_dropdown {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 90%;
+
+}
+
+.autograph_dropdown_content {
+    display: none;
+    background-color: #CAB9BE;
+    min-width: 160px;
+    width: 80%;
+    height: 90%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 1%;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.autograph_dropdown_content a {
+    color: #330A29;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/*////////////////////////////////////ACUM*/
+
+#big_new_autograph_box{
+    text-align: justify;
+    background-color:#85697A;
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 8px solid purple;
+    align-items: center;
+}
+.option_text_and_item{
+    background-color: forestgreen;
+    padding-top: 20px;
+}
+.box_de_centrat_in_boxul_mare{
+    width: 50%;
+    align-items: normal;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(160px, 1fr));
+    margin: auto;
+    border: 5px solid #FFFF00;
+    padding: 10px;
+}
+
+.option_text{
+    color: #330A29;
+    padding-top: 6%;
+    padding-bottom: 3%;
+    text-align: center;
+}
+
+.option_item{
+    background-color: #CAB9BE;
+    justify-content: center;
+    color: mediumblue;
+    height: 40px;
+    width: 100px;
+    border-radius: 20%;
+}
+
+.center {
+    margin-top: 10px;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+#item1{
+    background-color: orangered;
+}
+#item2{
+    background-color: #AFE9DC;
+}
+#item3{
+    background-color: yellowgreen;
+}
+#item4{
+    background-color: purple;
+}
+#item5{
+    background-color: salmon;
+}
+.option_item:hover{
+    background-color: #AFE9DC;
+}
+
+.add_custom_container{
+    margin-top: 8px;
+    //margin-left: 5%;
+    font-size: 20px;
+    //display: flex;
+    justify-content: space-between;
+}
+
+.add_custom_bar input{
+    height: 30px;
+    width: 150px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #85697A;
+    background-color: #CAB9BE;
+}
+.add_custom_bar{
+    padding: 10px;
+    margin-top: 8px;
+    font-size: 20px;
+    //display: flex;
+}
+.add_mentions_container{
+    margin-top: 8px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.add_mentions_container input{
+    height: 50px;
+    width: 100%;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #85697A;
+    background-color: #CAB9BE;
+}
+.add_mentions_bar{
+    padding: 10px;
+    width: 70%;
+    height: 50px;
+    font-size: 20px;
+    display: flex;
+}
+
+.submit_new_autograph{
+    margin-top: 3%;
+    margin-bottom: 1%;
+    width: 100px;
+    height: 50px;
+    background-color: #48223E;
+    color: #AFE9DC;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 16px;
+}
+
+.submit_new_autograph:hover{
+    background-color: #AFE9DC;
+    color: #48223E;
+    border-color: #AFE9DC;
+}
+/*///////////////////////////////tryyyy///////////////////////////*/
+
+.multiselect {
+    width: 100px;
+}
+
+.selectBox {
+    position: relative;
+}
+
+.selectBox select {
+    width: 100%;
+    font-weight: bold;
+}
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#checkboxes {
+    display: none;
+    border: 1px #dadada solid;
+}
+
+#checkboxes label {
+    display: block;
+}
+
+#checkboxes label:hover {
+    background-color: #AFE9DC;
+}
 
