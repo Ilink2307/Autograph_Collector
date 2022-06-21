@@ -151,7 +151,13 @@ function getDataFromForms() {
     let year = yearSelect.options[yearSelect.selectedIndex].value;
 
     let idUser = 4;
-    let photo = "demo.jpg";
+    //let photo = "demo.jpg";
+
+    let photo = document.getElementById("autographPhoto").value;
+    if(!photo) {
+        photo = "https://upload.wikimedia.org/wikipedia/commons/1/1d/TC_Autograph.jpg";
+    }
+
     let autographDate = day + "-" + month + "-" + year;
 
     let author;
@@ -173,7 +179,6 @@ function getDataFromForms() {
     }
 
     let tags = getAllTags().toString();
-
     if(!tags) {
         tags = "none";
     }
@@ -236,10 +241,10 @@ function dataIsGoodToInsert(data) {
     let yearSelect = document.getElementById("autographDateYear");
     let year = yearSelect.options[yearSelect.selectedIndex].value;
 
-    if(!data.photo) {
-        alert("Please select a valid photo!");
-        return false;
-    }
+    // if(!data.photo) {
+    //     alert("Please select a valid photo!");
+    //     return false;
+    // }
     if(day === "Select Day") {
         alert("Please select a valid day!");
         return false;
@@ -334,7 +339,7 @@ function displayAutographs(autographArray) {
 
         let img = document.createElement("img");
         img.setAttribute("class", "myImg");
-        img.setAttribute("alt", "Autograph image");
+        //img.setAttribute("alt", "Autograph image");
         img.setAttribute("src", autographArray[i].photo);
 
         fourthDiv.appendChild(img);
