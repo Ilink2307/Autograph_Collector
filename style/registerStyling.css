@@ -1,6 +1,7 @@
 body {
-    background-color: #A8919C;
-    font-family: Arial, Helvetica, sans-serif;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgb(66, 38, 54) 0%, rgb(168, 90, 176) 35%, rgb(57, 187, 187) 100%);
+
     /*overflow: hidden; /* Hide scrollbars */
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
@@ -42,7 +43,7 @@ body::-webkit-scrollbar { /* WebKit */
     margin-bottom: 2%;
     margin-right: 20%;
     margin-left: 20%;
-    background-color: #330A29;
+    background-color: #460e3d;
     border-radius: 20px;
 }
 

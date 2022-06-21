@@ -1,7 +1,8 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #A8919C;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgb(66, 38, 54) 0%, rgb(168, 90, 176) 35%, rgb(57, 187, 187) 100%);
     overflow: hidden;
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
@@ -10,7 +11,7 @@ body {
 
 .navbar {
     overflow: hidden;
-    background-color: #330A29;
+    background-color: #460e3d;
 }
 
 .navbar a {
@@ -24,12 +25,12 @@ body {
 
 .navbar a:hover {
     background-color: #AFE9DC;
-    color: #330A29;
+    color: #460e3d;
 }
 
 .navbar a.active {
     background-color: #85697A;
-    color: #330A29;
+    color: #460e3d;
 }
 
 .navbar a.top_right {
@@ -70,7 +71,7 @@ body {
 
 #new_autograph:hover{
     background-color: #AFE9DC;
-    color: #330A29;
+    color: #460e3d;
 }
 
 #search_bar{
@@ -92,11 +93,11 @@ body {
 
 .navbar a:hover, .dropdown:hover .dropbtn{
     background-color: #AFE9DC;
-    color: #330A29;
+    color: #460e3d;
 }
 
 .autograph_btn {
-    background-color: #5C3A52;
+    background-color: #460e3d;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -109,7 +110,7 @@ body {
 
 .autograph_btn:hover, .autograph_btn:focus {
     background-color: #AFE9DC;
-    color: #330A29;
+    color: #460e3d;
 }
 
 #autographDetails{
@@ -296,7 +297,7 @@ div.a{
     --baseFg: dimgray;
     --baseBg: white;
     --accentFg: #AFE9DC;
-    --accentBg: #48223E;
+    --accentBg: #460e3d;
 }
 
 select {
@@ -305,7 +306,7 @@ select {
     font: 400 12px/1.3 sans-serif;
     -webkit-appearance: none;
     appearance: none;
-    color: #330A29;
+    color: #460e3d;
     border: 1px solid var(--baseFg);
     line-height: 1;
     outline: 0;
@@ -377,7 +378,7 @@ select:active {
     background-color:#85697A;
     margin-left: 5%;
     margin-right: 5%;
-    border: 5px solid purple;
+    border: 5px solid #460e3d;
     align-items: center;
 }
 
@@ -385,7 +386,7 @@ select:active {
     padding-top: 40px;
 }
 .option_text_and_item{
-    background-color: forestgreen;
+    //background-color: forestgreen;
     padding-top: 20px;
 }
 .box_de_centrat_in_boxul_mare{
@@ -394,12 +395,12 @@ select:active {
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(160px, 1fr));
     margin: auto;
-    border: 5px solid #FFFF00;
+    //border: 5px solid #FFFF00;
     padding: 10px;
 }
 
 .option_text{
-    color: #330A29;
+    color: #460e3d;
     padding-top: 6%;
     padding-bottom: 5%;
     text-align: center;
@@ -420,24 +421,24 @@ select:active {
     margin-right: 25%;
 }
 
-#item1{
-    background-color: orangered;
-}
-#item2{
-    background-color: #AFE9DC;
-}
-#item3{
-    background-color: yellowgreen;
-}
-#item4{
-    background-color: purple;
-}
-#item5{
-    background-color: salmon;
-}
-#item6{
-    background-color: darkslategray;
-}
+/*#item1{*/
+/*    background-color: orangered;*/
+/*}*/
+/*#item2{*/
+/*    background-color: #AFE9DC;*/
+/*}*/
+/*#item3{*/
+/*    background-color: yellowgreen;*/
+/*}*/
+/*#item4{*/
+/*    background-color: purple;*/
+/*}*/
+/*#item5{*/
+/*    background-color: salmon;*/
+/*}*/
+/*#item6{*/
+/*    background-color: darkslategray;*/
+/*}*/
 .option_item:hover{
     background-color: #AFE9DC;
 }
@@ -521,7 +522,7 @@ select:active {
 
 .selectBox select {
     width: 100%;
-    font-weight: bold;
+    //font-weight: bold;
 }
 
 .overSelect {
