@@ -275,7 +275,64 @@ async function computePointsForAutograph(connection, authorID, itemID, mentions)
     return Math.floor(pts);
 }
 
+async function search(tags, userID) {
+    return new Promise(async (resolve, reject) => {
+        const getResponse = await searchInBD(tags, userID);
+        resolve(getResponse);
+    });
+}
+
+async function searchInBD(tags, userID) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({user:"project", password:"PROJECT", connectionString:"localhost/XE"});
+
+        let autographArray = [];
+
+        let numberOfAutographs = await getNumberOfAutographs(connection, userID);
+
+        for(let i = 0; i < numberOfAutographs; ++i) {
+            let currentAutographRaw = await getIthAutographFromBD(connection, userID, i+1);
+            let currentAutograph = await getProcessedAutograph(connection, currentAutographRaw);
+            if(matchesTags(currentAutograph.tags, tags)) {
+                autographArray.push(currentAutograph);
+            }
+        }
+
+        await connection.close;
+        return autographArray;
+    }
+    catch (error){
+        console.error(error);
+        return "add failed in db";
+    }
+}
+
+function matchesTags(currentTags, tags) {
+    console.log("face match? " + tags + " autograf: " + currentTags);
+    let differentTags = tags.split(/[, ]+/);
+    let assignedTags = currentTags.split(/[, ]+/);
+
+    console.log("tag din search: " + differentTags);
+    console.log("assigned: " + assignedTags[0] + assignedTags[1]);
+
+    for(let i = 0; differentTags[i]; ++i) {
+        let isAssigned = false;
+        for(let j=0; assignedTags[j]; ++j) {
+            if(assignedTags[j] === differentTags[i]) {
+                isAssigned = true;
+                break;
+            }
+        }
+        if(isAssigned === false) {
+            return false;
+        }
+    }
+    return true;
+}
+
 module.exports = {
     addAutograph,
-    getAutographs
+    getAutographs,
+    search
 }
