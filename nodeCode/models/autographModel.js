@@ -3,13 +3,12 @@ const mediumImportance = 5;
 
 async function getAutographs(userID) {
     return new Promise(async (resolve, reject) => {
-        const getResponse = await getAutographFromBD(userID);
-        console.log("Primul autograf are acest autor: " + getResponse[0].author)
+        const getResponse = await getAutographsFromBD(userID);
         resolve(getResponse);
     });
 }
 
-async function getAutographFromBD(userID) {
+async function getAutographsFromBD(userID) {
     let connection;
     try {
         connection = await oracledb.getConnection({user:"project", password:"PROJECT", connectionString:"localhost/XE"});
@@ -43,6 +42,7 @@ async function getProcessedAutograph(connection, currentAutographRaw) {
     let pts = currentAutographRaw[6];
     let date = currentAutographRaw[7];
     let photo = currentAutographRaw[8];
+    let tags = currentAutographRaw[9];
 
     processedAutograph = {
         author,
@@ -51,7 +51,8 @@ async function getProcessedAutograph(connection, currentAutographRaw) {
         mentions,
         pts,
         date,
-        photo
+        photo,
+        tags
     }
 
     return processedAutograph;
@@ -127,7 +128,7 @@ async function addAutographInBD(autograph) {
 
         let uploadObject = await computeUploadObject(connection, autograph);
 
-        let insertQuery = `INSERT INTO ALL_AUTOGRAPHS_V2 VALUES (:a, :b, :c, :d, :e, :f, :g, :h, :i)`
+        let insertQuery = `INSERT INTO ALL_AUTOGRAPHS_V2 VALUES (:a, :b, :c, :d, :e, :f, :g, :h, :i, :j)`;
         await connection.execute(
             insertQuery,
             [
@@ -139,10 +140,13 @@ async function addAutographInBD(autograph) {
                 uploadObject.mentions,
                 uploadObject.pts,
                 uploadObject.autographDate,
-                uploadObject.autographPhoto
+                uploadObject.autographPhoto,
+                uploadObject.tags
             ],
             { autoCommit: true }
         );
+
+        console.log("TAGURILE SUNT: " + uploadObject.tags);
 
         await connection.close;
         return "add successfully computed";
@@ -163,6 +167,7 @@ async function computeUploadObject(connection, autograph) {
     let pts = await computePointsForAutograph(connection, authorID, itemID, mentions);
     let autographDate = autograph.autographDate;
     let autographPhoto = autograph.photo;
+    let tags = autograph.tags;
 
     return {
         autographID,
@@ -173,7 +178,8 @@ async function computeUploadObject(connection, autograph) {
         mentions,
         pts,
         autographDate,
-        autographPhoto
+        autographPhoto,
+        tags
     }
 }
 

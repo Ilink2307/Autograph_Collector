@@ -35,7 +35,7 @@
                         <div id="item2" class="center_item">
                             <div class="option_text">Date</div>
                             <select id="autographDateDay">
-                                <option>Select day</option>
+                                <option>Select Day</option>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -69,7 +69,7 @@
                                 <option>31</option>
                             </select>
                             <select id="autographDateMonth">
-                                <option>Select month</option>
+                                <option>Select Month</option>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -84,7 +84,7 @@
                                 <option>12</option>
                             </select>
                             <select id="autographDateYear">
-                                <option>Select year</option>
+                                <option>Select Year</option>
                                 <option>2000</option>
                                 <option>2001</option>
                                 <option>2002</option>
@@ -114,7 +114,7 @@
                         <div id="item3" class="center_item">
                             <div class="option_text">Personality</div>
                             <select id="autographAuthorSelect">
-                                <option>Select personality</option>
+                                <option>Select Personality</option>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -129,7 +129,9 @@
                             <div class="option_text">Add custom</div>
                             <div class="add_custom_container">
                                 <form class="add_custom_bar">
-                                    <input class="center_item" id="autographAuthorCustom" type="text" placeholder="add custom" name="search">
+                                    <input class="center_item" id="autographAuthorCustom" type="text"
+                                           onkeyup="customElementWasSpecified('autographAuthorSelect')"
+                                           placeholder="add custom" name="search">
                                 </form>
                             </div>
 
@@ -137,7 +139,7 @@
                         <div id="item4" class="center_item">
                             <div class="option_text">Placed on</div>
                             <select id="autographItemSelect">
-                                <option>Select place</option>
+                                <option>Select Item</option>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -152,7 +154,9 @@
                             <div class="option_text">Add custom</div>
                             <div class="add_custom_container ">
                                 <form class="add_custom_bar" onclick="searchBarFunction()">
-                                    <input class="center_item" id="autographItemCustom" type="text" placeholder="add custom" name="search">
+                                    <input class="center_item" id="autographItemCustom"
+                                           onkeyup="customElementWasSpecified('autographItemSelect')"
+                                           type="text" placeholder="add custom" name="search">
                                 </form>
                             </div>
 
@@ -169,12 +173,12 @@
                                             <div class="overSelect"></div>
                                         </div>
                                         <div id="checkboxes">
-                                            <label for="one">
-                                                <input type="checkbox" id="one" />Tag 1</label>
-                                            <label for="two">
-                                                <input type="checkbox" id="two" />Tag 2</label>
-                                            <label for="three">
-                                                <input type="checkbox" id="three" />Tag 3</label>
+                                            <label for="checkBoxID1">
+                                                <input type="checkbox" id="checkBoxID1" name="Tag 1"/>Tag 1</label>
+                                            <label for="checkBoxID2">
+                                                <input type="checkbox" id="checkBoxID2" name="Tag 2"/>Tag 2</label>
+                                            <label for="checkBoxID3">
+                                                <input type="checkbox" id="checkBoxID3" name="Tag 3"/>Tag 3</label>
                                         </div>
                                     </div>
                                 </form>
@@ -210,7 +214,7 @@
                 </div>
 
                 <div class="center_item">
-                    <button id="submit_button" class="submit_new_autograph"> Submit </button>
+                    <button id="submit_button" class="submit_new_autograph" onclick="submitForm()"> Submit </button>
                 </div>
 
 
@@ -222,7 +226,6 @@
         <h1 id="main_title">Your Autographs</h1>
         <nav>
             <ul id="ul_center" style="list-style-type:none;" >
-
             </ul>
         </nav>
     </div>

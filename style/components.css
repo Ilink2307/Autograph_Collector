@@ -116,15 +116,13 @@ body {
 
 }
 
-.show {display:block;}
-
-
 .autograph_element{
     align-items: center;
     align-content: center;
     margin-left: 5%;
     margin-right: 5%;
 }
+
 #main_title{
     text-align: center;
     color: #330A29;
@@ -547,3 +545,4 @@ select:active {
     background-color: #AFE9DC;
 }
 
+.show {display:block;}
