@@ -183,7 +183,7 @@ function getDataFromForms() {
         mentions = "none";
     }
 
-    let moment = "acum 5 zile"; //de luat din id supa ce apare campul
+    let moment = document.getElementById("autographMoment").value;
     if(!moment) {
         moment = "none";
     }

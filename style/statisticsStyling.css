@@ -1,16 +1,16 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #A8919C;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgb(66, 38, 54) 0%, rgb(168, 90, 176) 35%, rgb(57, 187, 187) 100%);
     overflow: hidden;
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
-
 .navbar {
     overflow: hidden;
-    background-color: #330A29;
+    background-color: #460e3d;
 }
 
 .navbar a {
@@ -24,12 +24,12 @@ body {
 
 .navbar a:hover {
     background-color: #AFE9DC;
-    color: #330A29;
+    color: #460e3d;
 }
 
 .navbar a.active {
     background-color: #85697A;
-    color: #330A29;
+    color: #460e3d;
 }
 
 .navbar a.top_right {
@@ -38,20 +38,6 @@ body {
 .navbar a.top_left {
     float: left;
 }
-
-.inline-flex-parent {
-    display: flex;
-}
-
-.navbar a {
-    float: left;
-    font-size: 16px;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
 .dropdown {
     float: right;
     overflow: hidden;
@@ -69,10 +55,6 @@ body {
     margin: 0;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: #AFE9DC;
-    color: #330A29;
-}
 
 .dropdown-content a {
     float: none;
@@ -103,7 +85,7 @@ body {
 }
 
 .statistics_btn {
-    background-color: #5C3A52;
+    background-color: #460e3d;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -142,7 +124,6 @@ body {
 
 .statistics_dropdown_content a:hover {background-color: #f1f1f1}
 
-.show {display:block;}
 
 .statistics_element{
     align-items: center;
@@ -151,6 +132,7 @@ body {
 }
 
 .statistics_title{
+    margin-top: 20%;
     text-align: center;
     color: #330A29;
 }
@@ -160,7 +142,7 @@ body {
     align-items: center;
 }
 
-
+.show {display:block;}
 
 
 
