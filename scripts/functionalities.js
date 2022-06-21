@@ -6,6 +6,125 @@ function openDropdown(elementId) {
 
 window.onload = async function() {
     await refreshAutographs();
+    await refreshOptions();
+}
+
+async function refreshOptions() {
+    await refreshPersonalityOptions();
+    await refreshItemOptions();
+    await refreshTags();
+}
+
+async function refreshTags() {
+    let options = await getTagsOptions();
+    for(let i = 0; options[i]; ++i) {
+        let newLabel = document.createElement("label");
+        let index = i+1;
+        let customID = "checkBoxID" + index;
+        newLabel.setAttribute("for", customID);
+
+        let newInput = document.createElement("input");
+        newInput.setAttribute("type", "checkbox");
+        newInput.setAttribute("id", customID);
+        newInput.setAttribute("name", options[i]);
+
+        newLabel.appendChild(newInput);
+        newLabel.innerHTML = newLabel.innerHTML + options[i];//nu stiu daca e bun
+
+        document.getElementById("checkboxes").appendChild(newLabel);
+    }
+}
+
+async function refreshItemOptions() {
+    let options = await getItemOptions();
+    for(let i = 0; options[i]; ++i) {
+        let newOp = document.createElement("option");
+        newOp.value = options[i];
+        newOp.innerHTML = options[i];
+        document.getElementById("autographItemSelect").appendChild(newOp);
+    }
+}
+
+async function getTagsOptions() {
+    let url="http://localhost:8081/get-tags";
+    try {
+        let responseBodyTags;
+
+        await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'text/plain'
+            }
+        }).then(response=>response.json())
+            .then(data=>{
+                responseBodyTags = data;
+            })
+            .catch(err => {console.error(err); alert(err)});
+        return responseBodyTags;
+
+    } catch (error) {
+        console.error(error);
+        return "tags call failed";
+    }
+}
+
+async function getItemOptions() {
+    let url="http://localhost:8081/get-items";
+    try {
+        let responseBodyItems;
+
+        await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'text/plain'
+            }
+        }).then(response=>response.json())
+            .then(data=>{
+                responseBodyItems = data;
+            })
+            .catch(err => {console.error(err); alert(err)});
+        return responseBodyItems;
+
+    } catch (error) {
+        console.error(error);
+        return "items call failed";
+    }
+}
+
+async function refreshPersonalityOptions() {
+    let options = await getPersonalityOptions();
+    for(let i = 0; options[i]; ++i) {
+        let newOp = document.createElement("option");
+        newOp.value = options[i];
+        newOp.innerHTML = options[i];
+        document.getElementById("autographAuthorSelect").appendChild(newOp);
+    }
+}
+
+async function getPersonalityOptions() {
+    let url="http://localhost:8081/get-personalities";
+    try {
+        let responseBodyPersonalities;
+
+        await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'text/plain'
+            }
+        }).then(response=>response.json())
+            .then(data=>{
+                responseBodyPersonalities = data;
+            })
+            .catch(err => {console.error(err); alert(err)});
+        return responseBodyPersonalities;
+
+    } catch (error) {
+        console.error(error);
+        return "personalities call failed";
+    }
 }
 
 async function submitForm() {
@@ -43,6 +162,7 @@ function getDataFromForms() {
     } else {
         author = authorSelect.options[authorSelect.selectedIndex].value;
     }
+    alert("autorul este: " + author);
 
     let autographItem;
     let itemSelect = document.getElementById("autographItemSelect");
@@ -260,6 +380,7 @@ async function newAutographApiCall(object, url) {
             mentions: object.mentions,
             moment: object.moment
         }
+        alert("se face req cu autorul: " + object.author);
 
         let newAutographJSON = JSON.stringify(newAutograph);
 
