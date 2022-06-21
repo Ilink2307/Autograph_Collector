@@ -4,8 +4,42 @@ function openDropdown(elementId) {
     document.getElementById(elementId).classList.toggle("show");
 }
 
+function setSearchOff() {
+    setSearchCookie(false);
+}
+
+function setSearchCookie(value) {
+    document.cookie = "search" + "=" + value + ";";
+}
+
+function getSearchCookie() {
+    let name = "search" + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
 window.onload = async function() {
-    await refreshAutographs();
+    let cookie = getSearchCookie();
+    alert("cookie este: " + cookie);
+    if(cookie === "true") {
+        alert("serach on refresh");
+        let tags = document.getElementById("search_input").value;
+        //await searchAutographByTags(tags);
+        setSearchCookie(false);
+    } else {
+        alert("serach off refresh");
+        await refreshAutographs();
+    }
     await refreshOptions();
 }
 
@@ -13,6 +47,46 @@ async function refreshOptions() {
     await refreshPersonalityOptions();
     await refreshItemOptions();
     await refreshTags();
+}
+
+async function searchAutographByTags(tags, event) {
+    event.preventDefault();
+    setSearchCookie(true);
+    alert("se cauta in baza de date autografele cu tag: " + tags);
+    let url = 'http://localhost:8081/search';
+    let autographArray = await requestAutographArraySearch(url, tags);
+    clearAutographs();
+    displayAutographs(autographArray);
+}
+
+function refreshAndSetSearchOff() {
+    setSearchOff();
+    location.reload();
+}
+
+async function requestAutographArraySearch(url, tags) {
+    try {
+        let responseBody;
+
+        await fetch(url, {
+            method: 'POST',
+            body: tags,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'text/plain'
+            }
+        }).then(response=>response.json())
+            .then(data=>{
+                responseBody = data;
+                alert("a mers search ok");
+            })
+            .catch(err => {console.error(err); alert(err)});
+        return responseBody;
+
+    } catch (error) {
+        console.error(error);
+        return "main api call failed";
+    }
 }
 
 async function refreshTags() {

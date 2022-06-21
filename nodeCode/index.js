@@ -1,14 +1,14 @@
 const http = require('http');
 const { registerUser, loginUser } = require('./controllers/userController')
-const { getUserStatistics, getFirstGlobalStatistic } = require('./controllers/statisticsController')
-const { addNewAutograph, getAutographs } = require('./controllers/autographController')
+const { getUserStatistics } = require('./controllers/statisticsController')
+const { addNewAutograph, getAutographs, getAutographsFromSearch } = require('./controllers/autographController')
 const { getPersonalities, getItems, getTags } = require('./controllers/optionsController')
 
 const PORT = 8081;
 
 const server = http.createServer((req, res) => {
 
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342')
+    res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Request-Method', '')
 
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST')
@@ -62,6 +62,12 @@ const server = http.createServer((req, res) => {
         getTags(req, res).then(
             function(value) { console.log("tags get success") },
             function(error) { console.log("tags get fail") }
+        );
+    } else if(req.url === '/search' && req.method === 'POST') {
+        console.log("se va efectua get autographs from search");
+        getAutographsFromSearch(req, res).then(
+            function(value) { console.log("search success") },
+            function(error) { console.log("search fail") }
         );
     }
     else{

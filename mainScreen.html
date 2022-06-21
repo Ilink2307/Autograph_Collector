@@ -10,9 +10,19 @@
 <body>
 
     <div class="navbar">
-        <a class="active" href="mainScreen.html">Home</a>
+        <a class="active" onclick="refreshAndSetSearchOff()">Home</a>
         <a class="top_right" href="welcomeScreenNew.html">Log Out</a>
         <a class="top_right" href="statisticsScreen.html">Statistics</a>
+    </div>
+
+    <div class="search_add_container inline-flex-parent" >
+        <div class="top_left">
+            <form id="search_bar">
+                <input id="search_input" type="text" placeholder="Search for a tag..." name="search">
+                <button id="search_button"
+                        onclick="searchAutographByTags(document.getElementById('search_input').value, event);"> Search </button>
+            </form>
+        </div>
     </div>
 
     <div class="center_item">
@@ -155,12 +165,6 @@
                                             <div class="overSelect"></div>
                                         </div>
                                         <div id="checkboxes" style="font-size: smaller">
-<!--                                            <label for="one">-->
-<!--                                                <input type="checkbox" id="one" />First checkbox</label>-->
-<!--                                            <label for="two">-->
-<!--                                                <input type="checkbox" id="two" />Second checkbox</label>-->
-<!--                                            <label for="three">-->
-<!--                                                <input type="checkbox" id="three" />Third checkbox</label>-->
                                         </div>
                                     </div>
                                 </form>
