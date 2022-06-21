@@ -6,11 +6,9 @@ body {
 }
 #welcome_title{
     text-align: center;
-    top: 80%;
     color: #CAB9BE;
     font-size: xx-large;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-top: 30%;
 }
 .login_register_button{
     align-items: center;
@@ -53,10 +51,7 @@ body {
     background-color:#330A29;
     padding-top: 30px;
     padding-bottom: 30px;
-    margin-top: 12%;
-    margin-bottom: 12%;
-    margin-left: 30%;
-    margin-right: 30%;
+    margin: 12% 30%;
     border-radius: 15px;
     border-style: solid;
     width: 50%;
