@@ -12,10 +12,15 @@ async function submitForm() {
     let url = 'http://localhost:8081/new-autograph';
     let data = getDataFromForms();
     if(dataIsGoodToInsert(data)) {
+        clearAutographs();
         await newAutographApiCall(data, url);
         await refreshAutographs();
         alert("Your new autograph was successfully added!")
     }
+}
+
+function clearAutographs() {
+    document.getElementById("ul_center").innerHTML = "";
 }
 
 function getDataFromForms() {
@@ -190,7 +195,7 @@ function displayAutographs(autographArray) {
         } else if(index === 2) {
             innerText = "Your second autograph";
         } else if(index === 3) {
-            innerText = "Your second autograph";
+            innerText = "Your third autograph";
         } else {
             innerText = "Your " + index + "th autograph"
         }
