@@ -24,6 +24,7 @@ async function registerUser(req, res){
 
             const newUser = Person.registerUserBD(person);
             res.writeHead(201, {'Content-Type': 'application/json'});
+            console.log(res.statusCode);
             return res.end(JSON.stringify(newUser))
 
         })
