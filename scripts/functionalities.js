@@ -156,18 +156,17 @@ function getDataFromForms() {
 
     let author;
     let authorSelect = document.getElementById("autographAuthorSelect");
-    if(authorSelect.options[authorSelect.selectedIndex].value ===
-        authorSelect.options[customOptionID].value) {
+    if(authorSelect.options[authorSelect.selectedIndex].value ==
+        customOptionID) {
         author = document.getElementById("autographAuthorCustom").value;
     } else {
         author = authorSelect.options[authorSelect.selectedIndex].value;
     }
-    alert("autorul este: " + author);
 
     let autographItem;
     let itemSelect = document.getElementById("autographItemSelect");
-    if(itemSelect.options[itemSelect.selectedIndex].value ===
-        itemSelect.options[customOptionID].value) {
+    if(itemSelect.options[itemSelect.selectedIndex].value ==
+        customOptionID) {
         autographItem = document.getElementById("autographItemCustom").value;
     } else {
         autographItem = itemSelect.options[itemSelect.selectedIndex].value;
@@ -253,11 +252,11 @@ function dataIsGoodToInsert(data) {
         alert("Please select a valid year!");
         return false;
     }
-    if(data.author === "Select Personality") {
+    if(data.author == '1' || data.author == '2' || !data.author) {
         alert("Please select a valid personality!");
         return false;
     }
-    if(data.autographItem === "Select Item") {
+    if(data.autographItem == '1' || data.autographItem == '2' || !data.autographItem) {
         alert("Please select a valid item!");
         return false;
     }
@@ -380,7 +379,6 @@ async function newAutographApiCall(object, url) {
             mentions: object.mentions,
             moment: object.moment
         }
-        alert("se face req cu autorul: " + object.author);
 
         let newAutographJSON = JSON.stringify(newAutograph);
 
@@ -407,37 +405,6 @@ async function sendNewAutographRequest(url, newAutographJSON) {
         })
         .catch(err => console.error(err));
     return responseBody;
-}
-
-function getObjectFromInputForms() {
-    let object;
-    let idUser = 3;
-    let photo = 'p1';
-    let autographDate = '08-02-12';
-    let author = 'Nicki Minaj';
-    let autographItem = 'sapca';
-    let tags = 'cool, new, cute';
-    let mentions = 'nice day';
-    let moment = 'last summer';
-
-    /*let photo = document.getElementById("autographPhoto").something to get pic
-    autographDate = document.getElementById("autographDate").smth to get date
-    author;
-    if(!document.getElementById("autographAuthorCustom")) {
-        author = document.getElementById("autographAuthorSelect").
-    }*/
-
-    object = {
-        idUser,
-        photo,
-        autographDate,
-        author,
-        autographItem,
-        tags,
-        mentions,
-        moment
-    }
-    return object;
 }
 
 ///////////////////////////////////////////////////////// trebuie facut curat mai jos arata groaznic
