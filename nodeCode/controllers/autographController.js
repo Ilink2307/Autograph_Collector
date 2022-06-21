@@ -13,8 +13,7 @@ async function getAutographs(req, res) {
 
             const getResponse = await AutographModel.getAutographs(userID);
             res.writeHead(201, {'Content-Type': 'application/json'});
-            console.log("get rasp author: " + getResponse[0].author)
-            console.log("get response tags: " + getResponse[0].tags);
+
             return res.end(JSON.stringify(getResponse))
         })
     } catch (error){
