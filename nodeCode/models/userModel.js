@@ -16,7 +16,15 @@ async function findUserIDByUsername(username, password){
 }
 
 function encodeUserData(username, password, userID){
-    return '123';
+    let userDataToToken = '';
+    let stringUserID = userID.toString();
+    let token = userDataToToken.concat(username, password, stringUserID)
+    let encodedToken = btoa(token);
+
+    console.log("The Token", token);
+    console.log("Encoded Token", encodedToken);
+
+    return encodedToken;
 }
 
 async function updateToken(username, password, tokenValue){

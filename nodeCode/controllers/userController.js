@@ -66,15 +66,16 @@ async function loginUser(req, res){
                 const userId = await Person.findUserIDByUsername(person.username, person.password);
                 console.log(userId.rows[0][0]);
 
-                const encodedToken = Person.encodeUserData(person.username, person.password, userId);
+                const encodedToken = Person.encodeUserData(person.username, person.password, userId.rows[0][0]);
                 console.log(encodedToken);
 
                 await Person.updateToken(person.username, person.password, encodedToken)
-                res.writeHead(200, {
-                    'Content-Type': 'application/json',
-                    //'Authorization': encodedToken
-                });
-                res.end(JSON.stringify({token: encodedToken}))
+                res.writeHead(200, {'Content-Type': 'application/json'});
+                res.end(JSON.stringify({
+                       // message: "User Logged in",
+                        token: encodedToken
+                    })
+                )
                 console.log ("User Logged in");
             }
         })

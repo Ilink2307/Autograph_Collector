@@ -1,5 +1,3 @@
-//import {updateToken} from "../token";
-
 async function login (){
 
     let username = document.getElementById("userName").value;
@@ -12,6 +10,7 @@ async function login (){
     await loginApiCall(username, password, urlPath);
 
 }
+
 async function loginApiCall(username, password, url) {
     try {
         const user = {
@@ -25,34 +24,34 @@ async function loginApiCall(username, password, url) {
         alert(textResponse.message);
         alert(textResponse.token);
 
+        //document.cookie = textResponse.token;
+
+         //deleteAllCookies();
+
+        let cookieToken = document.cookie;
+        alert("cookie "+ cookieToken)
+
        // let updatedToken = updateToken(textResponse.token);
 
-        if(textResponse.message == 'User Not Registered'){
+        if(textResponse.message === 'User Not Registered'){
             alert("Incorrect username or password")
         }
-        else{
-            //if(Token.checkToken()===true){
-                alert("CRAPI?")
-                //location.replace( 'http://localhost:63342/Autograph_Collector/mainScreen.html')
-                window.location.href= 'mainScreen.html';
-           // }
-            //else {
-               // alert("DAR AICI CRAPI?")
-           // }
-
+        else{//if(Token.checkToken()===true){
+            alert("CRAPI?")
+            //location.replace( 'http://localhost:63342/Autograph_Collector/mainScreen.html')
+            window.location.href= 'mainScreen.html';
         }
 
     } catch (error) {
         console.error(error);
     }
-
-
 }
+
 async function sendLoginRequest(url, bodyText) {
     let responseBody
 
     await fetch(url, {
-        credentials:'include',
+        //credentials:'include',
         method: 'POST',
         body: bodyText,
         headers: {
@@ -71,7 +70,18 @@ async function sendLoginRequest(url, bodyText) {
     return responseBody;
 }
 
+function testFunction (username){
+    return '1111111';
+}
 
+function deleteAllCookies() {
+    var cookies = document.cookie.split(" ");
 
-
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
 

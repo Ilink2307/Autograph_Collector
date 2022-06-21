@@ -7,8 +7,16 @@ async function registerUser() {
     let username = document.getElementById("userName").value;
     let password = document.getElementById("password").value;
     let url = 'http://localhost:8081/register';
+    let urlLogin = 'http://localhost:8081/login';
 
     await registerApiCall(email, username, password, url);
+    alert("gata registerul")
+
+    //deleteAllCookies();
+    alert("COOKIE " + document.cookie)
+    //await Login.loginApiCall(username, password, urlLogin);
+    //alert("gata login")
+    //alert(callLogin.testFunction(username));
 }
 
 async function registerApiCall(email, username, password, url) {
@@ -46,4 +54,14 @@ function sendRegisterRequest (url, bodyText) {
     }).catch((error) => {
         console.log(error)
     })
+}
+function deleteAllCookies() {
+    var cookies = document.cookie.split(" ");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
 }
