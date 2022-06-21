@@ -11,33 +11,11 @@
 
     <div class="navbar">
         <a class="active" href="mainScreen.html">Home</a>
-        <div id="profile" class="dropdown top_right">
-            <button class="dropbtn">Profile
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-                <a href="#">Edit profile</a>
-                <a href="#">Settings</a>
-                <a href="welcomeScreen.html">Log out</a>
-            </div>
-        </div>
+        <a class="top_right" href="welcomeScreenNew.html">Log Out</a>
         <a class="top_right" href="statisticsScreen.html">Statistics</a>
     </div>
 
-    <div class="search_add_container inline-flex-parent" >
-        <div class="top_left">
-            <form id="search_bar" onclick="searchBarFunction()">
-                <input id="input" type="text" placeholder="Search.." name="search">
-            </form>
-        </div>
-
-        <div class="top_right">
-            <button type="button" id="new_autograph" onclick="addNewAutographFromMain()">New autograph</button>
-        </div>
-    </div>
-
     <div class="center_item">
-
 
 <!--        ////////////////////////////////////// BOX //////////////////////////////////////-->
         <h2 id="add_new_autograph">Add a new autograph to your collection</h2>
@@ -207,6 +185,16 @@
                                     <input class="center_item" id="autographTagsCustom" type="text" placeholder="add custom" name="search">
                                 </form>
                             </div>
+                        </div>
+
+                        <div id="item6" class="center_item">
+                            <div class="option_text">When did you get it?</div>
+                            <div class="add_custom_container ">
+                                <form class="add_custom_bar" onclick="searchBarFunction()">
+                                    <input class="center_item" id="autographMoment" type="text" placeholder="add moment" name="search">
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                     </div>
