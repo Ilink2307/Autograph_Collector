@@ -8,7 +8,15 @@ async function registerUser() {
     let password = document.getElementById("password").value;
     let url = 'http://localhost:8081/register';
 
-    await registerApiCall(email, username, password, url);
+    if(!isRegisterInputValid(email, username, password)){
+        alert("Input is not valid. Please try again!")
+    }
+    else{
+        alert("Input valid. ")
+        await registerApiCall(email, username, password, url);
+
+    }
+
 }
 
 async function registerApiCall(email, username, password, url) {
@@ -45,4 +53,17 @@ function sendRegisterRequest (url, bodyText) {
     }).catch((error) => {
         console.log(error)
     })
+}
+function isRegisterInputValid (email, username, password){
+
+    if(username.length < 3 || username.length > 30 || password.length < 3)
+        return false
+
+    if (/^[0-9@._a-zA-Z]+$/.test(email) && /^[0-9@._a-zA-Z]+$/.test(password)){
+        return true;
+    }
+    else{
+        return false;
+    }
+
 }
