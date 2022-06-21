@@ -1,4 +1,4 @@
-const Person = require('../models/userModel')
+const Person = require('../models/userModel');
 
 // @desc Register User
 // @route POST /register
@@ -35,7 +35,7 @@ async function registerUser(req, res){
 
 // @desc Login User
 // @route POST /login
-async function loginUser(req, res, header_custom){
+async function loginUser(req, res){
     try {
 
         let person;
@@ -63,9 +63,19 @@ async function loginUser(req, res, header_custom){
                 console.log ("User Not Registered")
             }
             else{
-                res.writeHead(200, {'Content-Type': 'application/json'});
-                res.end(JSON.stringify({message: 'User Logged in'}))
-                console.log ("User Logged in")
+                const userId = await Person.findUserIDByUsername(person.username, person.password);
+                console.log(userId.rows[0][0]);
+
+                const encodedToken = Person.encodeUserData(person.username, person.password, userId);
+                console.log(encodedToken);
+
+                await Person.updateToken(person.username, person.password, encodedToken)
+                res.writeHead(200, {
+                    'Content-Type': 'application/json',
+                    //'Authorization': encodedToken
+                });
+                res.end(JSON.stringify({token: encodedToken}))
+                console.log ("User Logged in");
             }
         })
 
@@ -74,8 +84,6 @@ async function loginUser(req, res, header_custom){
         console.log(error);
     }
 }
-
-
 
 module.exports = {
     registerUser,

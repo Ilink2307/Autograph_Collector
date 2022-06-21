@@ -4,7 +4,6 @@ const mediumImportance = 5;
 async function getAutographs(userID) {
     return new Promise(async (resolve, reject) => {
         const getResponse = await getAutographFromBD(userID);
-        console.log("Primul autograf are acest autor: " + getResponse[0].author)
         resolve(getResponse);
     });
 }

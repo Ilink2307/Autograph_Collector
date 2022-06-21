@@ -41,6 +41,7 @@ function sendRegisterRequest (url, bodyText) {
     }).then((res) => {
         if (res.status === 201) {
             console.log("Post successfully created!")
+
         }
     }).catch((error) => {
         console.log(error)
