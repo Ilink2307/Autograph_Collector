@@ -146,8 +146,6 @@ async function addAutographInBD(autograph) {
             { autoCommit: true }
         );
 
-        console.log("TAGURILE SUNT: " + uploadObject.tags);
-
         await connection.close;
         return "add successfully computed";
     }

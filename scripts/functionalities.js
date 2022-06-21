@@ -6,6 +6,125 @@ function openDropdown(elementId) {
 
 window.onload = async function() {
     await refreshAutographs();
+    await refreshOptions();
+}
+
+async function refreshOptions() {
+    await refreshPersonalityOptions();
+    await refreshItemOptions();
+    await refreshTags();
+}
+
+async function refreshTags() {
+    let options = await getTagsOptions();
+    for(let i = 0; options[i]; ++i) {
+        let newLabel = document.createElement("label");
+        let index = i+1;
+        let customID = "checkBoxID" + index;
+        newLabel.setAttribute("for", customID);
+
+        let newInput = document.createElement("input");
+        newInput.setAttribute("type", "checkbox");
+        newInput.setAttribute("id", customID);
+        newInput.setAttribute("name", options[i]);
+
+        newLabel.appendChild(newInput);
+        newLabel.innerHTML = newLabel.innerHTML + options[i];//nu stiu daca e bun
+
+        document.getElementById("checkboxes").appendChild(newLabel);
+    }
+}
+
+async function refreshItemOptions() {
+    let options = await getItemOptions();
+    for(let i = 0; options[i]; ++i) {
+        let newOp = document.createElement("option");
+        newOp.value = options[i];
+        newOp.innerHTML = options[i];
+        document.getElementById("autographItemSelect").appendChild(newOp);
+    }
+}
+
+async function getTagsOptions() {
+    let url="http://localhost:8081/get-tags";
+    try {
+        let responseBodyTags;
+
+        await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'text/plain'
+            }
+        }).then(response=>response.json())
+            .then(data=>{
+                responseBodyTags = data;
+            })
+            .catch(err => {console.error(err); alert(err)});
+        return responseBodyTags;
+
+    } catch (error) {
+        console.error(error);
+        return "tags call failed";
+    }
+}
+
+async function getItemOptions() {
+    let url="http://localhost:8081/get-items";
+    try {
+        let responseBodyItems;
+
+        await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'text/plain'
+            }
+        }).then(response=>response.json())
+            .then(data=>{
+                responseBodyItems = data;
+            })
+            .catch(err => {console.error(err); alert(err)});
+        return responseBodyItems;
+
+    } catch (error) {
+        console.error(error);
+        return "items call failed";
+    }
+}
+
+async function refreshPersonalityOptions() {
+    let options = await getPersonalityOptions();
+    for(let i = 0; options[i]; ++i) {
+        let newOp = document.createElement("option");
+        newOp.value = options[i];
+        newOp.innerHTML = options[i];
+        document.getElementById("autographAuthorSelect").appendChild(newOp);
+    }
+}
+
+async function getPersonalityOptions() {
+    let url="http://localhost:8081/get-personalities";
+    try {
+        let responseBodyPersonalities;
+
+        await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'text/plain'
+            }
+        }).then(response=>response.json())
+            .then(data=>{
+                responseBodyPersonalities = data;
+            })
+            .catch(err => {console.error(err); alert(err)});
+        return responseBodyPersonalities;
+
+    } catch (error) {
+        console.error(error);
+        return "personalities call failed";
+    }
 }
 
 async function submitForm() {
@@ -37,8 +156,8 @@ function getDataFromForms() {
 
     let author;
     let authorSelect = document.getElementById("autographAuthorSelect");
-    if(authorSelect.options[authorSelect.selectedIndex].value ===
-        authorSelect.options[customOptionID].value) {
+    if(authorSelect.options[authorSelect.selectedIndex].value ==
+        customOptionID) {
         author = document.getElementById("autographAuthorCustom").value;
     } else {
         author = authorSelect.options[authorSelect.selectedIndex].value;
@@ -46,8 +165,8 @@ function getDataFromForms() {
 
     let autographItem;
     let itemSelect = document.getElementById("autographItemSelect");
-    if(itemSelect.options[itemSelect.selectedIndex].value ===
-        itemSelect.options[customOptionID].value) {
+    if(itemSelect.options[itemSelect.selectedIndex].value ==
+        customOptionID) {
         autographItem = document.getElementById("autographItemCustom").value;
     } else {
         autographItem = itemSelect.options[itemSelect.selectedIndex].value;
@@ -133,11 +252,11 @@ function dataIsGoodToInsert(data) {
         alert("Please select a valid year!");
         return false;
     }
-    if(data.author === "Select Personality") {
+    if(data.author == '1' || data.author == '2' || !data.author) {
         alert("Please select a valid personality!");
         return false;
     }
-    if(data.autographItem === "Select Item") {
+    if(data.autographItem == '1' || data.autographItem == '2' || !data.autographItem) {
         alert("Please select a valid item!");
         return false;
     }
@@ -286,37 +405,6 @@ async function sendNewAutographRequest(url, newAutographJSON) {
         })
         .catch(err => console.error(err));
     return responseBody;
-}
-
-function getObjectFromInputForms() {
-    let object;
-    let idUser = 3;
-    let photo = 'p1';
-    let autographDate = '08-02-12';
-    let author = 'Nicki Minaj';
-    let autographItem = 'sapca';
-    let tags = 'cool, new, cute';
-    let mentions = 'nice day';
-    let moment = 'last summer';
-
-    /*let photo = document.getElementById("autographPhoto").something to get pic
-    autographDate = document.getElementById("autographDate").smth to get date
-    author;
-    if(!document.getElementById("autographAuthorCustom")) {
-        author = document.getElementById("autographAuthorSelect").
-    }*/
-
-    object = {
-        idUser,
-        photo,
-        autographDate,
-        author,
-        autographItem,
-        tags,
-        mentions,
-        moment
-    }
-    return object;
 }
 
 ///////////////////////////////////////////////////////// trebuie facut curat mai jos arata groaznic

@@ -2,6 +2,7 @@ const http = require('http');
 const { registerUser, loginUser } = require('./controllers/userController')
 const { getUserStatistics, getFirstGlobalStatistic } = require('./controllers/statisticsController')
 const { addNewAutograph, getAutographs } = require('./controllers/autographController')
+const { getPersonalities, getItems, getTags } = require('./controllers/optionsController')
 
 const PORT = 8081;
 
@@ -43,6 +44,24 @@ const server = http.createServer((req, res) => {
         getAutographs(req, res).then(
             function(value) { console.log("main get success") },
             function(error) { console.log("main get fail") }
+        );
+    } else if(req.url === '/get-items' && req.method === 'GET') {
+        console.log("se va efectua get items");
+        getItems(req, res).then(
+            function(value) { console.log("items get success") },
+            function(error) { console.log("items get fail") }
+        );
+    } else if(req.url === '/get-personalities' && req.method === 'GET') {
+        console.log("se va efectua get personalities");
+        getPersonalities(req, res).then(
+            function(value) { console.log("personalities get success") },
+            function(error) { console.log("personalities get fail") }
+        );
+    } else if(req.url === '/get-tags' && req.method === 'GET') {
+        console.log("se va efectua get tags");
+        getTags(req, res).then(
+            function(value) { console.log("tags get success") },
+            function(error) { console.log("tags get fail") }
         );
     }
     else{

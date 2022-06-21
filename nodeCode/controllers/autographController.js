@@ -41,7 +41,6 @@ async function addNewAutograph(req, res) {
             } = JSON.parse(body);
 
             console.log(body);
-            console.log("1 tagurile sunt: " + tags);
 
             const autograph = {
                 idUser,
@@ -53,8 +52,6 @@ async function addNewAutograph(req, res) {
                 mentions,
                 moment
             }
-
-            console.log("autograful este: " + autograph.tags);
 
             const addResponse = await AutographModel.addAutograph(autograph);
             console.log(addResponse)
