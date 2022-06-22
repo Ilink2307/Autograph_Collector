@@ -1,7 +1,7 @@
 const oracledb = require("oracledb")
 
 function getLoggedUserStatistics() {
-    let loggedUserID = 3; //de luat id-ul din file ul cu tokenul
+    let loggedUserID = 4; //de luat id-ul din file ul cu tokenul
     return new Promise ((resolve, reject) => {
         const info = getLoggedUserStatisticsFromBD(loggedUserID);
         resolve(info);

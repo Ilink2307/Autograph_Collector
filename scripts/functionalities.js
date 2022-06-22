@@ -315,10 +315,6 @@ function dataIsGoodToInsert(data) {
     let yearSelect = document.getElementById("autographDateYear");
     let year = yearSelect.options[yearSelect.selectedIndex].value;
 
-    // if(!data.photo) {
-    //     alert("Please select a valid photo!");
-    //     return false;
-    // }
     if(day === "Select Day") {
         alert("Please select a valid day!");
         return false;
@@ -486,9 +482,31 @@ async function sendNewAutographRequest(url, newAutographJSON) {
     return responseBody;
 }
 
+async function getJSONAutographs() {
+    let url = 'http://localhost:8081/main-get';
+    let autographArray = await getRequestAutographArray(url);
+    document.getElementById("formatAutographs").innerHTML = JSON.stringify(autographArray);
+}
+
+async function getCSVAutographs() {
+    let url = 'http://localhost:8081/main-get';
+    let autographArray = await getRequestAutographArray(url);
+
+    let csv = "personality,value,date,item,moment,mentions,tags,picture<br>";
+
+    for(let i = 0; autographArray[i]; ++i) {
+        let str = autographArray[i].author + "," + autographArray[i].pts  + "," +
+            autographArray[i].date + "," + autographArray[i].item + "," +
+            autographArray[i].moment + "," + autographArray[i].mentions + "," + autographArray[i].tags;
+        csv+=str+"<br>";
+    }
+
+    document.getElementById("formatAutographs").innerHTML = csv;
+}
+
 ///////////////////////////////////////////////////////// trebuie facut curat mai jos arata groaznic
 
-function searchBarFunction(){
+async function searchBarFunction(){
 
 }
 
