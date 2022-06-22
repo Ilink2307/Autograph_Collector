@@ -12,16 +12,7 @@
 
     <div class="navbar">
         <a href="mainScreen.html">Home</a>
-        <div id="profile" class="dropdown top_right">
-            <button class="dropbtn">Profile
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-                <a href="#">Edit profile</a>
-                <a href="#">Settings</a>
-                <a href="welcomeScreen.html">Log out</a>
-            </div>
-        </div>
+        <a class="top_right" href="welcomeScreenNew.html">Log Out</a>
         <a class="top_right active" href="statisticsScreen.html">Statistics</a>
     </div>
 
@@ -37,13 +28,13 @@
                             See your stats
                         </button>
                         <div id="statistics_details_1" class="dropdown-content statistics_dropdown_content">
-                            <p>Total number of autographs: <div id="usersNumberOfAutographs"></div></p>
+                            <p>Total number of autographs: <p id="usersNumberOfAutographs"></p></p>
                             <p>Most valuable autograph is from:
-                                <div id="usersMostValuableAutographsAuthor"></div> and it values
-                                <div id="usersMostValuableAutographsValue"></div> AuCo points</p>
-                            <p>Total value of your autographs: <div id="usersMostTotalValue"></div> AuCo points</p>
-                            <p>Your most frequent author is: <div id="usersMostFrequentAuthor"></div></p>
-                            <p>You own <div id="usersMostFrequentAuthorCount"></div> autographs from them</p>
+                                <p id="usersMostValuableAutographsAuthor"></p> and it values
+                                <p id="usersMostValuableAutographsValue"></p> AuCo points</p>
+                            <p>Total value of your autographs: <p id="usersMostTotalValue"></p> AuCo points</p>
+                            <p>Your most frequent author is: <p id="usersMostFrequentAuthor"></p></p>
+                            <p>You own <p id="usersMostFrequentAuthorCount"></p> autographs from them</p>
                             <p>Your top 3 most valuable autographs are from:</p>
                             <ol>
                                 <li id="firstAuthor"></li>
@@ -56,64 +47,9 @@
                 </li>
 
                 <li class="statistics_element">
-                    <h1 class="statistics_title">Global Statistics</h1>
-                </li>
-                <li class="statistics_element">
-                    <div class="statistics_dropdown">
-                        <button class="statistics_btn" onclick="showTopThreeUsersByValue('statistics_details_2')">
-                            Highest total value - Top 3 users
-                        </button>
-                        <div id="statistics_details_2" class="dropdown-content statistics_dropdown_content" >
-                            <ol>
-                                <li>
-                                    <p id="firstGSUsername1"></p>
-                                    <p> with </p>
-                                    <p id="firstGSPoints1"></p>
-                                    <p>AuCo points</p>
-                                </li>
-
-                                <li>
-                                    <p id="firstGSUsername2"></p>
-                                    <p> with </p>
-                                    <p id="firstGSPoints2"></p>
-                                    <p>AuCo points</p>
-                                </li>
-
-                                <li>
-                                    <p id="firstGSUsername3"></p>
-                                    <p> with </p>
-                                    <p id="firstGSPoints3"></p>
-                                    <p>AuCo points</p>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="statistics_element">
-                    <div class="statistics_dropdown">
-                        <button class="statistics_btn" onclick="showGlobalStatistics('statistics_details_3')">
-                            Most Autographs - Top 3 users
-                        </button>
-                        <div id="statistics_details_3" class="dropdown-content statistics_dropdown_content">
-                            <p>Elijah Charlotte: 46</p>
-                            <p>Noah	Emma: 37</p>
-                            <p>Johnny Seens: 33</p>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="statistics_element">
-                    <div class="statistics_dropdown">
-                        <button class="statistics_btn" onclick="showGlobalStatistics('statistics_details_4')">
-                            Users Having The Most Valuable Autograph
-                        </button>
-                        <div id="statistics_details_4" class="dropdown-content statistics_dropdown_content">
-                            <p>Anna Borshun: The Puppy</p>
-                            <p>You: The Puppy</p>
-                            <p>Oxlong Mike: The Puppy</p>
-                        </div>
-                    </div>
+                    <button id="getJson" onclick="getJson()">Get Statistics Json</button>
+                    <button id="getCsv" onclick="getCsv()">Get Statistics CSV</button>
+                    <p id="dynamicStats"></p>
                 </li>
             </ul>
         </nav>

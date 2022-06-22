@@ -1,51 +1,13 @@
 const oracledb = require("oracledb")
 
 function getLoggedUserStatistics() {
-    let loggedUserID = 1; //de luat id-ul din file ul cu tokenul
+    let loggedUserID = 4; //de luat id-ul din file ul cu tokenul
     return new Promise ((resolve, reject) => {
         const info = getLoggedUserStatisticsFromBD(loggedUserID);
         resolve(info);
     })
 }
 
-async function getFirstGlobalStatistic() {
-    return new Promise ((resolve, reject) => {
-        const info = getFirstGlobalStatisticFromBD();
-        resolve(info);
-    })
-}
-
-async function getFirstGlobalStatisticFromBD() {
-    let connection;
-    try {
-        connection = await oracledb.getConnection({user:"project", password:"PROJECT", connectionString:"localhost/XE"});
-
-        //FUNCTIA ASTA INCA NU ESTE GATA, PROBLEME CU VERSIUNE ORACLE, TREBUIE SIMPLIFICAT CEVA
-
-        //let firstUsername = await getTheNthUsernameByValue(connection, 1);
-        /*let secondUsername = await getTheNthUsernameByValue(connection, 2);
-        let thirdUsername = await getTheNthUsernameByValue(connection, 3);
-
-        let firstUserPoints = await getUserPoints(connection, firstUsername);
-        let secondUserPoints = await getUserPoints(connection, firstUsername);
-        let thirdUserPoints = await getUserPoints(connection, firstUsername);
-
-        let firstUser = { username: firstUsername, pts: firstUserPoints }
-        let secondUser = { username: secondUsername, pts: secondUserPoints }
-        let thirdUser = { username: thirdUsername, pts: thirdUserPoints }
-
-        await connection.close;
-
-        return {
-            firstUser: firstUser,
-            secondUser: secondUser,
-            thirdUser: thirdUser
-        }*/
-
-    } catch (error){
-        console.error(error);
-    }
-}
 
 async function getUserPoints(connection, username) {
     try {
@@ -71,53 +33,12 @@ async function getUserIDByUsername(connection, username) {
 
 async function getUserPointsByID(connection, userID) {
     try {
-        let sumQuery = `SELECT SUM(POINTS) FROM ALL_AUTOGRAPHS WHERE ID_USER = :userID`
+        let sumQuery = `SELECT SUM(POINTS) FROM ALL_AUTOGRAPHS_V2 WHERE ID_USER = :userID`
         let sumQueryResult = await connection.execute(
             sumQuery, [userID],
             { autoCommit: true });
 
         return sumQueryResult.rows[0][0];
-
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-async function getTheNthUsernameByValue(connection, index) {
-    try {
-
-        let sumQuery = `SELECT SUM(POINTS) FROM ALL_AUTOGRAPHS GROUP BY ID_USER`
-        let sumQueryResult = await connection.execute(
-            sumQuery, { autoCommit: true }
-        )
-        console.log(sumQueryResult.rows[0][0])
-
-
-        let userIDQuery = `SELECT ID_USER FROM (SELECT ID_USER
-                        FROM (SELECT * FROM (SELECT SUM(POINTS) AS SUMA, ID_USER FROM ALL_AUTOGRAPHS GROUP BY ID_USER) ORDER BY SUMA)
-                        WHERE ROWNUM <= 1) WHERE ROWNUM >= 1`;
-
-        console.log("query: " + userIDQuery)
-        console.log("index: " + index)
-
-        let userIDQueryResult = await connection.execute(
-            userIDQuery,
-            { autoCommit: true });
-
-        console.log("result: " + userIDQueryResult.rows)
-
-        let userID = userIDQueryResult.rows[0][0];
-
-        let usernameQuery = `SELECT ID_AUTHOR FROM ALL_AUTOGRAPHS WHERE POINTS = :maxValue AND ID_USER = :loggedUserID`;
-        let usernameQueryResult = await connection.execute(
-            usernameQuery, [userID],
-            { autoCommit: true });
-
-        let username = usernameQueryResult.rows[0][0];
-
-        return {
-            username: username
-        };
 
     } catch (error) {
         console.error(error);
@@ -166,10 +87,10 @@ async function getMostFrequentAuthor(connection, loggedUserID) {
     try {
         let authorIDQuery = `select counter1.ID_AUTHOR
             from (select COUNT(*) as total, ID_AUTHOR
-                from ALL_AUTOGRAPHS
+                from ALL_AUTOGRAPHS_V2
                 group by ID_AUTHOR) counter1,
             (select MAX(total) as maxtotal from 
-                    (select COUNT(*) as total, ID_AUTHOR from ALL_AUTOGRAPHS where ID_USER = :loggedUserID group by ID_AUTHOR)) counter2
+                    (select COUNT(*) as total, ID_AUTHOR from ALL_AUTOGRAPHS_V2 where ID_USER = :loggedUserID group by ID_AUTHOR)) counter2
                         where counter1.total = counter2.maxtotal`
 
         let authorIDResult = await connection.execute(
@@ -183,7 +104,7 @@ async function getMostFrequentAuthor(connection, loggedUserID) {
             { autoCommit: true });
         let authorName = authorNameResult.rows[0][0];
 
-        let numberQuery = `SELECT COUNT(*) FROM ALL_AUTOGRAPHS WHERE ID_USER = :loggedUserID AND ID_AUTHOR = :authorID`
+        let numberQuery = `SELECT COUNT(*) FROM ALL_AUTOGRAPHS_V2 WHERE ID_USER = :loggedUserID AND ID_AUTHOR = :authorID`
         let numberQueryResult = await connection.execute(
             numberQuery, [loggedUserID, authorID],
             { autoCommit: true });
@@ -203,11 +124,12 @@ async function getTopThreeMostValuableAutographsData(connection, loggedUserID) {
         let thirdAuthorName = null;
 
 
-        let firstAutoQuery = `SELECT ID_AUTHOR FROM (SELECT * FROM ALL_AUTOGRAPHS WHERE ID_USER = :loggedUserID ORDER BY POINTS) WHERE ROWNUM <= 1`
+        let firstAutoQuery = `SELECT ID_AUTHOR FROM (SELECT * FROM (SELECT * FROM ALL_AUTOGRAPHS_V2 WHERE ID_USER = :A) ORDER BY POINTS DESC) WHERE ROWNUM <= 1`
         let firstAutoQueryResult = await connection.execute(
             firstAutoQuery, [loggedUserID],
             { autoCommit: true });
         let firstAutoData = firstAutoQueryResult.rows[0][0];
+        console.log("first auto data: " + firstAutoData);
 
         let firstAuthorNameQuery =  `SELECT AUTHOR FROM AUTOGRAPH_AUTHORS WHERE ID_AUTHOR = :authorID`
         let firstAuthorNameResult = await connection.execute(
@@ -215,9 +137,9 @@ async function getTopThreeMostValuableAutographsData(connection, loggedUserID) {
             { autoCommit: true });
         firstAuthorName = firstAuthorNameResult.rows[0][0];
 
-        let secondAutoQuery = `SELECT ID_AUTHOR FROM (SELECT * FROM 
-                            (SELECT * FROM ALL_AUTOGRAPHS WHERE ID_USER = :loggedUserID ORDER BY POINTS)
-                        WHERE ROWNUM <= 2) WHERE ROWNUM >= 2`
+        let secondAutoQuery = `SELECT ID_AUTHOR FROM (SELECT * FROM (SELECT * FROM
+                (SELECT * FROM ALL_AUTOGRAPHS_V2 WHERE ID_USER = :a ORDER BY POINTS DESC)
+                                              WHERE ROWNUM <= 2) order by POINTS) WHERE ROWNUM <=1`
 
         let secondAutoQueryResult = await connection.execute(
             secondAutoQuery, [loggedUserID],
@@ -227,6 +149,7 @@ async function getTopThreeMostValuableAutographsData(connection, loggedUserID) {
 
         if(secondAutoQueryResult.rows[0]) {
             secondAutoData = secondAutoQueryResult.rows[0][0];
+            console.log("second a data: " + secondAutoData);
 
             let secondAuthorNameQuery =  `SELECT AUTHOR FROM AUTOGRAPH_AUTHORS WHERE ID_AUTHOR = :authorID`
             let secondAuthorNameResult = await connection.execute(
@@ -234,9 +157,9 @@ async function getTopThreeMostValuableAutographsData(connection, loggedUserID) {
                 { autoCommit: true });
             secondAuthorName = secondAuthorNameResult.rows[0][0];
 
-            let thirdAutoQuery = `SELECT ID_AUTHOR FROM (SELECT * FROM
-                (SELECT * FROM ALL_AUTOGRAPHS WHERE ID_USER = :loggedUserID ORDER BY POINTS)
-                                             WHERE ROWNUM <= 3) WHERE ROWNUM >= 3`
+            let thirdAutoQuery = `SELECT ID_AUTHOR FROM (SELECT * FROM (SELECT * FROM
+                    (SELECT * FROM ALL_AUTOGRAPHS_V2 WHERE ID_USER = :a ORDER BY POINTS DESC)
+                                                                WHERE ROWNUM <= 3) order by POINTS) WHERE ROWNUM <=1`
 
             let thirdAutoQueryResult = await connection.execute(
                 thirdAutoQuery, [loggedUserID],
@@ -266,13 +189,13 @@ async function getTopThreeMostValuableAutographsData(connection, loggedUserID) {
 
 async function getMostValuableAutographsData(connection, loggedUserID) {
     try {
-        let maxValueQuery = `SELECT MAX(POINTS) FROM ALL_AUTOGRAPHS WHERE ID_USER = :loggedUserID`;
+        let maxValueQuery = `SELECT MAX(POINTS) FROM ALL_AUTOGRAPHS_V2 WHERE ID_USER = :loggedUserID`;
         let maxValueResult = await connection.execute(
             maxValueQuery, [loggedUserID],
             { autoCommit: true });
         let maxValue = maxValueResult.rows[0][0];
 
-        let authorIDQuery = `SELECT ID_AUTHOR FROM ALL_AUTOGRAPHS WHERE POINTS = :maxValue AND ID_USER = :loggedUserID`;
+        let authorIDQuery = `SELECT ID_AUTHOR FROM ALL_AUTOGRAPHS_V2 WHERE POINTS = :maxValue AND ID_USER = :loggedUserID`;
         let authorIDResult = await connection.execute(
             authorIDQuery, [maxValue, loggedUserID],
             { autoCommit: true });
@@ -294,7 +217,7 @@ async function getMostValuableAutographsData(connection, loggedUserID) {
 
 async function getTotalValueOfAutographs(connection, loggedUserID) {
     try {
-        let totalValueQuery = `SELECT SUM(POINTS) FROM ALL_AUTOGRAPHS WHERE ID_USER = :loggedUserID`;
+        let totalValueQuery = `SELECT SUM(POINTS) FROM ALL_AUTOGRAPHS_V2 WHERE ID_USER = :loggedUserID`;
 
         let totalValueResult = await connection.execute(
             totalValueQuery, [loggedUserID],
@@ -309,7 +232,7 @@ async function getTotalValueOfAutographs(connection, loggedUserID) {
 
 async function getNumberOfAutographs(connection, loggedUserID) {
     try {
-        let numberOfAutographsQuery = `SELECT COUNT(*) FROM ALL_AUTOGRAPHS WHERE ID_USER = :loggedUserID`;
+        let numberOfAutographsQuery = `SELECT COUNT(*) FROM ALL_AUTOGRAPHS_V2 WHERE ID_USER = :loggedUserID`;
 
         let numberOfAutographsResult = await connection.execute(
             numberOfAutographsQuery, [loggedUserID],
@@ -322,6 +245,5 @@ async function getNumberOfAutographs(connection, loggedUserID) {
 }
 
 module.exports = {
-    getLoggedUserStatistics,
-    getFirstGlobalStatistic
+    getLoggedUserStatistics
 }

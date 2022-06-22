@@ -1,0 +1,53 @@
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgb(66, 38, 54) 0%, rgb(168, 90, 176) 35%, rgb(57, 187, 187) 100%);
+
+    overflow: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+
+}
+#big_title{
+    color: #422636;
+    width: 400px;
+   // background-color: rgba(185, 165, 173, 0.77);
+    ;
+}
+div.big_documentation_box{
+    background-color: #CAB9BE;
+    height: 700px;
+    width: 80%;
+    padding: 1%;
+    overflow: auto;
+    border-radius: 15px;
+    //border-style: solid;
+}
+.vertical_horizontal_center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.documentation_and_diagrams{
+    //display: ;
+    //position: relative;
+}
+
+.box_diagrams{
+    background-color: #CAB9BE;
+    height: 400px;
+    //width: 80%;
+    padding: 1%;
+    overflow: auto;
+    border-radius: 15px;
+}
+.diagram{
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+    overflow: auto;
+}

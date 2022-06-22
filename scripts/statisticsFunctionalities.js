@@ -95,3 +95,37 @@ async function sendPersonalStatisticsRequest(url) {
 function showGlobalStatistics(elementId) {
     document.getElementById(elementId).classList.toggle("show");
 }
+
+async function getJson() {
+    let url = 'http://localhost:8081/user-statistics';
+    let div = document.getElementById("dynamicStats");
+    let responseBody = await sendPersonalStatisticsRequest(url);
+
+    let object;
+    object = {
+        numberOfAutographs: responseBody.numberOfAutographs,
+        mostValuableAutographsAuthorsName: responseBody.mostValuableAutographsAuthorsName,
+        mostValuableAutographsPoints: responseBody.mostValuableAutographsPoints,
+        totalValueOfAutographs: responseBody.totalValueOfAutographs,
+        mostFrequentAuthor: responseBody.mostFrequentAuthor.authorName,
+        top1MostValuableAutographsAuthor: responseBody.topThreeMostValuableAutographsData.firstAuthor,
+        top2MostValuableAutographsAuthor: responseBody.topThreeMostValuableAutographsData.secondAuthor,
+        top3MostValuableAutographsAuthor:responseBody.topThreeMostValuableAutographsData.thirdAuthor
+    }
+
+    div.innerHTML = JSON.stringify(object);
+}
+
+async function getCsv() {
+    let url = 'http://localhost:8081/user-statistics';
+    let div = document.getElementById("dynamicStats");
+    let responseBody = await sendPersonalStatisticsRequest(url);
+
+    let csv = "numberOfAutographs,mostValuableAutographsAuthorsName,mostValuableAutographsPoints,totalValueOfAutographs,mostFrequentAuthor,top1MostValuableAutographsAuthor: responseBody.topThreeMostValuableAutographsData.firstAuthor,top2MostValuableAutographsAuthor,top3MostValuableAutographsAuthor<br>";
+    csv += responseBody.numberOfAutographs +','+ responseBody.mostValuableAutographsAuthorsName +','+
+        responseBody.mostValuableAutographsPoints +','+ responseBody.totalValueOfAutographs +','+
+        responseBody.mostFrequentAuthor.authorName +','+ responseBody.topThreeMostValuableAutographsData.firstAuthor +','+
+        responseBody.topThreeMostValuableAutographsData.secondAuthor +','+ responseBody.topThreeMostValuableAutographsData.thirdAuthor;
+    div.innerHTML = csv;
+}
+

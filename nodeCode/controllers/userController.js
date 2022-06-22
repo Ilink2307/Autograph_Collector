@@ -22,10 +22,16 @@ async function registerUser(req, res){
                 password
             }
 
-            const newUser = Person.registerUserBD(person);
-            res.writeHead(201, {'Content-Type': 'application/json'});
-            console.log(res.statusCode);
-            return res.end(JSON.stringify(newUser))
+
+            if(isRegisterInputValid(email, username, password)){
+                const newUser = Person.registerUserBD(person);
+                res.writeHead(201, {'Content-Type': 'application/json'});
+                return res.end(JSON.stringify(newUser))
+            }
+            else{
+                console.log("nu ii place inputul la register");
+            }
+
 
         })
 
@@ -36,6 +42,7 @@ async function registerUser(req, res){
 
 // @desc Login User
 // @route POST /login
+
 async function loginUser(req, res){
     try {
 
@@ -55,37 +62,70 @@ async function loginUser(req, res){
                 username,
                 password,
             }
+            
+           
+            if(isLoginInputValid(username, password)){
+                const personExists = await Person.findIfUserExistsByUsername(person.username, person.password);
 
-            const personExists = await Person.findIfUserExistsByUsername(person.username, person.password);
+                if(!personExists){
+                    res.writeHead(404, {'Content-Type': 'application/json'});
+                    res.end(JSON.stringify({message: 'User Not Registered'}))
+                    console.log ("User Not Registered")
+                }
+                else{
+                    const userId = await Person.findUserIDByUsername(person.username, person.password);
+                    console.log(userId.rows[0][0]);
 
-            if(!personExists){
-                res.writeHead(404, {'Content-Type': 'application/json'});
-                res.end(JSON.stringify({message: 'User Not Registered'}))
-                console.log ("User Not Registered")
+                    const encodedToken = Person.encodeUserData(person.username, person.password, userId.rows[0][0]);
+                    console.log(encodedToken);
+
+                    await Person.updateToken(person.username, person.password, encodedToken)
+                    res.writeHead(200, {'Content-Type': 'application/json'});
+                    res.end(JSON.stringify({
+                            // message: "User Logged in",
+                            token: encodedToken
+                        }))
+                    console.log ("User Logged in");
+                    }
             }
-            else{
-                const userId = await Person.findUserIDByUsername(person.username, person.password);
-                console.log(userId.rows[0][0]);
+            else{console.log("nu ii place inputul la login")}
 
-                const encodedToken = Person.encodeUserData(person.username, person.password, userId.rows[0][0]);
-                console.log(encodedToken);
-
-                await Person.updateToken(person.username, person.password, encodedToken)
-                res.writeHead(200, {'Content-Type': 'application/json'});
-                res.end(JSON.stringify({
-                       // message: "User Logged in",
-                        token: encodedToken
-                    })
-                )
-                console.log ("User Logged in");
-            }
         })
-
-
+        
     }catch (error){
         console.log(error);
     }
 }
+
+
+function isLoginInputValid (username, password){
+
+    if(username.length < 3 || username.length > 30 || password.length < 3)
+        return false
+
+    if (/^[0-9@._a-zA-Z]+$/.test(password)){
+        return true;
+    }
+    else{
+        return false;
+    }
+
+}
+
+function isRegisterInputValid (email, username, password){
+
+    if(username.length < 3 || username.length > 30 || password.length < 3)
+        return false
+           // /^[a-zA-Z]+[@][0-9@._a-zA-Z]+[.com]$/
+    if (/^[0-9@._a-zA-Z]+$/.test(email) && /^[0-9@._a-zA-Z]+$/.test(password)){
+        return true;
+    }
+    else{
+        return false;
+    }
+
+}
+
 
 module.exports = {
     registerUser,

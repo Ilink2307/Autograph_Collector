@@ -7,7 +7,14 @@ async function login (){
 
     alert(urlPath);
 
-    await loginApiCall(username, password, urlPath);
+    if(!isLoginInputValid(username, password)){
+        alert("Input is not valid. Please try again!")
+    }
+    else{
+        await loginApiCall(username, password, urlPath);
+        //alert("Input  valid. ")
+    }
+
 
 }
 
@@ -70,8 +77,19 @@ async function sendLoginRequest(url, bodyText) {
     return responseBody;
 }
 
-function testFunction (username){
-    return '1111111';
+
+function isLoginInputValid (username, password){
+
+    if(username.length < 3 || username.length > 30 || password.length < 3)
+        return false
+
+    if (/^[0-9@._a-zA-Z]+$/.test(password)){
+        return true;
+    }
+    else{
+        return false;
+    }
+
 }
 
 function deleteAllCookies() {

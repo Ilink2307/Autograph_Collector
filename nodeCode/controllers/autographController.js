@@ -13,7 +13,7 @@ async function getAutographs(req, res) {
 
             const getResponse = await AutographModel.getAutographs(userID);
             res.writeHead(201, {'Content-Type': 'application/json'});
-            console.log(JSON.stringify(getResponse));
+
             return res.end(JSON.stringify(getResponse))
         })
     } catch (error){
@@ -40,6 +40,8 @@ async function addNewAutograph(req, res) {
                 moment
             } = JSON.parse(body);
 
+            console.log(body);
+
             const autograph = {
                 idUser,
                 photo,
@@ -61,7 +63,35 @@ async function addNewAutograph(req, res) {
     }
 }
 
+async function getAutographsFromSearch(req, res) {
+    try {
+        let body ='';
+        req.on('data', (chunk) => {
+            body += chunk.toString();
+        })
+
+        req.on('end', async () => {
+            const tags = body;
+
+            console.log("se cauta in bd autografele cu tags: " + tags);
+
+            let userID = 4; // va fi luat din header de la get dupa ce face autentificarea
+
+            const searchArray = await AutographModel.search(tags, userID);
+
+            console.log("autografele cu tags sunt: " + searchArray);
+
+            res.writeHead(201, {'Content-Type': 'application/json'});
+
+            return res.end(JSON.stringify(searchArray))
+        })
+    } catch (error){
+        console.log(error);
+    }
+}
+
 module.exports = {
     addNewAutograph,
-    getAutographs
+    getAutographs,
+    getAutographsFromSearch
 }

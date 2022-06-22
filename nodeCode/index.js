@@ -1,7 +1,8 @@
 const http = require('http');
 const { registerUser, loginUser } = require('./controllers/userController')
-const { getUserStatistics, getFirstGlobalStatistic } = require('./controllers/statisticsController')
-const { addNewAutograph, getAutographs } = require('./controllers/autographController')
+const { getUserStatistics } = require('./controllers/statisticsController')
+const { addNewAutograph, getAutographs, getAutographsFromSearch } = require('./controllers/autographController')
+const { getPersonalities, getItems, getTags } = require('./controllers/optionsController')
 
 const PORT = 8081;
 
@@ -17,6 +18,7 @@ function noCORS(res) {
 const server = http.createServer((req, res) => {
 
     noCORS(res);
+
 
     if (req.method === 'OPTIONS') {
         console.log("OPTIONS :)")
@@ -39,15 +41,6 @@ const server = http.createServer((req, res) => {
             function(value) { console.log("personal statistics success") },
             function(error) { console.log("personal statistics fail") }
         );
-    } else if(req.url === '/global-statistic-1' && req.method === 'GET') {
-        getFirstGlobalStatistic(req, res).then(
-            function(value) { console.log("first global statistic success") },
-            function(error) { console.log("first global statistic fail") }
-        ); //nu merge
-    } else if(req.url === '/global-statistic-2' && req.method === 'GET') {
-        getSecondGlobalStatistic(req, res); //de implementat
-    } else if(req.url === '/global-statistic-3' && req.method === 'GET') {
-        getThirdGlobalStatistic(req, res); //de implementat
     } else if(req.url === '/new-autograph' && req.method === 'POST') {
         addNewAutograph(req, res).then(
             function(value) { console.log("add success") },
@@ -58,6 +51,30 @@ const server = http.createServer((req, res) => {
         getAutographs(req, res).then(
             function(value) { console.log("main get success") },
             function(error) { console.log("main get fail") }
+        );
+    } else if(req.url === '/get-items' && req.method === 'GET') {
+        console.log("se va efectua get items");
+        getItems(req, res).then(
+            function(value) { console.log("items get success") },
+            function(error) { console.log("items get fail") }
+        );
+    } else if(req.url === '/get-personalities' && req.method === 'GET') {
+        console.log("se va efectua get personalities");
+        getPersonalities(req, res).then(
+            function(value) { console.log("personalities get success") },
+            function(error) { console.log("personalities get fail") }
+        );
+    } else if(req.url === '/get-tags' && req.method === 'GET') {
+        console.log("se va efectua get tags");
+        getTags(req, res).then(
+            function(value) { console.log("tags get success") },
+            function(error) { console.log("tags get fail") }
+        );
+    } else if(req.url === '/search' && req.method === 'POST') {
+        console.log("se va efectua get autographs from search");
+        getAutographsFromSearch(req, res).then(
+            function(value) { console.log("search success") },
+            function(error) { console.log("search fail") }
         );
     }
     else{

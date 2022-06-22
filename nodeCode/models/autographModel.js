@@ -4,11 +4,12 @@ const mediumImportance = 5;
 async function getAutographs(userID) {
     return new Promise(async (resolve, reject) => {
         const getResponse = await getAutographFromBD(userID);
+
         resolve(getResponse);
     });
 }
 
-async function getAutographFromBD(userID) {
+async function getAutographsFromBD(userID) {
     let connection;
     try {
         connection = await oracledb.getConnection({user:"project", password:"PROJECT", connectionString:"localhost/XE"});
@@ -42,6 +43,7 @@ async function getProcessedAutograph(connection, currentAutographRaw) {
     let pts = currentAutographRaw[6];
     let date = currentAutographRaw[7];
     let photo = currentAutographRaw[8];
+    let tags = currentAutographRaw[9];
 
     processedAutograph = {
         author,
@@ -50,7 +52,8 @@ async function getProcessedAutograph(connection, currentAutographRaw) {
         mentions,
         pts,
         date,
-        photo
+        photo,
+        tags
     }
 
     return processedAutograph;
@@ -126,7 +129,7 @@ async function addAutographInBD(autograph) {
 
         let uploadObject = await computeUploadObject(connection, autograph);
 
-        let insertQuery = `INSERT INTO ALL_AUTOGRAPHS_V2 VALUES (:a, :b, :c, :d, :e, :f, :g, :h, :i)`
+        let insertQuery = `INSERT INTO ALL_AUTOGRAPHS_V2 VALUES (:a, :b, :c, :d, :e, :f, :g, :h, :i, :j)`;
         await connection.execute(
             insertQuery,
             [
@@ -138,7 +141,8 @@ async function addAutographInBD(autograph) {
                 uploadObject.mentions,
                 uploadObject.pts,
                 uploadObject.autographDate,
-                uploadObject.autographPhoto
+                uploadObject.autographPhoto,
+                uploadObject.tags
             ],
             { autoCommit: true }
         );
@@ -162,6 +166,7 @@ async function computeUploadObject(connection, autograph) {
     let pts = await computePointsForAutograph(connection, authorID, itemID, mentions);
     let autographDate = autograph.autographDate;
     let autographPhoto = autograph.photo;
+    let tags = autograph.tags;
 
     return {
         autographID,
@@ -172,7 +177,8 @@ async function computeUploadObject(connection, autograph) {
         mentions,
         pts,
         autographDate,
-        autographPhoto
+        autographPhoto,
+        tags
     }
 }
 
@@ -270,7 +276,64 @@ async function computePointsForAutograph(connection, authorID, itemID, mentions)
     return Math.floor(pts);
 }
 
+async function search(tags, userID) {
+    return new Promise(async (resolve, reject) => {
+        const getResponse = await searchInBD(tags, userID);
+        resolve(getResponse);
+    });
+}
+
+async function searchInBD(tags, userID) {
+    let connection;
+    try {
+        connection = await oracledb.getConnection({user:"project", password:"PROJECT", connectionString:"localhost/XE"});
+
+        let autographArray = [];
+
+        let numberOfAutographs = await getNumberOfAutographs(connection, userID);
+
+        for(let i = 0; i < numberOfAutographs; ++i) {
+            let currentAutographRaw = await getIthAutographFromBD(connection, userID, i+1);
+            let currentAutograph = await getProcessedAutograph(connection, currentAutographRaw);
+            if(matchesTags(currentAutograph.tags, tags)) {
+                autographArray.push(currentAutograph);
+            }
+        }
+
+        await connection.close;
+        return autographArray;
+    }
+    catch (error){
+        console.error(error);
+        return "add failed in db";
+    }
+}
+
+function matchesTags(currentTags, tags) {
+    console.log("face match? " + tags + " autograf: " + currentTags);
+    let differentTags = tags.split(/[, ]+/);
+    let assignedTags = currentTags.split(/[, ]+/);
+
+    console.log("tag din search: " + differentTags);
+    console.log("assigned: " + assignedTags[0] + assignedTags[1]);
+
+    for(let i = 0; differentTags[i]; ++i) {
+        let isAssigned = false;
+        for(let j=0; assignedTags[j]; ++j) {
+            if(assignedTags[j] === differentTags[i]) {
+                isAssigned = true;
+                break;
+            }
+        }
+        if(isAssigned === false) {
+            return false;
+        }
+    }
+    return true;
+}
+
 module.exports = {
     addAutograph,
-    getAutographs
+    getAutographs,
+    search
 }

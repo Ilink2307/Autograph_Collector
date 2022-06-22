@@ -1,15 +1,19 @@
 body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #A8919C;
-    overflow: hidden; /* Hide scrollbars */
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgb(66, 38, 54) 0%, rgb(168, 90, 176) 35%, rgb(57, 187, 187) 100%);
+
+    /*overflow: hidden; /* Hide scrollbars */
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
 #login_title{
     text-align: center;
-    top: 80%;
-    margin-bottom: 2%;
-    color: #CAB9BE;
     font-size: xx-large;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    color: #A8919C;
 }
 
 .text_field{
@@ -17,8 +21,11 @@ body {
     float: left;
     font-size: large;
     color: #CAB9BE;
-    margin-top: 2%;
-    margin-bottom: 1%;
+    margin-top: 10%;
+    margin-bottom: 6%;
+}
+.input_field{
+    margin-bottom: 6%;
 }
 
 .group input{
@@ -88,7 +95,7 @@ body {
 }
 
 .container{
-    background-color:#330A29;
+    background-color: #460e3d;
     padding-top: 30px;
     padding-bottom: 30px;
     margin-top: 12%;
@@ -96,9 +103,10 @@ body {
     margin-left: 30%;
     margin-right: 30%;
     border-radius: 15px;
-    border-style: solid;
+    //border-style: solid;
     width: 60%;
     height: 70%;
+    border: none;
 }
 
 .vertical_horizontal_center {
@@ -122,7 +130,7 @@ body {
     width: 100px;
     height: 50%;
     align-items: center;
-    margin-top: 2%;
+    margin-top:10%;
     justify-content: space-between;
     font-size: x-large;
     display: inline-block;

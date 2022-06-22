@@ -8,16 +8,17 @@ async function registerUser() {
     let password = document.getElementById("password").value;
     let url = 'http://localhost:8081/register';
 
-    await registerApiCall(email, username, password, url);
-    alert("gata registerul");
-    //location.replace( 'http://localhost:63342/Autograph_Collector/mainScreen.html')
 
+    if(!isRegisterInputValid(email, username, password)){
+        alert("Input is not valid. Please try again!")
+    }
+    else{
+        alert("Input valid. ")
+        await registerApiCall(email, username, password, url);
+        alert("COOKIE " + document.cookie)
 
-    //deleteAllCookies();
-    alert("COOKIE " + document.cookie)
-    //await Login.loginApiCall(username, password, urlLogin);
-    //alert("gata login")
-    //alert(callLogin.testFunction(username));
+    }
+
 }
 
 async function registerApiCall(email, username, password, url) {
@@ -47,13 +48,14 @@ async function sendRegisterRequest (url, bodyText) {
             'Accept': 'application/json',
             'Content-Type': 'text/plain'
         }
+
     }).then(response=>response.json())
         .then((res) => {
             window.location.href= 'mainScreen.html';
         }).catch((error) => {
             alert("Post NO!")
             console.log(error)
-            })
+        })
 }
 
 function deleteAllCookies() {
@@ -65,4 +67,18 @@ function deleteAllCookies() {
         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
+}
+
+function isRegisterInputValid (email, username, password){
+
+    if(username.length < 3 || username.length > 30 || password.length < 3)
+        return false
+
+    if (/^[0-9@._a-zA-Z]+$/.test(email) && /^[0-9@._a-zA-Z]+$/.test(password)){
+        return true;
+    }
+    else{
+        return false;
+    }
+
 }
