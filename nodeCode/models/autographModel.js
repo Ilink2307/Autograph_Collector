@@ -3,8 +3,7 @@ const mediumImportance = 5;
 
 async function getAutographs(userID) {
     return new Promise(async (resolve, reject) => {
-        const getResponse = await getAutographFromBD(userID);
-
+        const getResponse = await getAutographsFromBD(userID);
         resolve(getResponse);
     });
 }

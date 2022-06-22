@@ -1,4 +1,4 @@
-const Person = require('../models/userModel');
+const Person = require('../models/userModel')
 
 // @desc Register User
 // @route POST /register
@@ -22,7 +22,6 @@ async function registerUser(req, res){
                 password
             }
 
-
             if(isRegisterInputValid(email, username, password)){
                 const newUser = Person.registerUserBD(person);
                 res.writeHead(201, {'Content-Type': 'application/json'});
@@ -31,7 +30,6 @@ async function registerUser(req, res){
             else{
                 console.log("nu ii place inputul la register");
             }
-
 
         })
 
@@ -42,7 +40,6 @@ async function registerUser(req, res){
 
 // @desc Login User
 // @route POST /login
-
 async function loginUser(req, res){
     try {
 
@@ -62,8 +59,7 @@ async function loginUser(req, res){
                 username,
                 password,
             }
-            
-           
+
             if(isLoginInputValid(username, password)){
                 const personExists = await Person.findIfUserExistsByUsername(person.username, person.password);
 
@@ -73,30 +69,20 @@ async function loginUser(req, res){
                     console.log ("User Not Registered")
                 }
                 else{
-                    const userId = await Person.findUserIDByUsername(person.username, person.password);
-                    console.log(userId.rows[0][0]);
-
-                    const encodedToken = Person.encodeUserData(person.username, person.password, userId.rows[0][0]);
-                    console.log(encodedToken);
-
-                    await Person.updateToken(person.username, person.password, encodedToken)
                     res.writeHead(200, {'Content-Type': 'application/json'});
-                    res.end(JSON.stringify({
-                            // message: "User Logged in",
-                            token: encodedToken
-                        }))
-                    console.log ("User Logged in");
-                    }
+                    res.end(JSON.stringify({message: 'User Logged in'}))
+                    console.log ("User Logged in")
+                }
             }
             else{console.log("nu ii place inputul la login")}
 
         })
-        
+
+
     }catch (error){
         console.log(error);
     }
 }
-
 
 function isLoginInputValid (username, password){
 
@@ -125,6 +111,7 @@ function isRegisterInputValid (email, username, password){
     }
 
 }
+
 
 
 module.exports = {
