@@ -3,352 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <title>Documentation</title>
+    <link rel="stylesheet" href="style/documentationStyling.css">
 </head>
+
 <body style="font-family: 'Times New Roman', serif; text-align: justify;">
-    <h1>AuCo (Autograph Collector)</h1>
-    <section typeof="sa:AuthorsList">
-        <h2>Authors</h2>
-        <ul>
-            <li typeof="sa:ContributorRole" property="schema:author">
-                <span typeof="schema:Person" resource="https://github.com/Ilink2307">
-                    <meta property="schema:givenName" content="Ilinca">
-                    <meta property="schema:additionalName" content="Gabriela">
-                    <meta property="schema:familyName" content="Dumitra&#351cu">
-                    <span property="schema:name">Ilinca G. Dumitra&#351cu</span>
-                </span>
-
+    <div class= "vertical_horizontal_center big_documentation_box">
+        <div >
+            <h1 id="big_title">AuCo (Autograph Collector)</h1>
+            <section typeof="sa:AuthorsList">
+                <h2>Authors</h2>
                 <ul>
-                    <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
-                        <a href="ilinca.dumitrascu@gmail.com"
-                           property="schema:email">ilinca.dumitrascu@gmail.com</a>
+                    <li typeof="sa:ContributorRole" property="schema:author">
+                    <span typeof="schema:Person" resource="https://github.com/Ilink2307">
+                        <meta property="schema:givenName" content="Ilinca">
+                        <meta property="schema:additionalName" content="Gabriela">
+                        <meta property="schema:familyName" content="Dumitra&#351cu">
+                        <span property="schema:name">Ilinca G. Dumitra&#351cu</span>
+                    </span>
+
+                        <ul>
+                            <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                                <a href="ilinca.dumitrascu@gmail.com"
+                                   property="schema:email">ilinca.dumitrascu@gmail.com</a>
+                            </li>
+                            <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                                <a href="tel:+40735977910" property="schema:telephone">+40735977910</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
-                        <a href="tel:+40735977910" property="schema:telephone">+40735977910</a>
+
+                    <li typeof="sa:ContributorRole" property="schema:author">
+                    <span typeof="schema:Person" resource="https://github.com/deliaioana">
+                        <meta property="schema:givenName" content="Delia">
+                        <meta property="schema:additionalName" content="Ioana">
+                        <meta property="schema:familyName" content="Oloeriu">
+                        <span property="schema:name">Delia I. Oloeriu</span>
+                    </span>
+
+                        <ul>
+                            <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                                <a href="deliaoloeriu18@gmail.com"
+                                   property="schema:email">deliaoloeriu18@gmail.com</a>
+                            </li>
+                            <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                                <a href="tel:++40773898198" property="schema:telephone">+40773898198</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
-            </li>
 
-            <li typeof="sa:ContributorRole" property="schema:author">
-                <span typeof="schema:Person" resource="https://github.com/deliaioana">
-                    <meta property="schema:givenName" content="Delia">
-                    <meta property="schema:additionalName" content="Ioana">
-                    <meta property="schema:familyName" content="Oloeriu">
-                    <span property="schema:name">Delia I. Oloeriu</span>
-                </span>
-
-                <ul>
-                    <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
-                        <a href="deliaoloeriu18@gmail.com"
-                           property="schema:email">deliaoloeriu18@gmail.com</a>
-                    </li>
-                    <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
-                        <a href="tel:++40773898198" property="schema:telephone">+40773898198</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-
-        <section>
-            <h2>1 Introduction</h2>
-            <section>
-                <h3 role="doc-subtitle">1.1 Purpose</h3>
-                <p>The product described in this documentation represents the frontend part of a bigger project named AuCo(Autograph Collector).
-                This SRS encapsulates version 1.0 of this product, which is composed of HTML, CSS and JavaScript files.</p>
-            </section>
-            <section>
-                <h3 role="doc-subtitle">1.2 Document Conventions</h3>
-                <p>This document is written using Times New Roman. Priorities are indicated by the &#60;h1> - &#60;h6> tags, with the highest one
-                being represented by the &#60;h1> tag.
-                The content is structured in different sections using the <a href="https://w3c.github.io/scholarly-html/">"Scholarly HTML"</a> format. Each section has its own number in accordance with the
-                priorities mentioned above.</p>
-            </section>
-            <section>
-                <h3 role="doc-subtitle">1.3 Intended Audience and Reading Suggestions</h3>
-                <p>
-                    The documentation addresses the project manager and the developers involved. It describes the product, the requirements and
-                    the implemented features. The most pertinent sections for the project manager are <a href="#1.4">1.4 Product Scope</a> and
-                    <a href="#2.3">2.3 User Classes And Characteristics</a>. The sections regarding code implementation, and the most
-                    relevant for the developers, are <a href="#2.2">2.2 Product Functions</a>,
-                    <a href="#2.5">2.5 Design And Implementation Constraints</a> and <a href="#4">4 System Features</a>.
-                </p>
-            </section>
-            <section>
-                <h3 id="1.4" role="doc-subtitle">1.4 Product Scope</h3>
-                <p>
-                    AuCo is a useful tool for amateur autograph collectors, that allows users to organize their acquired autographs and store their
-                    unique specifications and descriptions. This website helps collectors access their own autograph database easily and gain
-                    insight on some global statistics. AuCo uses a personal system of estimating values within the app, and every autograph
-                    has a value expressed in auco points. Also, users can access their own statistics in order to see information like their total
-                    value acquired in points.
-                </p>
-            </section>
-            <section>
-                <h3 role="doc-subtitle">1.5 References</h3>
-                <ol>
-                    <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html" property="schema:citation" id="ref-1">
-                        <cite property="schema:name"><a href="https://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html">Project requirements</a></cite>
-                    </li>
-                    <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://w3c.github.io/scholarly-html/#abstract" property="schema:citation" id="ref-2">
-                        <cite property="schema:name"><a href="https://w3c.github.io/scholarly-html/#abstract" >Scholarly HTML format</a></cite>
-                    </li>
-                    <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://www.w3schools.com/" property="schema:citation" id="ref-3">
-                        <cite property="schema:name"><a href="https://www.w3schools.com/">W3Schools</a></cite>
-                    </li>
-                </ol>
-            </section>
-        </section>
-        <section>
-            <h2>2 Overall Description</h2>
-            <section>
-                <h3 role="doc-subtitle">2.1 Product Perspective</h3>
-                <p>
-                    This product is part of the collection-organizing-apps family, and gives the user an overview of their own collection of
-                    autographs in the "Statistics" section.
-                </p>
-            </section>
-
-            <section>
-                <h3 id="2.2" role="doc-subtitle">2.2 Product Functions</h3>
-                <ol>
-                    <li>User Interface:
+                <section>
+                    <h2>1 Introduction</h2>
+                    <section>
+                        <h3 role="doc-subtitle">1.1 Purpose</h3>
+                        <p>The product described in this documentation represents the frontend part of a bigger project named AuCo(Autograph Collector).
+                            This SRS encapsulates version 1.0 of this product, which is composed of HTML, CSS and JavaScript files.</p>
+                    </section>
+                    <section>
+                        <h3 role="doc-subtitle">1.2 Document Conventions</h3>
+                        <p>This document is written using Times New Roman. Priorities are indicated by the &#60;h1> - &#60;h6> tags, with the highest one
+                            being represented by the &#60;h1> tag.
+                            The content is structured in different sections using the <a href="https://w3c.github.io/scholarly-html/">"Scholarly HTML"</a> format. Each section has its own number in accordance with the
+                            priorities mentioned above.</p>
+                    </section>
+                    <section>
+                        <h3 role="doc-subtitle">1.3 Intended Audience and Reading Suggestions</h3>
+                        <p>
+                            The documentation addresses the project manager and the developers involved. It describes the product, the requirements and
+                            the implemented features. The most pertinent sections for the project manager are <a href="#1.4">1.4 Product Scope</a> and
+                            <a href="#2.3">2.3 User Classes And Characteristics</a>. The sections regarding code implementation, and the most
+                            relevant for the developers, are <a href="#2.2">2.2 Product Functions</a>,
+                            <a href="#2.5">2.5 Design And Implementation Constraints</a> and <a href="#4">4 System Features</a>.
+                        </p>
+                    </section>
+                    <section>
+                        <h3 id="1.4" role="doc-subtitle">1.4 Product Scope</h3>
+                        <p>
+                            AuCo is a useful tool for amateur autograph collectors, that allows users to organize their acquired autographs and store their
+                            unique specifications and descriptions. This website helps collectors access their own autograph database easily and gain
+                            insight on some global statistics. AuCo uses a personal system of estimating values within the app, and every autograph
+                            has a value expressed in auco points. Also, users can access their own statistics in order to see information like their total
+                            value acquired in points.
+                        </p>
+                    </section>
+                    <section>
+                        <h3 role="doc-subtitle">1.5 References</h3>
                         <ol>
-                            <li>Creating an account</li>
-                            <li>Adding an autograph</li>
-                            <li>Editing the profile</li>
-                            <li>Searching through the autographs</li>
-                            <li>Changing settings</li>
-                            <li>Account personalization</li>
-                            <li>Seeing personal and global statistics</li>
+                            <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html" property="schema:citation" id="ref-1">
+                                <cite property="schema:name"><a href="https://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html">Project requirements</a></cite>
+                            </li>
+                            <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://w3c.github.io/scholarly-html/#abstract" property="schema:citation" id="ref-2">
+                                <cite property="schema:name"><a href="https://w3c.github.io/scholarly-html/#abstract" >Scholarly HTML format</a></cite>
+                            </li>
+                            <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://www.w3schools.com/" property="schema:citation" id="ref-3">
+                                <cite property="schema:name"><a href="https://www.w3schools.com/">W3Schools</a></cite>
+                            </li>
                         </ol>
-                    </li>
-                    <li>AuCo system
+                    </section>
+                </section>
+                <section>
+                    <h2>2 Overall Description</h2>
+                    <section>
+                        <h3 role="doc-subtitle">2.1 Product Perspective</h3>
+                        <p>
+                            This product is part of the collection-organizing-apps family, and gives the user an overview of their own collection of
+                            autographs in the "Statistics" section.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3 id="2.2" role="doc-subtitle">2.2 Product Functions</h3>
                         <ol>
-                            <li>Database storing system</li>
+                            <li>User Interface:
+                                <ol>
+                                    <li>Creating an account</li>
+                                    <li>Adding an autograph</li>
+                                    <li>Searching through the autographs</li>
+                                    <li>Seeing personal and global statistics</li>
+                                </ol>
+                            </li>
+                            <li>AuCo system
+                                <ol>
+                                    <li>Database storing system</li>
+                                </ol>
+                            </li>
                         </ol>
-                    </li>
-                </ol>
-            </section>
+                    </section>
 
-            <section>
-                <h3 id="2.3" role="doc-subtitle">2.3 User Classes and Characteristics</h3>
-                <p>
-                    This product is destined to all classes of users. The autograph collection community has no age limit. The
-                    main characteristic of the users is having a valid email address. Also, the average user will show enthusiasm
-                    regarding collecting autographs and storing them. Even a person with just one autograph can find AuCo really
-                    helpful. Every AuCo functionality is accessible for all the users.
-                </p>
-            </section>
-
-            <section>
-                <h3 role="doc-subtitle">2.4 Operating Environment</h3>
-                <p>
-                    The product can optimally operate in any web browser that supports HTML5.
-                </p>
-            </section>
-
-            <section>
-                <h3 id="2.5" role="doc-subtitle">2.5 Design and Implementation Constraints</h3>
-                <p>
-                    The main constraint that AuCo imposes on the user is a superior limit in reference to
-                    the possible number of autographs stored. A single profile can store up to 2000 entries.
-                </p>
-            </section>
-
-            <section>
-                <h3 role="doc-subtitle">2.6 User Documentation</h3>
-                <p>
-                    The AuCo website comes with self-explanatory functionalities, and all of them are indicated by
-                    specific buttons with suggestive names like "Log out", "See your stats" or "New autograph".
-                </p>
-            </section>
-
-            <section>
-                <h3 role="doc-subtitle">2.7 Assumptions and Dependencies</h3>
-                <p>
-                    This product has two dependencies. The main one is represented by the chosen hosting server and the
-                    other one consists of the database used for storing all the user data. Any problem that occurs regarding
-                    the database or the host provider that threatens this product can be solved by switching to another
-                    third party provider. In addition, any memory issues that may occur will determine AuCo to expand
-                    the available storage with the help of future investments.
-                </p>
-            </section>
-        </section>
-
-        <section>
-            <h2>3 External Interface Requirements</h2>
-            <section>
-                <h3 role="doc-subtitle">3.1 User Interfaces</h3>
-                <p>When the user access the website there is displayed a welcome page that lets the user either log in
-                    into an existing account or create a new one by accessing the register page.
-                    In the main page the user has the option to search for a specific autograph, or they can add a new one.
-                    The autographs are displayed as buttons that show an image of the autograph and a short description
-                    when clicked on.
-                    The user also has the option to access a page of statistics where he can gain useful information
-                    about either their or others' autographs.
-                    If wanted, the user can log out of the account or edit their information and account settings.
-                </p>
-            </section>
-            <section>
-                <h3 role="doc-subtitle">3.2 Hardware Interfaces</h3>
-                <p>This website is supported by all devices on which the user can access a browser.
-                    The chosen protocol used for communication is HTTPS and the data will be transferred via either JSON or CSV format.</p>
-            </section>
-            <section>
-                <h3 role="doc-subtitle">3.3 Software Interfaces</h3>
-                <p>The website will use ORACLE as a third party provider of a database, which will communicate with AuCo through an API, using JSON and CSV formats.</p>
-            </section>
-            <section>
-                <h3 role="doc-subtitle">3.4 Communications Interfaces</h3>
-                <p>
-                    The website will use different APIs in order to communicate with the database, and
-                    will send the information via JSON and CSV files, and to send the confirmation
-                    emails. AuCo will use HTTPS as a communication standard. Sensitive and personal
-                    information will be encrypted for security issues.
-                </p>
-            </section>
-        </section>
-
-        <section>
-            <h2 id="4" >4 System Features</h2>
-            <section>
-                <h3 role="doc-subtitle">4.1 Account Management</h3>
-                <section>
-                    <h4 role="doc-subtitle">4.1.1 Description and Priority</h4>
-                    <p>
-                        This feature includes creating an account by registering, logging in with
-                        an existing account and editing your current profile. The AuCo verification
-                        system send a confirmation email during registering. This is a high
-                        priority feature because the user can only access the website through
-                        an account.
-                    </p>
-                </section>
-
-                <section>
-                    <h4 role="doc-subtitle">4.1.2 Stimulus/Response Sequences</h4>
                     <section>
-                        <h5 role="doc-subtitle">4.1.2.1 Register</h5>
+                        <h3 id="2.3" role="doc-subtitle">2.3 User Classes and Characteristics</h3>
                         <p>
-                            This feature is triggered by the user after clicking the "Register"
-                            button, which sends them to the register page. After completing
-                            the form and pressing the "Submit" button, the verification process
-                            begins. The website checks if the email is valid, if the password
-                            meets the safety requirements and matches the confirmation password
-                            and if the username is available. Next, the user data is sent to the
-                            database and updated using JSON and CSV files and a communication API.
-                            After this step, the user receives a confirmation on the website and
-                            on their email address.
+                            This product is destined to all classes of users. The autograph collection community has no age limit. The
+                            main characteristic of the users is having a valid email address. Also, the average user will show enthusiasm
+                            regarding collecting autographs and storing them. Even a person with just one autograph can find AuCo really
+                            helpful. Every AuCo functionality is accessible for all the users.
                         </p>
                     </section>
+
                     <section>
-                        <h5 role="doc-subtitle">4.1.2.2 Login</h5>
+                        <h3 role="doc-subtitle">2.4 Operating Environment</h3>
                         <p>
-                            This feature is triggered by the user after clicking the "Login"
-                            button, which sends them to the login page. After completing
-                            the form and pressing the "Login" button, the verification process
-                            begins. The website checks if the entry is found within the database.
-                            If the user submitted a valid entry, they will be sent to the main
-                            page.
+                            The product can optimally operate in any web browser that supports HTML5.
                         </p>
                     </section>
+
                     <section>
-                        <h5 role="doc-subtitle">4.1.2.3 Profile Editing</h5>
+                        <h3 id="2.5" role="doc-subtitle">2.5 Design and Implementation Constraints</h3>
                         <p>
-                            This feature is triggered by the user after clicking the "Edit Profile"
-                            button, which sends them to the "Edit Profile" page. After completing
-                            the form and pressing the "Submit" button, the verification process
-                            begins. If the user modified their password, the website will verify
-                            it in conformity with section <a href="#2.2">4.1.2.1 Register</a>.
-                            If the changes are valid, the website updates the data within the database.
+                            The main constraint that AuCo imposes on the user is a superior limit in reference to
+                            the possible number of autographs stored. A single profile can store up to 2000 entries.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3 role="doc-subtitle">2.6 User Documentation</h3>
+                        <p>
+                            The AuCo website comes with self-explanatory functionalities, and all of them are indicated by
+                            specific buttons with suggestive names like "Log out", "See your stats" or "New autograph".
+                        </p>
+                    </section>
+
+                    <section>
+                        <h3 role="doc-subtitle">2.7 Assumptions and Dependencies</h3>
+                        <p>
+                            This product has two dependencies. The main one is represented by the chosen hosting server and the
+                            other one consists of the database used for storing all the user data. Any problem that occurs regarding
+                            the database or the host provider that threatens this product can be solved by switching to another
+                            third party provider. In addition, any memory issues that may occur will determine AuCo to expand
+                            the available storage with the help of future investments.
                         </p>
                     </section>
                 </section>
 
                 <section>
-                    <h4 role="doc-subtitle">4.1.3 Functional Requirements</h4>
-                    <p>
-                        In order to successfully use this feature, the user needs a valid and
-                        accessible email address.
-                    </p>
-                </section>
-            </section>
-
-            <section>
-                <h3 role="doc-subtitle">4.2 Autograph Management</h3>
-                <section>
-                    <h4 role="doc-subtitle">4.2.1 Description and Priority</h4>
-                    <p>
-                        This feature includes uploading new autographs to the website's database,
-                        searching for an existing one and deleting unwanted autographs. This is
-                        a high priority feature because it describes the main point of the website.
-                    </p>
-                </section>
-
-                <section>
-                    <h4 role="doc-subtitle">4.2.2 Stimulus/Response Sequences</h4>
+                    <h2>3 External Interface Requirements</h2>
                     <section>
-                        <h5 role="doc-subtitle">4.2.2.1 Adding a New Autograph</h5>
-                        <p>
-                            This feature is triggered by the user after clicking the "New Autograph"
-                            button, which triggers the interfaces' response. Next, the user has to
-                            provide the required specifications and upload a photo, which are added
-                            to the database.
+                        <h3 role="doc-subtitle">3.1 User Interfaces</h3>
+                        <p>When the user access the website there is displayed a welcome page that lets the user either log in
+                            into an existing account or create a new one by accessing the register page.
+                            In the main page the user has the option to search for a specific autograph, or they can add a new one.
+                            The autographs are displayed as buttons that show an image of the autograph and a short description
+                            when clicked on.
+                            The user also has the option to access a page of statistics where he can gain useful information
+                            about either their or others' autographs.
+                            If wanted, the user can log out of the account or edit their information and account settings.
                         </p>
                     </section>
                     <section>
-                        <h5 role="doc-subtitle">4.2.2.2 Searching for an Autograph</h5>
-                        <p>
-                            This feature is triggered by the user after entering some tags in the
-                            searchbar. The website provides the matching elements after searching
-                            the database.
-                        </p>
+                        <h3 role="doc-subtitle">3.2 Hardware Interfaces</h3>
+                        <p>This website is supported by all devices on which the user can access a browser.
+                            The chosen protocol used for communication is HTTPS and the data will be transferred via either JSON or CSV format.</p>
                     </section>
                     <section>
-                        <h5 role="doc-subtitle">4.2.2.3 Delete</h5>
+                        <h3 role="doc-subtitle">3.3 Software Interfaces</h3>
+                        <p>The website will use ORACLE as a third party provider of a database, which will communicate with AuCo through an API, using JSON and CSV formats.</p>
+                    </section>
+                    <section>
+                        <h3 role="doc-subtitle">3.4 Communications Interfaces</h3>
                         <p>
-                            This feature is triggered by the user after clicking the "Delete"
-                            button within an autograph element. The website will ask for
-                            confirmation and by accepting, the database will be updated, and feedback
-                            will be shown.
+                            The website will use different APIs in order to communicate with the database, and
+                            will send the information via JSON and CSV files, and to send the confirmation
+                            emails. AuCo will use HTTPS as a communication standard. Sensitive and personal
+                            information will be encrypted for security issues.
                         </p>
                     </section>
                 </section>
 
                 <section>
-                    <h4 role="doc-subtitle">4.2.3 Functional Requirements</h4>
-                    <p>
-                        In order to successfully use this feature, the user needs a valid account.
-                    </p>
+                    <h2 id="4" >4 System Features</h2>
+                    <section>
+                        <h3 role="doc-subtitle">4.1 Account Management</h3>
+                        <section>
+                            <h4 role="doc-subtitle">4.1.1 Description and Priority</h4>
+                            <p>
+                                This feature includes creating an account by registering, logging in with
+                                an existing account and editing your current profile. The AuCo verification
+                                system send a confirmation email during registering. This is a high
+                                priority feature because the user can only access the website through
+                                an account.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h4 role="doc-subtitle">4.1.2 Stimulus/Response Sequences</h4>
+                            <section>
+                                <h5 role="doc-subtitle">4.1.2.1 Register</h5>
+                                <p>
+                                    This feature is triggered by the user after clicking the "Register"
+                                    button, which sends them to the register page. After completing
+                                    the form and pressing the "Submit" button, the verification process
+                                    begins. The website checks if the email is valid, if the password
+                                    meets the safety requirements and matches the confirmation password
+                                    and if the username is available. Next, the user data is sent to the
+                                    database and updated using JSON and CSV files and a communication API.
+                                    After this step, the user receives a confirmation on the website and
+                                    on their email address.
+                                </p>
+                            </section>
+                            <section>
+                                <h5 role="doc-subtitle">4.1.2.2 Login</h5>
+                                <p>
+                                    This feature is triggered by the user after clicking the "Login"
+                                    button, which sends them to the login page. After completing
+                                    the form and pressing the "Login" button, the verification process
+                                    begins. The website checks if the entry is found within the database.
+                                    If the user submitted a valid entry, they will be sent to the main
+                                    page.
+                                </p>
+                            </section>
+
+                        </section>
+
+                        <section>
+                            <h4 role="doc-subtitle">4.1.3 Functional Requirements</h4>
+                            <p>
+                                In order to successfully use this feature, the user needs a valid and
+                                accessible email address.
+                            </p>
+                        </section>
+                    </section>
+
+                    <section>
+                        <h3 role="doc-subtitle">4.2 Autograph Management</h3>
+                        <section>
+                            <h4 role="doc-subtitle">4.2.1 Description and Priority</h4>
+                            <p>
+                                This feature includes uploading new autographs to the website's database and
+                                searching for an existing one. This is
+                                a high priority feature because it describes the main point of the website.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h4 role="doc-subtitle">4.2.2 Stimulus/Response Sequences</h4>
+                            <section>
+                                <h5 role="doc-subtitle">4.2.2.1 Adding a New Autograph</h5>
+                                <p>
+                                    This feature is triggered by the user after they provide the required specifications
+                                    and upload a photo. Then, by clicking the "Submit" button, if the information they
+                                    introduced is valid, the details are added to the database.
+                                </p>
+                            </section>
+                            <section>
+                                <h5 role="doc-subtitle">4.2.2.2 Searching for an Autograph</h5>
+                                <p>
+                                    This feature is triggered by the user after entering some tags in the
+                                    searchbar. The website provides the matching elements after searching
+                                    the database.
+                                </p>
+                            </section>
+                        </section>
+
+                        <section>
+                            <h4 role="doc-subtitle">4.2.3 Functional Requirements</h4>
+                            <p>
+                                In order to successfully use this feature, the user needs a valid account.
+                            </p>
+                        </section>
+                    </section>
+                </section>
+
+                <section>
+                    <h3 role="doc-subtitle">4.3 Seeing Statistics</h3>
+                    <section>
+                        <h4 role="doc-subtitle">4.3.1 Description and Priority</h4>
+                        <p>
+                            This feature lets the user see his own statistics and the global ones
+                            displayed. This is not a very high priority feature because the main scope
+                            of the website is achievable without it, but it can get the users to be
+                            more involved.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4 role="doc-subtitle">4.3.2 Stimulus/Response Sequences</h4>
+                        <p>
+                            This feature is accessible for the user in the "Statistics" page, which
+                            displays the information from the database.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h4 role="doc-subtitle">4.3.3 Functional Requirements</h4>
+                        <p>
+                            In order to successfully use this feature, the user needs a valid account.
+                        </p>
+                    </section>
                 </section>
             </section>
-        </section>
+            <h2>Diagrams</h2>
+        </div>
+        <div class="box_diagrams">
+            <ul>
+                <div class="diagram">
+                    <img src="images/C4DiagramLvl1.png" style="object-fit: fill">
+                </div>
+                <div class="diagram">
+                    <img src="images/C4DiagramLvl2.png">
+                </div>
+                <div class="diagram">
+                    <img src="images/C4DiagramLvl3.png">
+                </div>
+                <div class="diagram">
+                    <img src="images/C4DiagramLvl4.png">
+                </div>
 
-        <section>
-            <h3 role="doc-subtitle">4.3 Seeing Statistics</h3>
-            <section>
-                <h4 role="doc-subtitle">4.3.1 Description and Priority</h4>
-                <p>
-                    This feature lets the user see his own statistics and the global ones
-                    displayed. This is not a very high priority feature because the main scope
-                    of the website is achievable without it, but it can get the users to be
-                    more involved.
-                </p>
-            </section>
+            </ul>
+        </div>
+    </div>
 
-            <section>
-                <h4 role="doc-subtitle">4.3.2 Stimulus/Response Sequences</h4>
-                <p>
-                    This feature is accessible for the user in the "Statistics" page, which
-                    displays the information from the database.
-                </p>
-            </section>
-
-            <section>
-                <h4 role="doc-subtitle">4.3.3 Functional Requirements</h4>
-                <p>
-                    In order to successfully use this feature, the user needs a valid account.
-                </p>
-            </section>
-        </section>
-    </section>
 </body>
 </html>
