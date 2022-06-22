@@ -17,6 +17,7 @@ async function login (){
 
 
 }
+
 async function loginApiCall(username, password, url) {
     try {
         const user = {
@@ -28,23 +29,36 @@ async function loginApiCall(username, password, url) {
         let textResponse = await sendLoginRequest(url, userJSON);
 
         alert(textResponse.message);
+        alert(textResponse.token);
 
-        if(textResponse.message == 'User Not Registered'){
+        //document.cookie = textResponse.token;
+
+         //deleteAllCookies();
+
+        let cookieToken = document.cookie;
+        alert("cookie "+ cookieToken)
+
+       // let updatedToken = updateToken(textResponse.token);
+
+        if(textResponse.message === 'User Not Registered'){
             alert("Incorrect username or password")
         }
-        else
-            location.replace( 'http://localhost:63343/Autograph_Collector/mainScreen.html')
+        else{//if(Token.checkToken()===true){
+            alert("CRAPI?")
+            //location.replace( 'http://localhost:63342/Autograph_Collector/mainScreen.html')
+            window.location.href= 'mainScreen.html';
+        }
 
     } catch (error) {
         console.error(error);
     }
-
-
 }
+
 async function sendLoginRequest(url, bodyText) {
     let responseBody
 
     await fetch(url, {
+        //credentials:'include',
         method: 'POST',
         body: bodyText,
         headers: {
@@ -54,10 +68,15 @@ async function sendLoginRequest(url, bodyText) {
     }).then(response=>response.json())
         .then(data=>{
             responseBody = data;
-        })
-        .catch(err => console.error(err));
+            alert("a Mers LoginRequest")
+        }).catch(err => {
+            alert("TE ROG")
+            alert(err);
+            console.error(err)
+        });
     return responseBody;
 }
+
 
 function isLoginInputValid (username, password){
 
@@ -73,6 +92,14 @@ function isLoginInputValid (username, password){
 
 }
 
+function deleteAllCookies() {
+    var cookies = document.cookie.split(" ");
 
-
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
 

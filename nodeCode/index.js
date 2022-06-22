@@ -6,19 +6,26 @@ const { getPersonalities, getItems, getTags } = require('./controllers/optionsCo
 
 const PORT = 8081;
 
+function noCORS(res) {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Request-Method', '*')
+    res.setHeader('Access-Control-Allow-Methods', '*')
+    res.setHeader('Access-Control-Allow-Headers', '*')
+    res.setHeader('Access-Control-Max-Age', 2592000) // 30 days
+
+}
+
 const server = http.createServer((req, res) => {
 
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Access-Control-Request-Method', '')
+    noCORS(res);
 
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST')
-    res.setHeader('Access-Control-Allow-Headers', '')
-    res.setHeader('Access-Control-Max-Age', 2592000) // 30 days
+
     if (req.method === 'OPTIONS') {
         console.log("OPTIONS :)")
         res.writeHead(200)
         res.end()
-        //return
+        return
+
     }else if(req.url === '/register' && req.method === 'POST'){
         registerUser(req, res).then(
             function(value) { console.log("register success") },

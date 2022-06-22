@@ -8,12 +8,14 @@ async function registerUser() {
     let password = document.getElementById("password").value;
     let url = 'http://localhost:8081/register';
 
+
     if(!isRegisterInputValid(email, username, password)){
         alert("Input is not valid. Please try again!")
     }
     else{
         alert("Input valid. ")
         await registerApiCall(email, username, password, url);
+        alert("COOKIE " + document.cookie)
 
     }
 
@@ -29,31 +31,44 @@ async function registerApiCall(email, username, password, url) {
 
         let userJSON = JSON.stringify(user);
 
-        sendRegisterRequest (url, userJSON)
+        await sendRegisterRequest (url, userJSON)
+        alert("IN API CALL")
 
     } catch (error) {
         console.error(error)
     }
 }
 
-function sendRegisterRequest (url, bodyText) {
-    fetch(url, {
+async function sendRegisterRequest (url, bodyText) {
+    alert("Inainte de fetch")
+    await fetch(url, {
         method: 'POST',
         body: bodyText,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'text/plain'
         }
-    }).then((response) => {
-        return response.json()
-    }).then((res) => {
-        if (res.status === 201) {
-            console.log("Post successfully created!")
-        }
-    }).catch((error) => {
-        console.log(error)
-    })
+
+    }).then(response=>response.json())
+        .then((res) => {
+            window.location.href= 'mainScreen.html';
+        }).catch((error) => {
+            alert("Post NO!")
+            console.log(error)
+        })
 }
+
+function deleteAllCookies() {
+    var cookies = document.cookie.split(" ");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
+
 function isRegisterInputValid (email, username, password){
 
     if(username.length < 3 || username.length > 30 || password.length < 3)
