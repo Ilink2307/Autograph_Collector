@@ -129,11 +129,3 @@ async function getCsv() {
     div.innerHTML = csv;
 }
 
-async function getPdf() {
-    let doc = new jsPDF({
-        orientation: 'landscape',
-        unit: 'in',
-        format: [6, 2]
-    })
-//This will make your generated PDF in 6x2 inches landscape.
-}
